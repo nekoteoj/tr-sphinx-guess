@@ -2,6 +2,7 @@
   "name": "tr-sphinx-guess",
   "type": "module",
   "private": true,
+  "packageManager": "pnpm@9",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
