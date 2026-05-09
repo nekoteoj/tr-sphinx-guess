@@ -41,7 +41,7 @@ defineProps<{
         <div class="rounded-lg bg-muted p-3">
           <p class="text-xs text-muted-foreground">{{ $t('status.range') }}</p>
           <p class="text-sm font-mono font-semibold">
-            [{{ rangeLow.toLocaleString() }}, {{ rangeHigh.toLocaleString() }}]
+            {{ $t('common.rangeFormat', { low: rangeLow.toLocaleString(), high: rangeHigh.toLocaleString() }) }}
           </p>
         </div>
         <div class="rounded-lg bg-muted p-3">
@@ -91,7 +91,7 @@ defineProps<{
               'text-pink-700 dark:text-pink-300': comfortLevel === 'tight',
             }"
           >
-            [{{ safeRange.low.toLocaleString() }}, {{ safeRange.high.toLocaleString() }}]
+            {{ $t('common.rangeFormat', { low: safeRange.low.toLocaleString(), high: safeRange.high.toLocaleString() }) }}
           </p>
           <p class="text-xs text-muted-foreground mt-1">
             {{ $t('status.safeNumbers', { count: safeRangeSize.toLocaleString(), percent: Math.round((safeRangeSize / rangeSize) * 100) }) }}

@@ -28,10 +28,10 @@ defineProps<{
           <div class="flex-1 min-w-0">
             <div class="flex items-center gap-2 flex-wrap">
               <span class="font-mono text-xs">
-                [{{ entry.rangeLow.toLocaleString() }}, {{ entry.rangeHigh.toLocaleString() }}]
+                {{ $t('common.rangeFormat', { low: entry.rangeLow.toLocaleString(), high: entry.rangeHigh.toLocaleString() }) }}
               </span>
               <span v-if="entry.safeLow !== null && entry.safeHigh !== null" class="text-xs text-muted-foreground">
-                {{ $t('history.safe') }} [{{ entry.safeLow.toLocaleString() }}, {{ entry.safeHigh.toLocaleString() }}]
+                {{ $t('history.safe') }} {{ $t('common.rangeFormat', { low: entry.safeLow.toLocaleString(), high: entry.safeHigh.toLocaleString() }) }}
               </span>
               <span v-else class="text-xs text-destructive">
                 {{ $t('history.impossible') }}
