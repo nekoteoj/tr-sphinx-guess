@@ -18,8 +18,8 @@ defineProps<{
           :key="entry.step"
           class="flex items-center gap-3 rounded-lg border p-3 text-sm"
           :class="{
-            'border-teal-300/30 bg-teal-50/50 dark:bg-teal-400/5 dark:border-teal-400/20': entry.isPossible && entry.safeLow !== null,
-            'border-rose-200/40 bg-rose-50/50 dark:bg-rose-400/5 dark:border-rose-400/20': !entry.isPossible,
+            'border-blue-200/40 bg-blue-50/40 dark:bg-blue-400/5 dark:border-blue-400/20': entry.isPossible && entry.safeLow !== null,
+            'border-pink-200/40 bg-pink-50/40 dark:bg-pink-400/5 dark:border-pink-400/20': !entry.isPossible,
           }"
         >
           <div class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-muted text-xs font-medium">

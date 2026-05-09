@@ -21,10 +21,10 @@ defineProps<{
         <Badge
           :variant="comfortLevel === 'impossible' ? 'destructive' : comfortLevel === 'won' ? 'default' : 'secondary'"
           :class="{
-            'bg-teal-200/50 text-teal-700 dark:bg-teal-400/15 dark:text-teal-300 border-teal-300/50': comfortLevel === 'comfortable',
-            'bg-amber-200/50 text-amber-700 dark:bg-amber-400/15 dark:text-amber-300 border-amber-200/50': comfortLevel === 'moderate',
-            'bg-rose-200/50 text-rose-700 dark:bg-rose-400/15 dark:text-rose-300 border-rose-200/50': comfortLevel === 'tight',
-            'bg-sky-200/50 text-sky-700 dark:bg-sky-400/15 dark:text-sky-300 border-sky-300/50': comfortLevel === 'won',
+            'bg-emerald-200/50 text-emerald-700 dark:bg-emerald-400/15 dark:text-emerald-300 border-emerald-300/50': comfortLevel === 'comfortable',
+            'bg-violet-200/50 text-violet-700 dark:bg-violet-400/15 dark:text-violet-300 border-violet-300/50': comfortLevel === 'moderate',
+            'bg-pink-200/50 text-pink-700 dark:bg-pink-400/15 dark:text-pink-300 border-pink-300/50': comfortLevel === 'tight',
+            'bg-blue-200/50 text-blue-700 dark:bg-blue-400/15 dark:text-blue-300 border-blue-300/50': comfortLevel === 'won',
           }"
         >
           {{ comfortLevel === 'comfortable' ? 'Comfortable' :
@@ -55,11 +55,11 @@ defineProps<{
       </div>
 
       <!-- Won State -->
-      <div v-if="isWon" class="rounded-lg border border-sky-300/40 bg-sky-100/50 dark:bg-sky-400/10 dark:border-sky-400/30 p-4 text-center">
-        <p class="text-lg font-semibold text-sky-700 dark:text-sky-300">
+      <div v-if="isWon" class="rounded-lg border border-blue-300/40 bg-blue-100/50 dark:bg-blue-400/10 dark:border-blue-400/30 p-4 text-center">
+        <p class="text-lg font-semibold text-blue-700 dark:text-blue-300">
           Number Found!
         </p>
-        <p class="text-2xl font-mono font-bold text-sky-800 dark:text-sky-200 mt-1">
+        <p class="text-2xl font-mono font-bold text-blue-800 dark:text-blue-200 mt-1">
           {{ rangeLow.toLocaleString() }}
         </p>
       </div>
@@ -78,18 +78,18 @@ defineProps<{
         <div
           class="rounded-lg border p-4 text-center transition-colors"
           :class="{
-            'border-teal-300/40 bg-teal-100/50 dark:bg-teal-400/10 dark:border-teal-400/25': comfortLevel === 'comfortable',
-            'border-amber-200/50 bg-amber-100/40 dark:bg-amber-400/10 dark:border-amber-400/25': comfortLevel === 'moderate',
-            'border-rose-200/50 bg-rose-100/40 dark:bg-rose-400/10 dark:border-rose-400/25': comfortLevel === 'tight',
+            'border-emerald-300/40 bg-emerald-100/50 dark:bg-emerald-400/10 dark:border-emerald-400/25': comfortLevel === 'comfortable',
+            'border-violet-300/40 bg-violet-100/50 dark:bg-violet-400/10 dark:border-violet-400/25': comfortLevel === 'moderate',
+            'border-pink-300/40 bg-pink-100/50 dark:bg-pink-400/10 dark:border-pink-400/25': comfortLevel === 'tight',
           }"
         >
           <p class="text-xs text-muted-foreground mb-1">Safe Range to Guess</p>
           <p
             class="text-2xl font-mono font-bold"
             :class="{
-              'text-teal-700 dark:text-teal-300': comfortLevel === 'comfortable',
-              'text-amber-700 dark:text-amber-300': comfortLevel === 'moderate',
-              'text-rose-700 dark:text-rose-300': comfortLevel === 'tight',
+              'text-emerald-700 dark:text-emerald-300': comfortLevel === 'comfortable',
+              'text-violet-700 dark:text-violet-300': comfortLevel === 'moderate',
+              'text-pink-700 dark:text-pink-300': comfortLevel === 'tight',
             }"
           >
             [{{ safeRange.low.toLocaleString() }}, {{ safeRange.high.toLocaleString() }}]
