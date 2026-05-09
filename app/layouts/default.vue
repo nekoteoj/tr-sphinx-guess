@@ -1,9 +1,13 @@
+<script setup lang="ts">
+const { reset } = useGuesser()
+</script>
+
 <template>
   <div class="min-h-screen bg-background">
     <!-- Header -->
     <header class="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div class="container mx-auto flex h-14 items-center justify-between px-4">
-        <div class="flex items-center gap-2">
+        <NuxtLink to="/" class="flex items-center gap-2 hover:opacity-80 transition-opacity" @click="reset">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -21,7 +25,7 @@
             <path d="M7 10h6" />
           </svg>
           <h1 class="text-lg font-semibold">{{ $t('layout.title') }}</h1>
-        </div>
+        </NuxtLink>
         <div class="flex items-center gap-1">
           <AlgorithmDialog />
           <LanguageToggle />

@@ -14,14 +14,15 @@ const DEFAULT_RANGE_LOW = 1
 const DEFAULT_RANGE_HIGH = 9999
 const DEFAULT_GUESSES = 14
 
+// Module-level state (singleton) — shared across all components
+const rangeLow = ref(DEFAULT_RANGE_LOW)
+const rangeHigh = ref(DEFAULT_RANGE_HIGH)
+const guessesLeft = ref(DEFAULT_GUESSES)
+const initialGuesses = ref(DEFAULT_GUESSES)
+const history = ref<HistoryEntry[]>([])
+const isStarted = ref(false)
+
 export function useGuesser() {
-  // State
-  const rangeLow = ref(DEFAULT_RANGE_LOW)
-  const rangeHigh = ref(DEFAULT_RANGE_HIGH)
-  const guessesLeft = ref(DEFAULT_GUESSES)
-  const initialGuesses = ref(DEFAULT_GUESSES)
-  const history = ref<HistoryEntry[]>([])
-  const isStarted = ref(false)
 
   // Computed values
   const rangeSize = computed(() => rangeHigh.value - rangeLow.value + 1)
