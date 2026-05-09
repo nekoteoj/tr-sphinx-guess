@@ -71,9 +71,18 @@ export function useGuesser() {
     return safeRange.value.high - safeRange.value.low + 1
   })
 
+  const isGameOver = computed(() => {
+    return guessesLeft.value <= 0 && rangeSize.value > 1
+  })
+
+  const suggestedGuess = computed(() => {
+    return Math.floor((rangeLow.value + rangeHigh.value) / 2)
+  })
+
   const comfortLevel = computed(() => {
-    if (!isPossible.value) return 'impossible'
+    if (isGameOver.value) return 'gameover'
     if (isWon.value) return 'won'
+    if (!isPossible.value) return 'impossible'
     const ratio = safeRangeSize.value / rangeSize.value
     if (ratio >= 0.5) return 'comfortable'
     if (ratio >= 0.2) return 'moderate'
@@ -141,6 +150,8 @@ export function useGuesser() {
     maxCoverable,
     isPossible,
     isWon,
+    isGameOver,
+    suggestedGuess,
     safeRange,
     safeRangeSize,
     comfortLevel,

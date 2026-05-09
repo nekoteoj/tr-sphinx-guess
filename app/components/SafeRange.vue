@@ -6,6 +6,8 @@ defineProps<{
   rangeSize: number
   isPossible: boolean
   isWon: boolean
+  isGameOver: boolean
+  suggestedGuess: number
   safeRange: { low: number; high: number } | null
   safeRangeSize: number
   comfortLevel: string
@@ -19,18 +21,20 @@ defineProps<{
       <div class="flex items-center justify-between">
         <CardTitle class="text-lg">{{ $t('status.title') }}</CardTitle>
         <Badge
-          :variant="comfortLevel === 'impossible' ? 'destructive' : comfortLevel === 'won' ? 'default' : 'secondary'"
+          :variant="comfortLevel === 'gameover' ? 'destructive' : 'secondary'"
           :class="{
             'bg-emerald-200/50 text-emerald-700 dark:bg-emerald-400/15 dark:text-emerald-300 border-emerald-300/50': comfortLevel === 'comfortable',
             'bg-violet-200/50 text-violet-700 dark:bg-violet-400/15 dark:text-violet-300 border-violet-300/50': comfortLevel === 'moderate',
             'bg-pink-200/50 text-pink-700 dark:bg-pink-400/15 dark:text-pink-300 border-pink-300/50': comfortLevel === 'tight',
             'bg-blue-200/50 text-blue-700 dark:bg-blue-400/15 dark:text-blue-300 border-blue-300/50': comfortLevel === 'won',
+            'bg-amber-200/50 text-amber-700 dark:bg-amber-400/15 dark:text-amber-300 border-amber-300/50': comfortLevel === 'impossible',
           }"
         >
           {{ comfortLevel === 'comfortable' ? $t('status.comfortable') :
              comfortLevel === 'moderate' ? $t('status.moderate') :
              comfortLevel === 'tight' ? $t('status.tight') :
              comfortLevel === 'won' ? $t('status.found') :
+             comfortLevel === 'gameover' ? $t('status.gameover') :
              $t('status.impossible') }}
         </Badge>
       </div>
@@ -64,13 +68,41 @@ defineProps<{
         </p>
       </div>
 
-      <!-- Impossible State -->
-      <Alert v-else-if="!isPossible" variant="destructive">
-        <AlertTitle>{{ $t('status.impossible') }}</AlertTitle>
-        <AlertDescription>
-          {{ $t('status.impossibleDesc', { rangeSize: rangeSize.toLocaleString(), maxCoverable: maxCoverable.toLocaleString(), guessesLeft }) }}
-        </AlertDescription>
-      </Alert>
+      <!-- Game Over State (out of guesses, didn't find it) -->
+      <div v-else-if="isGameOver" class="rounded-lg border border-pink-300/40 bg-pink-100/50 dark:bg-pink-400/10 dark:border-pink-400/30 p-4 text-center">
+        <p class="text-lg font-semibold text-pink-700 dark:text-pink-300">
+          {{ $t('status.gameoverTitle') }}
+        </p>
+        <p class="text-sm text-muted-foreground mt-1">
+          {{ $t('status.gameoverDesc', { low: rangeLow.toLocaleString(), high: rangeHigh.toLocaleString() }) }}
+        </p>
+      </div>
+
+      <!-- Not Guaranteed State (impossible but can still try) -->
+      <div v-else-if="!isPossible" class="space-y-3">
+        <div class="rounded-lg border border-amber-300/40 bg-amber-100/50 dark:bg-amber-400/10 dark:border-amber-400/30 p-4 text-center">
+          <p class="text-sm font-semibold text-amber-700 dark:text-amber-300">
+            {{ $t('status.notGuaranteed') }}
+          </p>
+          <p class="text-xs text-muted-foreground mt-1">
+            {{ $t('status.impossibleDesc', { rangeSize: rangeSize.toLocaleString(), maxCoverable: maxCoverable.toLocaleString(), guessesLeft }) }}
+          </p>
+          <p class="text-xs text-amber-600 dark:text-amber-400 mt-2 font-medium">
+            {{ $t('status.canStillTry') }}
+          </p>
+        </div>
+
+        <!-- Suggested midpoint guess -->
+        <div class="rounded-lg border border-muted p-4 text-center">
+          <p class="text-xs text-muted-foreground mb-1">{{ $t('status.suggestedGuess') }}</p>
+          <p class="text-2xl font-mono font-bold text-foreground">
+            {{ suggestedGuess.toLocaleString() }}
+          </p>
+          <p class="text-xs text-muted-foreground mt-1">
+            {{ $t('status.suggestedGuessHint') }}
+          </p>
+        </div>
+      </div>
 
       <!-- Safe Range Display -->
       <div v-else-if="safeRange" class="space-y-3">

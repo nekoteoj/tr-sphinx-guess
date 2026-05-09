@@ -9,6 +9,8 @@ const {
   maxCoverable,
   isPossible,
   isWon,
+  isGameOver,
+  suggestedGuess,
   safeRange,
   safeRangeSize,
   comfortLevel,
@@ -49,6 +51,8 @@ function handleReset() {
       :range-size="rangeSize"
       :is-possible="isPossible"
       :is-won="isWon"
+      :is-game-over="isGameOver"
+      :suggested-guess="suggestedGuess"
       :safe-range="safeRange"
       :safe-range-size="safeRangeSize"
       :comfort-level="comfortLevel"
