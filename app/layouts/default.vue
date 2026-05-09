@@ -22,7 +22,10 @@
           </svg>
           <h1 class="text-lg font-semibold">Number Guesser</h1>
         </div>
-        <ThemeToggle />
+        <div class="flex items-center gap-1">
+          <AlgorithmDialog />
+          <ThemeToggle />
+        </div>
       </div>
     </header>
 
