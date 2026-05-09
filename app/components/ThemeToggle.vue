@@ -11,7 +11,7 @@ function toggleTheme() {
     variant="ghost"
     size="icon"
     @click="toggleTheme"
-    aria-label="Toggle theme"
+    :aria-label="$t('theme.toggle')"
   >
     <svg
       v-if="colorMode.value === 'dark'"

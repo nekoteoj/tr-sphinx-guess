@@ -21,9 +21,6 @@ export default defineNuxtConfig({
         { name: 'description', content: 'A binary search helper that calculates the safe range of numbers to guess' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       ],
-      htmlAttrs: {
-        lang: 'en',
-      },
     },
   },
 
@@ -33,7 +30,17 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
   },
 
-  modules: ['shadcn-nuxt', '@vueuse/nuxt', '@nuxtjs/color-mode'],
+  modules: ['@nuxtjs/i18n', 'shadcn-nuxt', '@vueuse/nuxt', '@nuxtjs/color-mode'],
+
+  i18n: {
+    defaultLocale: 'th',
+    strategy: 'no_prefix',
+    locales: [
+      { code: 'th', name: 'ไทย', file: 'th.json' },
+      { code: 'en', name: 'English', file: 'en.json' },
+    ],
+    detectBrowserLanguage: false,
+  },
 
   colorMode: {
     classSuffix: '',

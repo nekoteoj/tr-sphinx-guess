@@ -1,0 +1,119 @@
+{
+  "layout": {
+    "title": "ทายตัวเลข",
+    "footer": "ตัวช่วย binary search — เลือกตัวเลขใดก็ได้ใน safe range"
+  },
+  "index": {
+    "heading": "ตัวช่วยทายตัวเลข",
+    "description": "หา safe range ของตัวเลขที่คุณสามารถทายได้ โดยยังรับประกันว่าจะหาคำตอบเจอภายในจำนวนครั้งที่เหลือ"
+  },
+  "setup": {
+    "title": "ตั้งค่าเกม",
+    "description": "กำหนดช่วงตัวเลขและจำนวนครั้งที่ทายได้",
+    "rangeLow": "ค่าต่ำสุด",
+    "rangeHigh": "ค่าสูงสุด",
+    "totalGuesses": "จำนวนครั้งที่ทาย",
+    "coverageHint": "ด้วย {guesses} ครั้ง สามารถครอบคลุมได้ถึง {max} ตัวเลข",
+    "startButton": "เริ่มเล่น",
+    "errors": {
+      "lowGeHigh": "ค่าต่ำสุดต้องน้อยกว่าค่าสูงสุด",
+      "minGuess": "ต้องมีอย่างน้อย 1 ครั้ง",
+      "maxGuess": "รองรับสูงสุด 50 ครั้ง",
+      "lowGtHigh": "ค่าต่ำสุดต้องน้อยกว่าหรือเท่ากับค่าสูงสุด",
+      "outOfRange": "ช่วงใหม่ต้องอยู่ภายใน [{low}, {high}]",
+      "notNarrower": "ช่วงต้องแคบกว่าช่วงปัจจุบัน"
+    }
+  },
+  "oracle": {
+    "title": "คำตอบจาก Oracle",
+    "description": "ใส่ช่วงใหม่หลังจากได้รับคำตอบจาก oracle",
+    "newLow": "ค่าต่ำสุดใหม่",
+    "newHigh": "ค่าสูงสุดใหม่",
+    "submitButton": "ส่งคำตอบ",
+    "resetButton": "รีเซ็ต"
+  },
+  "status": {
+    "title": "สถานะ",
+    "comfortable": "สบาย",
+    "moderate": "ปานกลาง",
+    "tight": "ตึง",
+    "found": "เจอแล้ว!",
+    "impossible": "เป็นไปไม่ได้",
+    "range": "ช่วง",
+    "size": "ขนาด",
+    "guessesLeft": "เหลือกี่ครั้ง",
+    "numberFound": "เจอตัวเลขแล้ว!",
+    "impossibleDesc": "ไม่สามารถรับประกันว่าจะหาเจอ ขนาดช่วง ({rangeSize}) เกินจำนวนที่ครอบคลุมได้ ({maxCoverable}) ด้วย {guessesLeft} ครั้ง",
+    "safeRangeLabel": "Safe Range ที่ทายได้",
+    "safeNumbers": "{count} ตัวเลขที่ปลอดภัย ({percent}% ของช่วง)",
+    "helpText": "เลือกตัวเลขใดก็ได้ใน safe range ไม่ว่า oracle จะตอบอย่างไร คุณยังหาคำตอบได้ภายใน {remaining} ครั้งที่เหลือ"
+  },
+  "history": {
+    "title": "ประวัติ",
+    "safe": "Safe:",
+    "impossible": "เป็นไปไม่ได้",
+    "left": "เหลือ {count}"
+  },
+  "theme": {
+    "toggle": "เปลี่ยนธีม"
+  },
+  "algorithm": {
+    "triggerLabel": "วิธีการทำงาน",
+    "title": "Safe Range ทำงานอย่างไร",
+    "description": "อธิบาย algorithm เบื้องหลังตัวช่วยทายตัวเลข",
+    "problem": {
+      "title": "โจทย์",
+      "text": "มีตัวเลขซ่อนอยู่ในช่วง [lo, hi] ในแต่ละรอบ คุณเลือกตัวเลขหนึ่งตัว แล้ว oracle จะบอกว่า \"สูงกว่า\" \"ต่ำกว่า\" หรือ \"ถูกต้อง\" คุณมี G ครั้งที่เหลือ ตัวเลขไหนที่ \"ปลอดภัย\" ที่จะทาย — คือ ไม่ว่า oracle จะตอบอย่างไร คุณยังรับประกันได้ว่าจะหาคำตอบเจอ?"
+    },
+    "insight": {
+      "title": "Key Insight",
+      "text": "ด้วย G ครั้ง binary search สามารถครอบคลุมได้สูงสุด {formula} ตัวเลขใน worst case เมื่อคุณทายตัวเลข x จะแบ่ง range ออกเป็น:",
+      "leftPart": "ฝั่งซ้าย: [lo, x-1] ขนาด (x - lo)",
+      "rightPart": "ฝั่งขวา: [x+1, hi] ขนาด (hi - x)",
+      "conclusion": "การทายจะ \"safe\" ก็ต่อเมื่อทั้งสองฝั่งสามารถแก้ได้ด้วย G-1 ครั้งที่เหลือ — ไม่ว่า oracle จะชี้ไปฝั่งไหน"
+    },
+    "formula": {
+      "title": "สูตร",
+      "intro": "การทายตำแหน่ง x จะ safe ก็ต่อเมื่อ:",
+      "leftSide": "ฝั่งซ้าย:  (x - lo) ≤ 2^(G-1) - 1",
+      "rightSide": "ฝั่งขวา: (hi - x) ≤ 2^(G-1) - 1",
+      "solving": "แก้หา x โดยที่ N = hi - lo + 1:",
+      "safeLow": "Safe Low  = lo + max(0, N - 2^(G-1))",
+      "safeHigh": "Safe High = hi - max(0, N - 2^(G-1))",
+      "impossibleNote": "ถ้า Safe Low > Safe High แสดงว่าไม่มีตัวเลขที่ safe — เป็นไปไม่ได้ที่จะรับประกันว่าหาเจอ"
+    },
+    "proof": {
+      "title": "ทำไมถึงใช้ได้ (Proof Sketch)",
+      "text1": "Binary search tree ที่มี depth D จะมี internal node ได้สูงสุด {formula} ตัว แต่ละ node คือการทาย 1 ครั้ง และแต่ละ leaf คือ \"เจอคำตอบ\" หลังจากทาย x แล้ว worst case คือฝั่งที่ใหญ่กว่า ถ้าทั้งสองฝั่งมีขนาด ≤ {constraint} แล้ว G-1 ครั้งก็เพียงพอไม่ว่า oracle จะตอบอย่างไร",
+      "text2": "Safe range คือเซตของตำแหน่งที่ constraint นี้เป็นจริงทั้งสองฝั่งพร้อมกัน — ทำให้คุณเลือกตัวเลขไหนก็ได้ในช่วงนี้"
+    },
+    "vizNumberLine": {
+      "title": "แผนภาพ: เส้นจำนวน",
+      "subtitle": "แสดงช่วง [{lo}, {hi}] โดยเหลือ {guesses} ครั้ง",
+      "unsafe": "ไม่ปลอดภัย",
+      "safeRange": "SAFE RANGE",
+      "rangeOf": "ช่วง {n} ตัวเลข",
+      "explanation": "โซนที่ไฮไลท์มี {count} ตัวเลขที่ปลอดภัย การทายใกล้ขอบเกินไปจะเสี่ยงสร้าง subproblem ที่ใหญ่เกินจะแก้ได้ในจำนวนครั้งที่เหลือ",
+      "noSafe": "ไม่มี safe range — ช่วงใหญ่เกินไปสำหรับจำนวนครั้งที่เหลือ"
+    },
+    "vizTree": {
+      "title": "แผนภาพ: Binary Search Tree",
+      "subtitle": "แต่ละการทายจะแบ่ง range tree ที่มี depth G ครอบคลุม 2^G - 1 ตัวเลข",
+      "guess": "ทาย",
+      "lower": "ต่ำกว่า",
+      "higher": "สูงกว่า",
+      "found": "เจอ!",
+      "depth": "Depth",
+      "explanation": "Tree ที่มี depth G จะมี internal node สูงสุด 2^G - 1 ตัว (การทาย) และ leaf 2^G ตัว (ผลลัพธ์) แต่ละ path จาก root ถึง leaf แทน worst-case sequence ของคำตอบจาก oracle การทายจะ safe ก็ต่อเมื่อ subtree ทั้งสองฝั่งพอดีกับ depth ที่เหลือ"
+    },
+    "example": {
+      "title": "ตัวอย่าง",
+      "range": "Range: [1, 9999], N = 9999, G = 14",
+      "maxPerSide": "2^13 = 8192 (max ต่อฝั่ง ด้วย G-1 = 13 ครั้ง)",
+      "offset": "Offset = max(0, 9999 - 8192) = 1807",
+      "safeLow": "Safe Low  = 1 + 1807 = {value}",
+      "safeHigh": "Safe High = 9999 - 1807 = {value}",
+      "safeSize": "Safe range size: 6385 ตัวเลข (63.9% ของช่วง)"
+    }
+  }
+}

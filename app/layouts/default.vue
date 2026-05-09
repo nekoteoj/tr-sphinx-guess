@@ -20,10 +20,11 @@
             <path d="M10 7v6" />
             <path d="M7 10h6" />
           </svg>
-          <h1 class="text-lg font-semibold">Number Guesser</h1>
+          <h1 class="text-lg font-semibold">{{ $t('layout.title') }}</h1>
         </div>
         <div class="flex items-center gap-1">
           <AlgorithmDialog />
+          <LanguageToggle />
           <ThemeToggle />
         </div>
       </div>
@@ -37,7 +38,7 @@
     <!-- Footer -->
     <footer class="border-t py-4 text-center text-xs text-muted-foreground">
       <div class="container mx-auto px-4">
-        Binary search helper — pick any number in the safe range
+        {{ $t('layout.footer') }}
       </div>
     </footer>
   </div>

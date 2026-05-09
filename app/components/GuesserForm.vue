@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const { t } = useI18n()
+
 const props = defineProps<{
   isStarted: boolean
   rangeLow: number
@@ -23,19 +25,19 @@ const oracleHigh = ref(9999)
 
 // Validation
 const setupError = computed(() => {
-  if (setupLow.value >= setupHigh.value) return 'Low must be less than High'
-  if (setupGuesses.value < 1) return 'Must have at least 1 guess'
-  if (setupGuesses.value > 50) return 'Maximum 50 guesses supported'
+  if (setupLow.value >= setupHigh.value) return t('setup.errors.lowGeHigh')
+  if (setupGuesses.value < 1) return t('setup.errors.minGuess')
+  if (setupGuesses.value > 50) return t('setup.errors.maxGuess')
   return null
 })
 
 const oracleError = computed(() => {
-  if (oracleLow.value > oracleHigh.value) return 'Low must be less than or equal to High'
+  if (oracleLow.value > oracleHigh.value) return t('setup.errors.lowGtHigh')
   if (oracleLow.value < props.rangeLow || oracleHigh.value > props.rangeHigh) {
-    return `New range must be within [${props.rangeLow}, ${props.rangeHigh}]`
+    return t('setup.errors.outOfRange', { low: props.rangeLow, high: props.rangeHigh })
   }
   if (oracleLow.value === props.rangeLow && oracleHigh.value === props.rangeHigh) {
-    return 'Range must be narrower than current range'
+    return t('setup.errors.notNarrower')
   }
   return null
 })
@@ -70,13 +72,13 @@ watch(() => [props.rangeLow, props.rangeHigh], ([low, high]) => {
   <!-- Setup Form (before game starts) -->
   <Card v-if="!isStarted">
     <CardHeader>
-      <CardTitle class="text-lg">Game Setup</CardTitle>
-      <CardDescription>Configure the number range and total guesses</CardDescription>
+      <CardTitle class="text-lg">{{ $t('setup.title') }}</CardTitle>
+      <CardDescription>{{ $t('setup.description') }}</CardDescription>
     </CardHeader>
     <CardContent class="space-y-4">
       <div class="grid grid-cols-2 gap-4">
         <div class="space-y-2">
-          <Label for="setup-low">Range Low</Label>
+          <Label for="setup-low">{{ $t('setup.rangeLow') }}</Label>
           <Input
             id="setup-low"
             v-model.number="setupLow"
@@ -85,7 +87,7 @@ watch(() => [props.rangeLow, props.rangeHigh], ([low, high]) => {
           />
         </div>
         <div class="space-y-2">
-          <Label for="setup-high">Range High</Label>
+          <Label for="setup-high">{{ $t('setup.rangeHigh') }}</Label>
           <Input
             id="setup-high"
             v-model.number="setupHigh"
@@ -95,7 +97,7 @@ watch(() => [props.rangeLow, props.rangeHigh], ([low, high]) => {
         </div>
       </div>
       <div class="space-y-2">
-        <Label for="setup-guesses">Total Guesses</Label>
+        <Label for="setup-guesses">{{ $t('setup.totalGuesses') }}</Label>
         <Input
           id="setup-guesses"
           v-model.number="setupGuesses"
@@ -105,7 +107,7 @@ watch(() => [props.rangeLow, props.rangeHigh], ([low, high]) => {
           placeholder="14"
         />
         <p class="text-xs text-muted-foreground">
-          With {{ setupGuesses }} guesses, you can cover up to {{ (Math.pow(2, setupGuesses) - 1).toLocaleString() }} numbers
+          {{ $t('setup.coverageHint', { guesses: setupGuesses, max: (Math.pow(2, setupGuesses) - 1).toLocaleString() }) }}
         </p>
       </div>
       <p v-if="setupError" class="text-sm text-destructive">
@@ -114,7 +116,7 @@ watch(() => [props.rangeLow, props.rangeHigh], ([low, high]) => {
     </CardContent>
     <CardFooter>
       <Button class="w-full" :disabled="!!setupError" @click="handleStart">
-        Start Guessing
+        {{ $t('setup.startButton') }}
       </Button>
     </CardFooter>
   </Card>
@@ -122,15 +124,15 @@ watch(() => [props.rangeLow, props.rangeHigh], ([low, high]) => {
   <!-- Oracle Response Form (during game) -->
   <Card v-else>
     <CardHeader>
-      <CardTitle class="text-lg">Oracle Response</CardTitle>
+      <CardTitle class="text-lg">{{ $t('oracle.title') }}</CardTitle>
       <CardDescription>
-        Enter the new range after the oracle's response
+        {{ $t('oracle.description') }}
       </CardDescription>
     </CardHeader>
     <CardContent class="space-y-4">
       <div class="grid grid-cols-2 gap-4">
         <div class="space-y-2">
-          <Label for="oracle-low">New Low</Label>
+          <Label for="oracle-low">{{ $t('oracle.newLow') }}</Label>
           <Input
             id="oracle-low"
             v-model.number="oracleLow"
@@ -140,7 +142,7 @@ watch(() => [props.rangeLow, props.rangeHigh], ([low, high]) => {
           />
         </div>
         <div class="space-y-2">
-          <Label for="oracle-high">New High</Label>
+          <Label for="oracle-high">{{ $t('oracle.newHigh') }}</Label>
           <Input
             id="oracle-high"
             v-model.number="oracleHigh"
@@ -160,10 +162,10 @@ watch(() => [props.rangeLow, props.rangeHigh], ([low, high]) => {
         :disabled="!!oracleError"
         @click="handleOracleSubmit"
       >
-        Submit Response
+        {{ $t('oracle.submitButton') }}
       </Button>
       <Button variant="outline" @click="handleReset">
-        Reset
+        {{ $t('oracle.resetButton') }}
       </Button>
     </CardFooter>
   </Card>

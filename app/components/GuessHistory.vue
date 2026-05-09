@@ -9,7 +9,7 @@ defineProps<{
 <template>
   <Card v-if="history.length > 0">
     <CardHeader class="pb-3">
-      <CardTitle class="text-lg">History</CardTitle>
+      <CardTitle class="text-lg">{{ $t('history.title') }}</CardTitle>
     </CardHeader>
     <CardContent>
       <div class="space-y-2 max-h-64 overflow-y-auto">
@@ -31,15 +31,15 @@ defineProps<{
                 [{{ entry.rangeLow.toLocaleString() }}, {{ entry.rangeHigh.toLocaleString() }}]
               </span>
               <span v-if="entry.safeLow !== null && entry.safeHigh !== null" class="text-xs text-muted-foreground">
-                Safe: [{{ entry.safeLow.toLocaleString() }}, {{ entry.safeHigh.toLocaleString() }}]
+                {{ $t('history.safe') }} [{{ entry.safeLow.toLocaleString() }}, {{ entry.safeHigh.toLocaleString() }}]
               </span>
               <span v-else class="text-xs text-destructive">
-                Impossible
+                {{ $t('history.impossible') }}
               </span>
             </div>
           </div>
           <Badge variant="outline" class="shrink-0 text-xs">
-            {{ entry.guessesLeft }} left
+            {{ $t('history.left', { count: entry.guessesLeft }) }}
           </Badge>
         </div>
       </div>

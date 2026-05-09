@@ -1,0 +1,119 @@
+{
+  "layout": {
+    "title": "Number Guesser",
+    "footer": "Binary search helper — pick any number in the safe range"
+  },
+  "index": {
+    "heading": "Binary Search Helper",
+    "description": "Find the safe range of numbers you can guess while still guaranteeing you'll find the answer within your remaining guesses."
+  },
+  "setup": {
+    "title": "Game Setup",
+    "description": "Configure the number range and total guesses",
+    "rangeLow": "Range Low",
+    "rangeHigh": "Range High",
+    "totalGuesses": "Total Guesses",
+    "coverageHint": "With {guesses} guesses, you can cover up to {max} numbers",
+    "startButton": "Start Guessing",
+    "errors": {
+      "lowGeHigh": "Low must be less than High",
+      "minGuess": "Must have at least 1 guess",
+      "maxGuess": "Maximum 50 guesses supported",
+      "lowGtHigh": "Low must be less than or equal to High",
+      "outOfRange": "New range must be within [{low}, {high}]",
+      "notNarrower": "Range must be narrower than current range"
+    }
+  },
+  "oracle": {
+    "title": "Oracle Response",
+    "description": "Enter the new range after the oracle's response",
+    "newLow": "New Low",
+    "newHigh": "New High",
+    "submitButton": "Submit Response",
+    "resetButton": "Reset"
+  },
+  "status": {
+    "title": "Status",
+    "comfortable": "Comfortable",
+    "moderate": "Moderate",
+    "tight": "Tight",
+    "found": "Found!",
+    "impossible": "Impossible",
+    "range": "Range",
+    "size": "Size",
+    "guessesLeft": "Guesses Left",
+    "numberFound": "Number Found!",
+    "impossibleDesc": "Cannot guarantee finding the number. Range size ({rangeSize}) exceeds maximum coverable ({maxCoverable}) with {guessesLeft} guess(es).",
+    "safeRangeLabel": "Safe Range to Guess",
+    "safeNumbers": "{count} safe number(s) ({percent}% of range)",
+    "helpText": "Pick any number in the safe range. Regardless of the oracle's response, you can still find the answer within {remaining} remaining guess(es)."
+  },
+  "history": {
+    "title": "History",
+    "safe": "Safe:",
+    "impossible": "Impossible",
+    "left": "{count} left"
+  },
+  "theme": {
+    "toggle": "Toggle theme"
+  },
+  "algorithm": {
+    "triggerLabel": "How it works",
+    "title": "How the Safe Range Works",
+    "description": "Understanding the algorithm behind the number guesser",
+    "problem": {
+      "title": "The Problem",
+      "text": "A number is hidden in the range [lo, hi]. Each turn, you pick a number and an oracle tells you \"higher\", \"lower\", or \"correct\". You have G guesses remaining. Which numbers are safe to guess — meaning you can still guarantee finding the answer no matter what the oracle responds?"
+    },
+    "insight": {
+      "title": "Key Insight",
+      "text": "With G guesses, binary search can handle at most {formula} numbers in the worst case. When you guess number x, you split the range into:",
+      "leftPart": "Left part: [lo, x-1] of size (x - lo)",
+      "rightPart": "Right part: [x+1, hi] of size (hi - x)",
+      "conclusion": "For your guess to be \"safe\", both parts must be solvable with only G-1 guesses remaining — regardless of which side the oracle points to."
+    },
+    "formula": {
+      "title": "The Formula",
+      "intro": "A guess at position x is safe if and only if:",
+      "leftSide": "Left side:  (x - lo) ≤ 2^(G-1) - 1",
+      "rightSide": "Right side: (hi - x) ≤ 2^(G-1) - 1",
+      "solving": "Solving for x, where N = hi - lo + 1:",
+      "safeLow": "Safe Low  = lo + max(0, N - 2^(G-1))",
+      "safeHigh": "Safe High = hi - max(0, N - 2^(G-1))",
+      "impossibleNote": "If Safe Low > Safe High, no safe guess exists — it's impossible to guarantee finding the number."
+    },
+    "proof": {
+      "title": "Why It Works (Proof Sketch)",
+      "text1": "A binary search tree of depth D has at most {formula} internal nodes. Each internal node represents one guess, and each leaf represents \"number found\". After guessing x, the worst case is whichever side is larger. If both sides have size ≤ {constraint}, then G-1 guesses suffice regardless of the oracle's response.",
+      "text2": "The safe range is exactly the set of positions where this constraint holds for both sides simultaneously — giving you freedom to pick any number within it."
+    },
+    "vizNumberLine": {
+      "title": "Visualization: Number Line",
+      "subtitle": "Showing range [{lo}, {hi}] with {guesses} guesses remaining",
+      "unsafe": "unsafe",
+      "safeRange": "SAFE RANGE",
+      "rangeOf": "Range of {n} numbers",
+      "explanation": "The highlighted zone contains {count} safe numbers. Guessing too close to either edge risks creating a subproblem too large to solve in the remaining guesses.",
+      "noSafe": "No safe range exists — the range is too large for the remaining guesses."
+    },
+    "vizTree": {
+      "title": "Visualization: Binary Search Tree",
+      "subtitle": "Each guess splits the remaining range. A tree of depth G covers 2^G - 1 numbers.",
+      "guess": "Guess",
+      "lower": "lower",
+      "higher": "higher",
+      "found": "Found!",
+      "depth": "Depth",
+      "explanation": "A tree of depth G has at most 2^G - 1 internal nodes (guesses) and 2^G leaves (outcomes). Each path from root to leaf represents a worst-case sequence of oracle responses. For a guess to be safe, both subtrees must fit within the remaining depth."
+    },
+    "example": {
+      "title": "Example",
+      "range": "Range: [1, 9999], N = 9999, G = 14",
+      "maxPerSide": "2^13 = 8192 (max per side with G-1 = 13 guesses)",
+      "offset": "Offset = max(0, 9999 - 8192) = 1807",
+      "safeLow": "Safe Low  = 1 + 1807 = {value}",
+      "safeHigh": "Safe High = 9999 - 1807 = {value}",
+      "safeSize": "Safe range size: 6385 numbers (63.9% of range)"
+    }
+  }
+}

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
+const { t } = useI18n()
+
 // Example values for visualization when game hasn't started
 const props = defineProps<{
   rangeLow?: number
@@ -54,7 +56,7 @@ const lineProps = computed(() => {
 <template>
   <Dialog>
     <DialogTrigger as-child>
-      <Button variant="ghost" size="icon" aria-label="How it works">
+      <Button variant="ghost" size="icon" :aria-label="$t('algorithm.triggerLabel')">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"
@@ -75,9 +77,9 @@ const lineProps = computed(() => {
 
     <DialogContent class="max-w-2xl max-h-[90vh] p-0">
       <DialogHeader class="px-6 pt-6 pb-0">
-        <DialogTitle class="text-xl">How the Safe Range Works</DialogTitle>
+        <DialogTitle class="text-xl">{{ $t('algorithm.title') }}</DialogTitle>
         <DialogDescription>
-          Understanding the algorithm behind the number guesser
+          {{ $t('algorithm.description') }}
         </DialogDescription>
       </DialogHeader>
 
@@ -87,13 +89,10 @@ const lineProps = computed(() => {
           <!-- Section 1: The Problem -->
           <section class="space-y-2">
             <h3 class="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-              The Problem
+              {{ $t('algorithm.problem.title') }}
             </h3>
             <p class="text-sm leading-relaxed">
-              A number is hidden in the range [lo, hi]. Each turn, you pick a number and an oracle
-              tells you "higher", "lower", or "correct". You have <strong>G guesses</strong> remaining.
-              Which numbers are <em>safe</em> to guess — meaning you can still guarantee finding the
-              answer no matter what the oracle responds?
+              {{ $t('algorithm.problem.text') }}
             </p>
           </section>
 
@@ -102,20 +101,17 @@ const lineProps = computed(() => {
           <!-- Section 2: Key Insight -->
           <section class="space-y-2">
             <h3 class="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-              Key Insight
+              {{ $t('algorithm.insight.title') }}
             </h3>
             <p class="text-sm leading-relaxed">
-              With G guesses, binary search can handle at most
-              <code class="rounded bg-muted px-1.5 py-0.5 font-mono text-xs">2<sup>G</sup> - 1</code>
-              numbers in the worst case. When you guess number <em>x</em>, you split the range into:
+              {{ $t('algorithm.insight.text', { formula: '2^G - 1' }) }}
             </p>
             <ul class="text-sm leading-relaxed list-disc pl-5 space-y-1">
-              <li><strong>Left part</strong>: [lo, x-1] of size <code class="rounded bg-muted px-1.5 py-0.5 font-mono text-xs">(x - lo)</code></li>
-              <li><strong>Right part</strong>: [x+1, hi] of size <code class="rounded bg-muted px-1.5 py-0.5 font-mono text-xs">(hi - x)</code></li>
+              <li><strong>{{ $t('algorithm.insight.leftPart') }}</strong></li>
+              <li><strong>{{ $t('algorithm.insight.rightPart') }}</strong></li>
             </ul>
             <p class="text-sm leading-relaxed">
-              For your guess to be "safe", <strong>both</strong> parts must be solvable with only
-              G-1 guesses remaining — regardless of which side the oracle points to.
+              {{ $t('algorithm.insight.conclusion') }}
             </p>
           </section>
 
@@ -124,25 +120,24 @@ const lineProps = computed(() => {
           <!-- Section 3: The Formula -->
           <section class="space-y-3">
             <h3 class="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-              The Formula
+              {{ $t('algorithm.formula.title') }}
             </h3>
             <p class="text-sm leading-relaxed">
-              A guess at position <em>x</em> is safe if and only if:
+              {{ $t('algorithm.formula.intro') }}
             </p>
             <div class="rounded-lg border bg-muted/50 p-4 font-mono text-xs leading-loose space-y-1">
-              <div>Left side:&nbsp; (x - lo) &le; 2<sup>G-1</sup> - 1</div>
-              <div>Right side: (hi - x) &le; 2<sup>G-1</sup> - 1</div>
+              <div>{{ $t('algorithm.formula.leftSide') }}</div>
+              <div>{{ $t('algorithm.formula.rightSide') }}</div>
             </div>
             <p class="text-sm leading-relaxed">
-              Solving for <em>x</em>, where N = hi - lo + 1:
+              {{ $t('algorithm.formula.solving') }}
             </p>
             <div class="rounded-lg border bg-primary/5 p-4 font-mono text-xs leading-loose space-y-1">
-              <div><strong>Safe Low</strong>&nbsp; = lo + max(0, N - 2<sup>G-1</sup>)</div>
-              <div><strong>Safe High</strong> = hi - max(0, N - 2<sup>G-1</sup>)</div>
+              <div><strong>{{ $t('algorithm.formula.safeLow') }}</strong></div>
+              <div><strong>{{ $t('algorithm.formula.safeHigh') }}</strong></div>
             </div>
             <p class="text-sm text-muted-foreground">
-              If Safe Low &gt; Safe High, no safe guess exists — it's impossible to guarantee
-              finding the number.
+              {{ $t('algorithm.formula.impossibleNote') }}
             </p>
           </section>
 
@@ -151,18 +146,13 @@ const lineProps = computed(() => {
           <!-- Section 4: Why It Works -->
           <section class="space-y-2">
             <h3 class="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-              Why It Works (Proof Sketch)
+              {{ $t('algorithm.proof.title') }}
             </h3>
             <p class="text-sm leading-relaxed">
-              A binary search tree of depth D has at most <code class="rounded bg-muted px-1.5 py-0.5 font-mono text-xs">2<sup>D</sup> - 1</code>
-              internal nodes. Each internal node represents one guess, and each leaf represents
-              "number found". After guessing <em>x</em>, the worst case is whichever side is larger.
-              If both sides have size &le; <code class="rounded bg-muted px-1.5 py-0.5 font-mono text-xs">2<sup>G-1</sup> - 1</code>,
-              then G-1 guesses suffice regardless of the oracle's response.
+              {{ $t('algorithm.proof.text1', { formula: '2^D - 1', constraint: '2^(G-1) - 1' }) }}
             </p>
             <p class="text-sm leading-relaxed">
-              The safe range is exactly the set of positions where this constraint holds for both sides
-              simultaneously — giving you freedom to pick <em>any</em> number within it.
+              {{ $t('algorithm.proof.text2') }}
             </p>
           </section>
 
@@ -171,11 +161,10 @@ const lineProps = computed(() => {
           <!-- Section 5: Number Line Visualization -->
           <section class="space-y-3">
             <h3 class="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-              Visualization: Number Line
+              {{ $t('algorithm.vizNumberLine.title') }}
             </h3>
             <p class="text-xs text-muted-foreground">
-              Showing range [{{ vizLo.toLocaleString() }}, {{ vizHi.toLocaleString() }}]
-              with {{ vizG }} guesses remaining
+              {{ $t('algorithm.vizNumberLine.subtitle', { lo: vizLo.toLocaleString(), hi: vizHi.toLocaleString(), guesses: vizG }) }}
             </p>
 
             <div class="rounded-lg border p-4 bg-muted/30">
@@ -262,7 +251,7 @@ const lineProps = computed(() => {
                   text-anchor="middle"
                   font-family="sans-serif"
                 >
-                  unsafe
+                  {{ $t('algorithm.vizNumberLine.unsafe') }}
                 </text>
                 <text
                   v-if="vizSafe && lineProps.safeWidth > 10"
@@ -272,7 +261,7 @@ const lineProps = computed(() => {
                   text-anchor="middle"
                   font-family="sans-serif"
                 >
-                  SAFE RANGE
+                  {{ $t('algorithm.vizNumberLine.safeRange') }}
                 </text>
                 <text
                   v-if="lineProps.rightWidth > 8"
@@ -282,24 +271,22 @@ const lineProps = computed(() => {
                   text-anchor="middle"
                   font-family="sans-serif"
                 >
-                  unsafe
+                  {{ $t('algorithm.vizNumberLine.unsafe') }}
                 </text>
 
                 <!-- Top annotation -->
                 <text x="200" y="18" class="fill-muted-foreground text-[8px]" text-anchor="middle" font-family="sans-serif">
-                  Range of {{ vizN.toLocaleString() }} numbers
+                  {{ $t('algorithm.vizNumberLine.rangeOf', { n: vizN.toLocaleString() }) }}
                 </text>
               </svg>
             </div>
 
             <p class="text-xs text-muted-foreground">
               <template v-if="vizSafe">
-                The highlighted zone contains <strong>{{ (vizSafe.high - vizSafe.low + 1).toLocaleString() }}</strong>
-                safe numbers. Guessing too close to either edge risks creating a subproblem
-                too large to solve in the remaining guesses.
+                {{ $t('algorithm.vizNumberLine.explanation', { count: (vizSafe.high - vizSafe.low + 1).toLocaleString() }) }}
               </template>
               <template v-else>
-                No safe range exists — the range is too large for the remaining guesses.
+                {{ $t('algorithm.vizNumberLine.noSafe') }}
               </template>
             </p>
           </section>
@@ -309,10 +296,10 @@ const lineProps = computed(() => {
           <!-- Section 6: Binary Tree Visualization -->
           <section class="space-y-3">
             <h3 class="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-              Visualization: Binary Search Tree
+              {{ $t('algorithm.vizTree.title') }}
             </h3>
             <p class="text-xs text-muted-foreground">
-              Each guess splits the remaining range. A tree of depth G covers 2<sup>G</sup> - 1 numbers.
+              {{ $t('algorithm.vizTree.subtitle') }}
             </p>
 
             <div class="rounded-lg border p-4 bg-muted/30">
@@ -326,15 +313,15 @@ const lineProps = computed(() => {
                 <line x1="200" y1="30" x2="290" y2="75" class="stroke-muted-foreground" stroke-width="1" />
                 <circle cx="200" cy="25" r="16" class="fill-primary/10 stroke-primary" stroke-width="1.5" />
                 <text x="200" y="29" class="fill-primary text-[9px] font-semibold" text-anchor="middle" font-family="sans-serif">
-                  Guess
+                  {{ $t('algorithm.vizTree.guess') }}
                 </text>
 
                 <!-- Edge labels level 0 -->
                 <text x="145" y="48" class="fill-muted-foreground text-[7px]" text-anchor="middle" font-family="sans-serif" transform="rotate(-20, 145, 48)">
-                  lower
+                  {{ $t('algorithm.vizTree.lower') }}
                 </text>
                 <text x="255" y="48" class="fill-muted-foreground text-[7px]" text-anchor="middle" font-family="sans-serif" transform="rotate(20, 255, 48)">
-                  higher
+                  {{ $t('algorithm.vizTree.higher') }}
                 </text>
 
                 <!-- Level 1: Left -->
@@ -354,25 +341,21 @@ const lineProps = computed(() => {
                 </text>
 
                 <!-- Level 2: Leaves -->
-                <!-- Left-left -->
                 <circle cx="65" cy="135" r="12" class="fill-violet-200/30 stroke-violet-400/50 dark:fill-violet-400/15 dark:stroke-violet-400/40" stroke-width="1" />
                 <text x="65" y="139" class="fill-violet-600 dark:fill-violet-300 text-[7px]" text-anchor="middle" font-family="sans-serif">
                   G-2
                 </text>
 
-                <!-- Left-right -->
                 <circle cx="155" cy="135" r="12" class="fill-violet-200/30 stroke-violet-400/50 dark:fill-violet-400/15 dark:stroke-violet-400/40" stroke-width="1" />
                 <text x="155" y="139" class="fill-violet-600 dark:fill-violet-300 text-[7px]" text-anchor="middle" font-family="sans-serif">
                   G-2
                 </text>
 
-                <!-- Right-left -->
                 <circle cx="245" cy="135" r="12" class="fill-violet-200/30 stroke-violet-400/50 dark:fill-violet-400/15 dark:stroke-violet-400/40" stroke-width="1" />
                 <text x="245" y="139" class="fill-violet-600 dark:fill-violet-300 text-[7px]" text-anchor="middle" font-family="sans-serif">
                   G-2
                 </text>
 
-                <!-- Right-right -->
                 <circle cx="335" cy="135" r="12" class="fill-violet-200/30 stroke-violet-400/50 dark:fill-violet-400/15 dark:stroke-violet-400/40" stroke-width="1" />
                 <text x="335" y="139" class="fill-violet-600 dark:fill-violet-300 text-[7px]" text-anchor="middle" font-family="sans-serif">
                   G-2
@@ -386,31 +369,28 @@ const lineProps = computed(() => {
 
                 <!-- Bottom leaf nodes -->
                 <rect x="40" y="170" width="50" height="16" rx="3" class="fill-blue-200/40 stroke-blue-400/40 dark:fill-blue-400/15 dark:stroke-blue-400/30" stroke-width="0.75" />
-                <text x="65" y="181" class="fill-blue-700 dark:fill-blue-300 text-[7px]" text-anchor="middle" font-family="sans-serif">Found!</text>
+                <text x="65" y="181" class="fill-blue-700 dark:fill-blue-300 text-[7px]" text-anchor="middle" font-family="sans-serif">{{ $t('algorithm.vizTree.found') }}</text>
 
                 <rect x="130" y="170" width="50" height="16" rx="3" class="fill-blue-200/40 stroke-blue-400/40 dark:fill-blue-400/15 dark:stroke-blue-400/30" stroke-width="0.75" />
-                <text x="155" y="181" class="fill-blue-700 dark:fill-blue-300 text-[7px]" text-anchor="middle" font-family="sans-serif">Found!</text>
+                <text x="155" y="181" class="fill-blue-700 dark:fill-blue-300 text-[7px]" text-anchor="middle" font-family="sans-serif">{{ $t('algorithm.vizTree.found') }}</text>
 
                 <rect x="220" y="170" width="50" height="16" rx="3" class="fill-blue-200/40 stroke-blue-400/40 dark:fill-blue-400/15 dark:stroke-blue-400/30" stroke-width="0.75" />
-                <text x="245" y="181" class="fill-blue-700 dark:fill-blue-300 text-[7px]" text-anchor="middle" font-family="sans-serif">Found!</text>
+                <text x="245" y="181" class="fill-blue-700 dark:fill-blue-300 text-[7px]" text-anchor="middle" font-family="sans-serif">{{ $t('algorithm.vizTree.found') }}</text>
 
                 <rect x="310" y="170" width="50" height="16" rx="3" class="fill-blue-200/40 stroke-blue-400/40 dark:fill-blue-400/15 dark:stroke-blue-400/30" stroke-width="0.75" />
-                <text x="335" y="181" class="fill-blue-700 dark:fill-blue-300 text-[7px]" text-anchor="middle" font-family="sans-serif">Found!</text>
+                <text x="335" y="181" class="fill-blue-700 dark:fill-blue-300 text-[7px]" text-anchor="middle" font-family="sans-serif">{{ $t('algorithm.vizTree.found') }}</text>
 
                 <!-- Annotation: depth -->
                 <line x1="390" y1="20" x2="390" y2="185" class="stroke-muted-foreground" stroke-width="0.75" stroke-dasharray="2,2" />
-                <text x="395" y="25" class="fill-muted-foreground text-[7px]" text-anchor="start" font-family="sans-serif">Depth 0</text>
-                <text x="395" y="82" class="fill-muted-foreground text-[7px]" text-anchor="start" font-family="sans-serif">Depth 1</text>
-                <text x="395" y="137" class="fill-muted-foreground text-[7px]" text-anchor="start" font-family="sans-serif">Depth 2</text>
-                <text x="395" y="181" class="fill-muted-foreground text-[7px]" text-anchor="start" font-family="sans-serif">Depth G</text>
+                <text x="395" y="25" class="fill-muted-foreground text-[7px]" text-anchor="start" font-family="sans-serif">{{ $t('algorithm.vizTree.depth') }} 0</text>
+                <text x="395" y="82" class="fill-muted-foreground text-[7px]" text-anchor="start" font-family="sans-serif">{{ $t('algorithm.vizTree.depth') }} 1</text>
+                <text x="395" y="137" class="fill-muted-foreground text-[7px]" text-anchor="start" font-family="sans-serif">{{ $t('algorithm.vizTree.depth') }} 2</text>
+                <text x="395" y="181" class="fill-muted-foreground text-[7px]" text-anchor="start" font-family="sans-serif">{{ $t('algorithm.vizTree.depth') }} G</text>
               </svg>
             </div>
 
             <p class="text-xs text-muted-foreground">
-              A tree of depth G has at most <strong>2<sup>G</sup> - 1</strong> internal nodes (guesses)
-              and <strong>2<sup>G</sup></strong> leaves (outcomes). Each path from root to leaf represents
-              a worst-case sequence of oracle responses. For a guess to be safe, both subtrees
-              must fit within the remaining depth.
+              {{ $t('algorithm.vizTree.explanation') }}
             </p>
           </section>
 
@@ -418,15 +398,15 @@ const lineProps = computed(() => {
           <Separator />
           <section class="space-y-2">
             <h3 class="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-              Example
+              {{ $t('algorithm.example.title') }}
             </h3>
             <div class="rounded-lg border bg-muted/50 p-4 text-xs leading-relaxed space-y-2 font-mono">
-              <div>Range: [1, 9999], N = 9999, G = 14</div>
-              <div>2<sup>13</sup> = 8192 (max per side with G-1 = 13 guesses)</div>
-              <div>Offset = max(0, 9999 - 8192) = 1807</div>
-              <div class="pt-1 font-semibold">Safe Low  = 1 + 1807 = <span class="text-blue-600 dark:text-blue-300">1808</span></div>
-              <div class="font-semibold">Safe High = 9999 - 1807 = <span class="text-blue-600 dark:text-blue-300">8192</span></div>
-              <div class="pt-1 text-muted-foreground">Safe range size: 6385 numbers (63.9% of range)</div>
+              <div>{{ $t('algorithm.example.range') }}</div>
+              <div>{{ $t('algorithm.example.maxPerSide') }}</div>
+              <div>{{ $t('algorithm.example.offset') }}</div>
+              <div class="pt-1 font-semibold">{{ $t('algorithm.example.safeLow', { value: '1808' }) }}</div>
+              <div class="font-semibold">{{ $t('algorithm.example.safeHigh', { value: '8192' }) }}</div>
+              <div class="pt-1 text-muted-foreground">{{ $t('algorithm.example.safeSize') }}</div>
             </div>
           </section>
 

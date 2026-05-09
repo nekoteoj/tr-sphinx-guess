@@ -34,10 +34,9 @@ function handleReset() {
   <div class="space-y-6">
     <!-- Intro text (when not started) -->
     <div v-if="!isStarted" class="text-center space-y-2 py-4">
-      <h2 class="text-2xl font-bold tracking-tight">Binary Search Helper</h2>
+      <h2 class="text-2xl font-bold tracking-tight">{{ $t('index.heading') }}</h2>
       <p class="text-muted-foreground text-sm max-w-md mx-auto">
-        Find the safe range of numbers you can guess while still guaranteeing
-        you'll find the answer within your remaining guesses.
+        {{ $t('index.description') }}
       </p>
     </div>
 
