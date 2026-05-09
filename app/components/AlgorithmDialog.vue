@@ -205,7 +205,7 @@ const lineProps = computed(() => {
                   y="30"
                   :width="(lineProps.safeWidth / 100) * 360"
                   height="24"
-                  class="fill-green-500/30 dark:fill-green-500/20"
+                  class="fill-teal-300/40 dark:fill-teal-400/20"
                 />
 
                 <!-- Unsafe right zone -->
@@ -221,8 +221,8 @@ const lineProps = computed(() => {
 
                 <!-- Boundary markers -->
                 <line x1="20" y1="26" x2="20" y2="58" class="stroke-foreground" stroke-width="1.5" />
-                <line :x1="20 + (lineProps.safeStart / 100) * 360" y1="26" :x2="20 + (lineProps.safeStart / 100) * 360" y2="58" class="stroke-green-600 dark:stroke-green-400" stroke-width="1.5" stroke-dasharray="3,2" />
-                <line :x1="20 + (lineProps.safeEnd / 100) * 360" y1="26" :x2="20 + (lineProps.safeEnd / 100) * 360" y2="58" class="stroke-green-600 dark:stroke-green-400" stroke-width="1.5" stroke-dasharray="3,2" />
+                <line :x1="20 + (lineProps.safeStart / 100) * 360" y1="26" :x2="20 + (lineProps.safeStart / 100) * 360" y2="58" class="stroke-teal-500 dark:stroke-teal-400" stroke-width="1.5" stroke-dasharray="3,2" />
+                <line :x1="20 + (lineProps.safeEnd / 100) * 360" y1="26" :x2="20 + (lineProps.safeEnd / 100) * 360" y2="58" class="stroke-teal-500 dark:stroke-teal-400" stroke-width="1.5" stroke-dasharray="3,2" />
                 <line x1="380" y1="26" x2="380" y2="58" class="stroke-foreground" stroke-width="1.5" />
 
                 <!-- Labels -->
@@ -233,7 +233,7 @@ const lineProps = computed(() => {
                   v-if="vizSafe"
                   :x="20 + (lineProps.safeStart / 100) * 360"
                   y="75"
-                  class="fill-green-700 dark:fill-green-400 text-[9px]"
+                  class="fill-teal-600 dark:fill-teal-300 text-[9px]"
                   text-anchor="middle"
                   font-family="monospace"
                 >
@@ -243,7 +243,7 @@ const lineProps = computed(() => {
                   v-if="vizSafe"
                   :x="20 + (lineProps.safeEnd / 100) * 360"
                   y="75"
-                  class="fill-green-700 dark:fill-green-400 text-[9px]"
+                  class="fill-teal-600 dark:fill-teal-300 text-[9px]"
                   text-anchor="middle"
                   font-family="monospace"
                 >
@@ -268,7 +268,7 @@ const lineProps = computed(() => {
                   v-if="vizSafe && lineProps.safeWidth > 10"
                   :x="20 + ((lineProps.safeStart + lineProps.safeEnd) / 200) * 360"
                   y="46"
-                  class="fill-green-700 dark:fill-green-400 text-[8px] font-semibold"
+                  class="fill-teal-600 dark:fill-teal-300 text-[8px] font-semibold"
                   text-anchor="middle"
                   font-family="sans-serif"
                 >
@@ -294,7 +294,7 @@ const lineProps = computed(() => {
 
             <p class="text-xs text-muted-foreground">
               <template v-if="vizSafe">
-                The green zone contains <strong>{{ (vizSafe.high - vizSafe.low + 1).toLocaleString() }}</strong>
+                The highlighted zone contains <strong>{{ (vizSafe.high - vizSafe.low + 1).toLocaleString() }}</strong>
                 safe numbers. Guessing too close to either edge risks creating a subproblem
                 too large to solve in the remaining guesses.
               </template>
@@ -355,26 +355,26 @@ const lineProps = computed(() => {
 
                 <!-- Level 2: Leaves -->
                 <!-- Left-left -->
-                <circle cx="65" cy="135" r="12" class="fill-green-500/15 stroke-green-500/50" stroke-width="1" />
-                <text x="65" y="139" class="fill-green-700 dark:fill-green-400 text-[7px]" text-anchor="middle" font-family="sans-serif">
+                <circle cx="65" cy="135" r="12" class="fill-teal-200/30 stroke-teal-400/50 dark:fill-teal-400/15 dark:stroke-teal-400/40" stroke-width="1" />
+                <text x="65" y="139" class="fill-teal-600 dark:fill-teal-300 text-[7px]" text-anchor="middle" font-family="sans-serif">
                   G-2
                 </text>
 
                 <!-- Left-right -->
-                <circle cx="155" cy="135" r="12" class="fill-green-500/15 stroke-green-500/50" stroke-width="1" />
-                <text x="155" y="139" class="fill-green-700 dark:fill-green-400 text-[7px]" text-anchor="middle" font-family="sans-serif">
+                <circle cx="155" cy="135" r="12" class="fill-teal-200/30 stroke-teal-400/50 dark:fill-teal-400/15 dark:stroke-teal-400/40" stroke-width="1" />
+                <text x="155" y="139" class="fill-teal-600 dark:fill-teal-300 text-[7px]" text-anchor="middle" font-family="sans-serif">
                   G-2
                 </text>
 
                 <!-- Right-left -->
-                <circle cx="245" cy="135" r="12" class="fill-green-500/15 stroke-green-500/50" stroke-width="1" />
-                <text x="245" y="139" class="fill-green-700 dark:fill-green-400 text-[7px]" text-anchor="middle" font-family="sans-serif">
+                <circle cx="245" cy="135" r="12" class="fill-teal-200/30 stroke-teal-400/50 dark:fill-teal-400/15 dark:stroke-teal-400/40" stroke-width="1" />
+                <text x="245" y="139" class="fill-teal-600 dark:fill-teal-300 text-[7px]" text-anchor="middle" font-family="sans-serif">
                   G-2
                 </text>
 
                 <!-- Right-right -->
-                <circle cx="335" cy="135" r="12" class="fill-green-500/15 stroke-green-500/50" stroke-width="1" />
-                <text x="335" y="139" class="fill-green-700 dark:fill-green-400 text-[7px]" text-anchor="middle" font-family="sans-serif">
+                <circle cx="335" cy="135" r="12" class="fill-teal-200/30 stroke-teal-400/50 dark:fill-teal-400/15 dark:stroke-teal-400/40" stroke-width="1" />
+                <text x="335" y="139" class="fill-teal-600 dark:fill-teal-300 text-[7px]" text-anchor="middle" font-family="sans-serif">
                   G-2
                 </text>
 
@@ -385,17 +385,17 @@ const lineProps = computed(() => {
                 <text x="335" y="162" class="fill-muted-foreground text-[8px]" text-anchor="middle">...</text>
 
                 <!-- Bottom leaf nodes -->
-                <rect x="40" y="170" width="50" height="16" rx="3" class="fill-green-500/20 stroke-green-500/40" stroke-width="0.75" />
-                <text x="65" y="181" class="fill-green-700 dark:fill-green-400 text-[7px]" text-anchor="middle" font-family="sans-serif">Found!</text>
+                <rect x="40" y="170" width="50" height="16" rx="3" class="fill-sky-200/40 stroke-sky-400/40 dark:fill-sky-400/15 dark:stroke-sky-400/30" stroke-width="0.75" />
+                <text x="65" y="181" class="fill-sky-700 dark:fill-sky-300 text-[7px]" text-anchor="middle" font-family="sans-serif">Found!</text>
 
-                <rect x="130" y="170" width="50" height="16" rx="3" class="fill-green-500/20 stroke-green-500/40" stroke-width="0.75" />
-                <text x="155" y="181" class="fill-green-700 dark:fill-green-400 text-[7px]" text-anchor="middle" font-family="sans-serif">Found!</text>
+                <rect x="130" y="170" width="50" height="16" rx="3" class="fill-sky-200/40 stroke-sky-400/40 dark:fill-sky-400/15 dark:stroke-sky-400/30" stroke-width="0.75" />
+                <text x="155" y="181" class="fill-sky-700 dark:fill-sky-300 text-[7px]" text-anchor="middle" font-family="sans-serif">Found!</text>
 
-                <rect x="220" y="170" width="50" height="16" rx="3" class="fill-green-500/20 stroke-green-500/40" stroke-width="0.75" />
-                <text x="245" y="181" class="fill-green-700 dark:fill-green-400 text-[7px]" text-anchor="middle" font-family="sans-serif">Found!</text>
+                <rect x="220" y="170" width="50" height="16" rx="3" class="fill-sky-200/40 stroke-sky-400/40 dark:fill-sky-400/15 dark:stroke-sky-400/30" stroke-width="0.75" />
+                <text x="245" y="181" class="fill-sky-700 dark:fill-sky-300 text-[7px]" text-anchor="middle" font-family="sans-serif">Found!</text>
 
-                <rect x="310" y="170" width="50" height="16" rx="3" class="fill-green-500/20 stroke-green-500/40" stroke-width="0.75" />
-                <text x="335" y="181" class="fill-green-700 dark:fill-green-400 text-[7px]" text-anchor="middle" font-family="sans-serif">Found!</text>
+                <rect x="310" y="170" width="50" height="16" rx="3" class="fill-sky-200/40 stroke-sky-400/40 dark:fill-sky-400/15 dark:stroke-sky-400/30" stroke-width="0.75" />
+                <text x="335" y="181" class="fill-sky-700 dark:fill-sky-300 text-[7px]" text-anchor="middle" font-family="sans-serif">Found!</text>
 
                 <!-- Annotation: depth -->
                 <line x1="390" y1="20" x2="390" y2="185" class="stroke-muted-foreground" stroke-width="0.75" stroke-dasharray="2,2" />
@@ -424,8 +424,8 @@ const lineProps = computed(() => {
               <div>Range: [1, 9999], N = 9999, G = 14</div>
               <div>2<sup>13</sup> = 8192 (max per side with G-1 = 13 guesses)</div>
               <div>Offset = max(0, 9999 - 8192) = 1807</div>
-              <div class="pt-1 font-semibold">Safe Low  = 1 + 1807 = <span class="text-green-700 dark:text-green-400">1808</span></div>
-              <div class="font-semibold">Safe High = 9999 - 1807 = <span class="text-green-700 dark:text-green-400">8192</span></div>
+              <div class="pt-1 font-semibold">Safe Low  = 1 + 1807 = <span class="text-teal-600 dark:text-teal-300">1808</span></div>
+              <div class="font-semibold">Safe High = 9999 - 1807 = <span class="text-teal-600 dark:text-teal-300">8192</span></div>
               <div class="pt-1 text-muted-foreground">Safe range size: 6385 numbers (63.9% of range)</div>
             </div>
           </section>

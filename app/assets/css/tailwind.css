@@ -35,59 +35,61 @@
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --radius: 0.625rem;
+  /* Cute pastel: Mint / Peach / Sky — Light Mode */
+  --background: oklch(0.98 0.008 80);          /* warm cream off-white */
+  --foreground: oklch(0.32 0.02 30);           /* soft dark brown-charcoal */
+  --card: oklch(0.995 0.005 80);               /* white with warm hint */
+  --card-foreground: oklch(0.32 0.02 30);      /* same soft dark */
+  --popover: oklch(0.995 0.005 80);
+  --popover-foreground: oklch(0.32 0.02 30);
+  --primary: oklch(0.78 0.12 170);             /* mint green */
+  --primary-foreground: oklch(0.25 0.05 170);  /* dark teal for text on mint */
+  --secondary: oklch(0.88 0.08 50);            /* peach / salmon */
+  --secondary-foreground: oklch(0.35 0.06 30); /* dark warm for text on peach */
+  --muted: oklch(0.95 0.015 220);              /* very light sky/lavender */
+  --muted-foreground: oklch(0.5 0.03 250);     /* muted blue-gray */
+  --accent: oklch(0.87 0.08 220);              /* sky blue */
+  --accent-foreground: oklch(0.3 0.05 220);    /* dark blue */
+  --destructive: oklch(0.7 0.14 20);           /* soft coral red */
+  --destructive-foreground: oklch(0.45 0.15 20); /* darker coral */
+  --border: oklch(0.92 0.025 50);              /* light peach/rose border */
+  --input: oklch(0.93 0.02 50);                /* light peach input bg */
+  --ring: oklch(0.78 0.12 170);                /* mint ring (matches primary) */
+  --chart-1: oklch(0.78 0.12 170);             /* mint */
+  --chart-2: oklch(0.82 0.1 50);               /* peach */
+  --chart-3: oklch(0.82 0.09 220);             /* sky */
+  --chart-4: oklch(0.85 0.1 130);              /* soft lime */
+  --chart-5: oklch(0.8 0.1 310);               /* soft lavender */
+  --radius: 0.75rem;
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.145 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.145 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: oklch(0.269 0 0);
-  --input: oklch(0.269 0 0);
-  --ring: oklch(0.439 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --radius: 0.625rem;
+  /* Cute pastel: Mint / Peach / Sky — Dark Pastel Mode */
+  --background: oklch(0.22 0.025 220);          /* deep muted navy-teal */
+  --foreground: oklch(0.92 0.015 80);           /* warm cream text */
+  --card: oklch(0.26 0.025 220);                /* slightly lighter card */
+  --card-foreground: oklch(0.92 0.015 80);
+  --popover: oklch(0.26 0.025 220);
+  --popover-foreground: oklch(0.92 0.015 80);
+  --primary: oklch(0.78 0.12 170);              /* pastel mint (glows on dark) */
+  --primary-foreground: oklch(0.2 0.04 170);    /* very dark teal */
+  --secondary: oklch(0.4 0.05 50);              /* muted peach/brown */
+  --secondary-foreground: oklch(0.9 0.06 50);   /* light peach text */
+  --muted: oklch(0.3 0.02 220);                 /* deep slate-teal */
+  --muted-foreground: oklch(0.68 0.04 220);     /* muted light blue-gray */
+  --accent: oklch(0.42 0.05 220);               /* muted sky blue surface */
+  --accent-foreground: oklch(0.88 0.08 220);    /* bright sky blue text */
+  --destructive: oklch(0.65 0.12 20);           /* muted coral */
+  --destructive-foreground: oklch(0.75 0.13 20); /* lighter coral */
+  --border: oklch(0.35 0.03 200);               /* muted teal/dark mint border */
+  --input: oklch(0.32 0.025 200);               /* dark teal input bg */
+  --ring: oklch(0.78 0.12 170);                 /* mint ring */
+  --chart-1: oklch(0.75 0.12 170);              /* mint */
+  --chart-2: oklch(0.72 0.1 50);                /* muted peach */
+  --chart-3: oklch(0.72 0.09 220);              /* muted sky */
+  --chart-4: oklch(0.7 0.1 130);                /* muted lime */
+  --chart-5: oklch(0.7 0.1 310);                /* muted lavender */
+  --radius: 0.75rem;
 }
 
 @layer base {

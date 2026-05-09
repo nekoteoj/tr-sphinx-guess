@@ -21,10 +21,10 @@ defineProps<{
         <Badge
           :variant="comfortLevel === 'impossible' ? 'destructive' : comfortLevel === 'won' ? 'default' : 'secondary'"
           :class="{
-            'bg-green-500/15 text-green-700 dark:text-green-400 border-green-500/30': comfortLevel === 'comfortable',
-            'bg-amber-500/15 text-amber-700 dark:text-amber-400 border-amber-500/30': comfortLevel === 'moderate',
-            'bg-orange-500/15 text-orange-700 dark:text-orange-400 border-orange-500/30': comfortLevel === 'tight',
-            'bg-green-500/15 text-green-700 dark:text-green-400 border-green-500/30': comfortLevel === 'won',
+            'bg-teal-200/50 text-teal-700 dark:bg-teal-400/15 dark:text-teal-300 border-teal-300/50': comfortLevel === 'comfortable',
+            'bg-amber-200/50 text-amber-700 dark:bg-amber-400/15 dark:text-amber-300 border-amber-200/50': comfortLevel === 'moderate',
+            'bg-rose-200/50 text-rose-700 dark:bg-rose-400/15 dark:text-rose-300 border-rose-200/50': comfortLevel === 'tight',
+            'bg-sky-200/50 text-sky-700 dark:bg-sky-400/15 dark:text-sky-300 border-sky-300/50': comfortLevel === 'won',
           }"
         >
           {{ comfortLevel === 'comfortable' ? 'Comfortable' :
@@ -55,11 +55,11 @@ defineProps<{
       </div>
 
       <!-- Won State -->
-      <div v-if="isWon" class="rounded-lg border border-green-500/30 bg-green-500/10 p-4 text-center">
-        <p class="text-lg font-semibold text-green-700 dark:text-green-400">
+      <div v-if="isWon" class="rounded-lg border border-sky-300/40 bg-sky-100/50 dark:bg-sky-400/10 dark:border-sky-400/30 p-4 text-center">
+        <p class="text-lg font-semibold text-sky-700 dark:text-sky-300">
           Number Found!
         </p>
-        <p class="text-2xl font-mono font-bold text-green-800 dark:text-green-300 mt-1">
+        <p class="text-2xl font-mono font-bold text-sky-800 dark:text-sky-200 mt-1">
           {{ rangeLow.toLocaleString() }}
         </p>
       </div>
@@ -78,18 +78,18 @@ defineProps<{
         <div
           class="rounded-lg border p-4 text-center transition-colors"
           :class="{
-            'border-green-500/30 bg-green-500/10': comfortLevel === 'comfortable',
-            'border-amber-500/30 bg-amber-500/10': comfortLevel === 'moderate',
-            'border-orange-500/30 bg-orange-500/10': comfortLevel === 'tight',
+            'border-teal-300/40 bg-teal-100/50 dark:bg-teal-400/10 dark:border-teal-400/25': comfortLevel === 'comfortable',
+            'border-amber-200/50 bg-amber-100/40 dark:bg-amber-400/10 dark:border-amber-400/25': comfortLevel === 'moderate',
+            'border-rose-200/50 bg-rose-100/40 dark:bg-rose-400/10 dark:border-rose-400/25': comfortLevel === 'tight',
           }"
         >
           <p class="text-xs text-muted-foreground mb-1">Safe Range to Guess</p>
           <p
             class="text-2xl font-mono font-bold"
             :class="{
-              'text-green-700 dark:text-green-400': comfortLevel === 'comfortable',
-              'text-amber-700 dark:text-amber-400': comfortLevel === 'moderate',
-              'text-orange-700 dark:text-orange-400': comfortLevel === 'tight',
+              'text-teal-700 dark:text-teal-300': comfortLevel === 'comfortable',
+              'text-amber-700 dark:text-amber-300': comfortLevel === 'moderate',
+              'text-rose-700 dark:text-rose-300': comfortLevel === 'tight',
             }"
           >
             [{{ safeRange.low.toLocaleString() }}, {{ safeRange.high.toLocaleString() }}]
