@@ -84,6 +84,7 @@ watch(() => [props.rangeLow, props.rangeHigh], ([low, high]) => {
             v-model.number="setupLow"
             type="number"
             placeholder="1"
+            @keyup.enter="handleStart"
           />
         </div>
         <div class="space-y-2">
@@ -93,6 +94,7 @@ watch(() => [props.rangeLow, props.rangeHigh], ([low, high]) => {
             v-model.number="setupHigh"
             type="number"
             placeholder="9999"
+            @keyup.enter="handleStart"
           />
         </div>
       </div>
@@ -105,6 +107,7 @@ watch(() => [props.rangeLow, props.rangeHigh], ([low, high]) => {
           min="1"
           max="50"
           placeholder="14"
+          @keyup.enter="handleStart"
         />
         <p class="text-xs text-muted-foreground">
           {{ $t('setup.coverageHint', { guesses: setupGuesses, max: (Math.pow(2, setupGuesses) - 1).toLocaleString() }) }}
@@ -139,6 +142,7 @@ watch(() => [props.rangeLow, props.rangeHigh], ([low, high]) => {
             type="number"
             :min="rangeLow"
             :max="rangeHigh"
+            @keyup.enter="handleOracleSubmit"
           />
         </div>
         <div class="space-y-2">
@@ -149,6 +153,7 @@ watch(() => [props.rangeLow, props.rangeHigh], ([low, high]) => {
             type="number"
             :min="rangeLow"
             :max="rangeHigh"
+            @keyup.enter="handleOracleSubmit"
           />
         </div>
       </div>
