@@ -33,6 +33,7 @@
     "newLow": "New Low",
     "newHigh": "New High",
     "submitButton": "Submit Response",
+    "undoButton": "Undo",
     "resetButton": "Reset"
   },
   "status": {

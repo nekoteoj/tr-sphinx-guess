@@ -72,6 +72,8 @@ export function useGuesser() {
     return safeRange.value.high - safeRange.value.low + 1
   })
 
+  const canUndo = computed(() => history.value.length > 1)
+
   const isGameOver = computed(() => {
     return guessesLeft.value <= 0 && rangeSize.value > 1
   })
@@ -128,6 +130,16 @@ export function useGuesser() {
     })
   }
 
+  function undo() {
+    if (history.value.length <= 1) return
+
+    history.value.pop()
+    const prev = history.value[history.value.length - 1]
+    rangeLow.value = prev.rangeLow
+    rangeHigh.value = prev.rangeHigh
+    guessesLeft.value = prev.guessesLeft
+  }
+
   function reset() {
     rangeLow.value = DEFAULT_RANGE_LOW
     rangeHigh.value = DEFAULT_RANGE_HIGH
@@ -152,6 +164,7 @@ export function useGuesser() {
     isPossible,
     isWon,
     isGameOver,
+    canUndo,
     suggestedGuess,
     safeRange,
     safeRangeSize,
@@ -160,6 +173,7 @@ export function useGuesser() {
     // Actions
     startGame,
     submitOracleResponse,
+    undo,
     reset,
   }
 }

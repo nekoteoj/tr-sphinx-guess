@@ -6,11 +6,13 @@ const props = defineProps<{
   rangeLow: number
   rangeHigh: number
   guessesLeft: number
+  canUndo: boolean
 }>()
 
 const emit = defineEmits<{
   start: [low: number, high: number, guesses: number]
   submitOracle: [newLow: number, newHigh: number]
+  undo: []
   reset: []
 }>()
 
@@ -168,6 +170,13 @@ watch(() => [props.rangeLow, props.rangeHigh], ([low, high]) => {
         @click="handleOracleSubmit"
       >
         {{ $t('oracle.submitButton') }}
+      </Button>
+      <Button
+        variant="outline"
+        :disabled="!canUndo"
+        @click="emit('undo')"
+      >
+        {{ $t('oracle.undoButton') }}
       </Button>
       <Button variant="outline" @click="handleReset">
         {{ $t('oracle.resetButton') }}

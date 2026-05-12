@@ -10,12 +10,14 @@ const {
   isPossible,
   isWon,
   isGameOver,
+  canUndo,
   suggestedGuess,
   safeRange,
   safeRangeSize,
   comfortLevel,
   startGame,
   submitOracleResponse,
+  undo,
   reset,
 } = useGuesser()
 
@@ -29,6 +31,10 @@ function handleOracleSubmit(newLow: number, newHigh: number) {
 
 function handleReset() {
   reset()
+}
+
+function handleUndo() {
+  undo()
 }
 </script>
 
@@ -65,8 +71,10 @@ function handleReset() {
       :range-low="rangeLow"
       :range-high="rangeHigh"
       :guesses-left="guessesLeft"
+      :can-undo="canUndo"
       @start="handleStart"
       @submit-oracle="handleOracleSubmit"
+      @undo="handleUndo"
       @reset="handleReset"
     />
 

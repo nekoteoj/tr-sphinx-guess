@@ -33,6 +33,7 @@
     "newLow": "ค่าต่ำสุดใหม่",
     "newHigh": "ค่าสูงสุดใหม่",
     "submitButton": "ส่งคำตอบ",
+    "undoButton": "ย้อนกลับ",
     "resetButton": "รีเซ็ต"
   },
   "status": {
