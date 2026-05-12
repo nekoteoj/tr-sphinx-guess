@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Play, ArrowRight, Undo2, RotateCcw } from 'lucide-vue-next'
+
 const { t } = useI18n()
 
 const props = defineProps<{
@@ -121,6 +123,7 @@ watch(() => [props.rangeLow, props.rangeHigh], ([low, high]) => {
     </CardContent>
     <CardFooter>
       <Button class="w-full" :disabled="!!setupError" @click="handleStart">
+        <Play class="mr-2 h-4 w-4" />
         {{ $t('setup.startButton') }}
       </Button>
     </CardFooter>
@@ -163,24 +166,34 @@ watch(() => [props.rangeLow, props.rangeHigh], ([low, high]) => {
         {{ oracleError }}
       </p>
     </CardContent>
-    <CardFooter class="flex gap-2">
+    <CardFooter class="flex flex-col gap-2">
       <Button
-        class="flex-1"
+        class="w-full"
         :disabled="!!oracleError"
         @click="handleOracleSubmit"
       >
+        <ArrowRight class="mr-2 h-4 w-4" />
         {{ $t('oracle.submitButton') }}
       </Button>
-      <Button
-        variant="outline"
-        :disabled="!canUndo"
-        @click="emit('undo')"
-      >
-        {{ $t('oracle.undoButton') }}
-      </Button>
-      <Button variant="outline" @click="handleReset">
-        {{ $t('oracle.resetButton') }}
-      </Button>
+      <div class="flex gap-2 w-full">
+        <Button
+          class="flex-1"
+          variant="outline"
+          :disabled="!canUndo"
+          @click="emit('undo')"
+        >
+          <Undo2 class="mr-2 h-4 w-4" />
+          {{ $t('oracle.undoButton') }}
+        </Button>
+        <Button
+          class="flex-1"
+          variant="outline"
+          @click="handleReset"
+        >
+          <RotateCcw class="mr-2 h-4 w-4" />
+          {{ $t('oracle.resetButton') }}
+        </Button>
+      </div>
     </CardFooter>
   </Card>
 </template>
