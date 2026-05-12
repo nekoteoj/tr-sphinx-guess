@@ -1,8 +1,8 @@
-import tailwindcss from '@tailwindcss/vite'
+import tailwindcss from "@tailwindcss/vite"
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2025-07-15',
+  compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
 
   ssr: false,
@@ -14,49 +14,43 @@ export default defineNuxtConfig({
   },
 
   app: {
-    baseURL: '/tr-sphinx-guess/',
+    baseURL: "/tr-sphinx-guess/",
     head: {
-      title: 'Number Guesser - Binary Search Helper',
+      title: "Number Guesser - Binary Search Helper",
       meta: [
-        { name: 'description', content: 'A binary search helper that calculates the safe range of numbers to guess' },
-        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { name: "description", content: "A binary search helper that calculates the safe range of numbers to guess" },
+        { name: "viewport", content: "width=device-width, initial-scale=1" },
       ],
     },
   },
 
-  css: ['~/assets/css/tailwind.css'],
+  css: ["~/assets/css/tailwind.css"],
 
   vite: {
     plugins: [tailwindcss()],
     optimizeDeps: {
-      include: [
-        'class-variance-authority',
-        'clsx',
-        'lucide-vue-next',
-        'reka-ui',
-        'tailwind-merge',
-      ],
+      include: ["class-variance-authority", "clsx", "lucide-vue-next", "reka-ui", "tailwind-merge"],
     },
   },
 
-  modules: ['@nuxtjs/i18n', 'shadcn-nuxt', '@vueuse/nuxt', '@nuxtjs/color-mode'],
+  modules: ["@nuxtjs/i18n", "shadcn-nuxt", "@vueuse/nuxt", "@nuxtjs/color-mode"],
 
   i18n: {
-    defaultLocale: 'th',
-    strategy: 'no_prefix',
+    defaultLocale: "th",
+    strategy: "no_prefix",
     locales: [
-      { code: 'th', name: 'ไทย', file: 'th.json' },
-      { code: 'en', name: 'English', file: 'en.json' },
+      { code: "th", name: "ไทย", file: "th.json" },
+      { code: "en", name: "English", file: "en.json" },
     ],
     detectBrowserLanguage: false,
   },
 
   colorMode: {
-    classSuffix: '',
+    classSuffix: "",
   },
 
   shadcn: {
-    prefix: '',
-    componentDir: './app/components/ui',
+    prefix: "",
+    componentDir: "./app/components/ui",
   },
 })

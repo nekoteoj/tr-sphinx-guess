@@ -1,6 +1,6 @@
-import { ref, computed } from 'vue'
+import { computed, ref } from "vue"
 
-export type GameMode = 'manual' | 'auto_pick'
+export type GameMode = "manual" | "auto_pick"
 
 export interface HistoryEntry {
   step: number
@@ -25,7 +25,7 @@ const guessesLeft = ref(DEFAULT_GUESSES)
 const initialGuesses = ref(DEFAULT_GUESSES)
 const history = ref<HistoryEntry[]>([])
 const isStarted = ref(false)
-const mode = ref<GameMode>('manual')
+const mode = ref<GameMode>("manual")
 const currentSuggestedGuess = ref(DEFAULT_RANGE_LOW)
 
 function clamp(value: number, low: number, high: number) {
@@ -36,7 +36,11 @@ function erf(x: number) {
   const sign = x < 0 ? -1 : 1
   const absX = Math.abs(x)
   const t = 1 / (1 + 0.3275911 * absX)
-  const y = 1 - (((((1.061405429 * t - 1.453152027) * t + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t) * Math.exp(-absX * absX)
+  const y =
+    1 -
+    ((((1.061405429 * t - 1.453152027) * t + 1.421413741) * t - 0.284496736) * t + 0.254829592) *
+      t *
+      Math.exp(-absX * absX)
   return sign * y
 }
 
@@ -45,10 +49,16 @@ function normalCdf(x: number) {
 }
 
 function inverseNormalCdf(p: number) {
-  const a = [-3.969683028665376e+01, 2.209460984245205e+02, -2.759285104469687e+02, 1.38357751867269e+02, -3.066479806614716e+01, 2.506628277459239e+00]
-  const b = [-5.447609879822406e+01, 1.615858368580409e+02, -1.556989798598866e+02, 6.680131188771972e+01, -1.328068155288572e+01]
-  const c = [-7.784894002430293e-03, -3.223964580411365e-01, -2.400758277161838e+00, -2.549732539343734e+00, 4.374664141464968e+00, 2.938163982698783e+00]
-  const d = [7.784695709041462e-03, 3.224671290700398e-01, 2.445134137142996e+00, 3.754408661907416e+00]
+  const a = [
+    -3.969683028665376e1, 2.209460984245205e2, -2.759285104469687e2, 1.38357751867269e2, -3.066479806614716e1,
+    2.506628277459239,
+  ]
+  const b = [-5.447609879822406e1, 1.615858368580409e2, -1.556989798598866e2, 6.680131188771972e1, -1.328068155288572e1]
+  const c = [
+    -7.784894002430293e-3, -3.223964580411365e-1, -2.400758277161838, -2.549732539343734, 4.374664141464968,
+    2.938163982698783,
+  ]
+  const d = [7.784695709041462e-3, 3.224671290700398e-1, 2.445134137142996, 3.754408661907416]
 
   const pLow = 0.02425
   const pHigh = 1 - pLow
@@ -58,20 +68,26 @@ function inverseNormalCdf(p: number) {
 
   if (p < pLow) {
     const q = Math.sqrt(-2 * Math.log(p))
-    return (((((c[0] * q + c[1]) * q + c[2]) * q + c[3]) * q + c[4]) * q + c[5]) /
+    return (
+      (((((c[0] * q + c[1]) * q + c[2]) * q + c[3]) * q + c[4]) * q + c[5]) /
       ((((d[0] * q + d[1]) * q + d[2]) * q + d[3]) * q + 1)
+    )
   }
 
   if (p <= pHigh) {
     const q = p - 0.5
     const r = q * q
-    return (((((a[0] * r + a[1]) * r + a[2]) * r + a[3]) * r + a[4]) * r + a[5]) * q /
+    return (
+      ((((((a[0] * r + a[1]) * r + a[2]) * r + a[3]) * r + a[4]) * r + a[5]) * q) /
       (((((b[0] * r + b[1]) * r + b[2]) * r + b[3]) * r + b[4]) * r + 1)
+    )
   }
 
   const q = Math.sqrt(-2 * Math.log(1 - p))
-  return -(((((c[0] * q + c[1]) * q + c[2]) * q + c[3]) * q + c[4]) * q + c[5]) /
+  return (
+    -(((((c[0] * q + c[1]) * q + c[2]) * q + c[3]) * q + c[4]) * q + c[5]) /
     ((((d[0] * q + d[1]) * q + d[2]) * q + d[3]) * q + 1)
+  )
 }
 
 function sampleTruncatedNormalInt(low: number, high: number) {
@@ -101,13 +117,12 @@ function sampleTruncatedNormalInt(low: number, high: number) {
 }
 
 export function useGuesser() {
-
   // Computed values
   const rangeSize = computed(() => rangeHigh.value - rangeLow.value + 1)
 
   const maxCoverable = computed(() => {
     if (guessesLeft.value <= 0) return 0
-    return Math.pow(2, guessesLeft.value) - 1
+    return 2 ** guessesLeft.value - 1
   })
 
   const isPossible = computed(() => {
@@ -130,7 +145,7 @@ export function useGuesser() {
     if (G <= 0) return null
 
     const N = rangeSize.value
-    const maxPerSide = Math.pow(2, G - 1) - 1
+    const maxPerSide = 2 ** (G - 1) - 1
 
     // Safe range: positions where both sides are solvable in G-1 guesses
     // x is safe if (x - lo) <= maxPerSide AND (hi - x) <= maxPerSide
@@ -161,18 +176,18 @@ export function useGuesser() {
   })
 
   const suggestedGuess = computed(() => {
-    if (mode.value === 'auto_pick') return currentSuggestedGuess.value
+    if (mode.value === "auto_pick") return currentSuggestedGuess.value
     return midpointGuess.value
   })
 
   const comfortLevel = computed(() => {
-    if (isGameOver.value) return 'gameover'
-    if (isWon.value) return 'won'
-    if (!isPossible.value) return 'impossible'
+    if (isGameOver.value) return "gameover"
+    if (isWon.value) return "won"
+    if (!isPossible.value) return "impossible"
     const ratio = safeRangeSize.value / rangeSize.value
-    if (ratio >= 0.5) return 'comfortable'
-    if (ratio >= 0.2) return 'moderate'
-    return 'tight'
+    if (ratio >= 0.5) return "comfortable"
+    if (ratio >= 0.2) return "moderate"
+    return "tight"
   })
 
   function refreshSuggestedGuess() {
@@ -181,7 +196,7 @@ export function useGuesser() {
       return
     }
 
-    if (mode.value === 'auto_pick') {
+    if (mode.value === "auto_pick") {
       const sourceLow = safeRange.value ? safeRange.value.low : rangeLow.value
       const sourceHigh = safeRange.value ? safeRange.value.high : rangeHigh.value
       currentSuggestedGuess.value = sampleTruncatedNormalInt(sourceLow, sourceHigh)
@@ -220,17 +235,16 @@ export function useGuesser() {
     addHistoryEntry()
   }
 
-  function submitAutoFeedback(direction: 'lower' | 'higher') {
+  function submitAutoFeedback(direction: "lower" | "higher") {
     if (guessesLeft.value <= 0) return
 
     const guess = currentSuggestedGuess.value
 
-    if (direction === 'lower') {
+    if (direction === "lower") {
       const newHigh = guess - 1
       if (newHigh < rangeLow.value) return
       rangeHigh.value = newHigh
-    }
-    else {
+    } else {
       const newLow = guess + 1
       if (newLow > rangeHigh.value) return
       rangeLow.value = newLow
@@ -250,7 +264,7 @@ export function useGuesser() {
 
   function rerollSuggestedGuess() {
     if (!isStarted.value) return
-    if (mode.value !== 'auto_pick') return
+    if (mode.value !== "auto_pick") return
     if (isWon.value || isGameOver.value) return
     refreshSuggestedGuess()
   }
@@ -288,7 +302,7 @@ export function useGuesser() {
     guessesLeft.value = DEFAULT_GUESSES
     initialGuesses.value = DEFAULT_GUESSES
     isStarted.value = false
-    mode.value = 'manual'
+    mode.value = "manual"
     currentSuggestedGuess.value = DEFAULT_RANGE_LOW
     history.value = []
   }

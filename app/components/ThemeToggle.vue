@@ -14,6 +14,7 @@ function toggleTheme() {
     :aria-label="$t('theme.toggle')"
   >
     <svg
+      aria-hidden="true"
       v-if="colorMode.value === 'dark'"
       xmlns="http://www.w3.org/2000/svg"
       width="20"
@@ -36,6 +37,7 @@ function toggleTheme() {
       <path d="m19.07 4.93-1.41 1.41" />
     </svg>
     <svg
+      aria-hidden="true"
       v-else
       xmlns="http://www.w3.org/2000/svg"
       width="20"

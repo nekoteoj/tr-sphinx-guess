@@ -6,8 +6,8 @@ function toggleLocale() {
   setLocale(newLocale)
 }
 
-const currentFlag = computed(() => locale.value === 'th' ? '🇹🇭' : '🇬🇧')
-const currentCode = computed(() => locale.value === 'th' ? 'TH' : 'EN')
+const currentFlag = computed(() => (locale.value === 'th' ? '🇹🇭' : '🇬🇧'))
+const currentCode = computed(() => (locale.value === 'th' ? 'TH' : 'EN'))
 </script>
 
 <template>

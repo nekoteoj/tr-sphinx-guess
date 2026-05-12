@@ -22,7 +22,7 @@ const vizSafe = computed(() => {
   // Calculate default example
   const N = vizN.value
   const G = vizG.value
-  const maxPerSide = Math.pow(2, G - 1) - 1
+  const maxPerSide = 2 ** (G - 1) - 1
   const offset = Math.max(0, N - 1 - maxPerSide)
   const safeLow = vizLo.value + offset
   const safeHigh = vizHi.value - offset
@@ -37,7 +37,6 @@ const lineProps = computed(() => {
     return { safeStart: 0, safeEnd: 100, leftWidth: 0, rightWidth: 0, safeWidth: 100 }
   }
   const leftSize = vizSafe.value.low - vizLo.value
-  const rightSize = vizHi.value - vizSafe.value.high
   const safeSize = vizSafe.value.high - vizSafe.value.low + 1
 
   const safeStart = (leftSize / N) * 100
@@ -48,7 +47,7 @@ const lineProps = computed(() => {
     safeEnd,
     leftWidth: safeStart,
     rightWidth: 100 - safeEnd,
-    safeWidth: safeEnd - safeStart,
+    safeWidth: safeEnd - safeStart
   }
 })
 </script>
@@ -58,6 +57,7 @@ const lineProps = computed(() => {
     <DialogTrigger as-child>
       <Button variant="ghost" size="icon" :aria-label="$t('algorithm.triggerLabel')">
         <svg
+          aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
           width="20"
           height="20"
@@ -169,6 +169,7 @@ const lineProps = computed(() => {
 
             <div class="rounded-lg border p-4 bg-muted/30">
               <svg
+                aria-hidden="true"
                 viewBox="0 0 400 100"
                 class="w-full h-auto"
                 xmlns="http://www.w3.org/2000/svg"
@@ -304,6 +305,7 @@ const lineProps = computed(() => {
 
             <div class="rounded-lg border p-4 bg-muted/30">
               <svg
+                aria-hidden="true"
                 viewBox="0 0 400 200"
                 class="w-full h-auto"
                 xmlns="http://www.w3.org/2000/svg"

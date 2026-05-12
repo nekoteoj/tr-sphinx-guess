@@ -24,7 +24,7 @@ const {
   submitOracleResponse,
   submitAutoFeedback,
   undo,
-  reset,
+  reset
 } = useGuesser()
 
 function handleStart(low: number, high: number, guesses: number, gameMode: GameMode) {

@@ -69,10 +69,13 @@ function handleReset() {
   emit('reset')
 }
 
-watch(() => [props.rangeLow, props.rangeHigh], ([low, high]) => {
-  oracleLow.value = low
-  oracleHigh.value = high
-})
+watch(
+  () => [props.rangeLow, props.rangeHigh],
+  ([low, high]) => {
+    oracleLow.value = low
+    oracleHigh.value = high
+  }
+)
 </script>
 
 <template>
@@ -96,7 +99,7 @@ watch(() => [props.rangeLow, props.rangeHigh], ([low, high]) => {
         <Label for="setup-guesses">{{ $t('setup.totalGuesses') }}</Label>
         <Input id="setup-guesses" v-model.number="setupGuesses" type="number" min="1" max="50" placeholder="14" @keyup.enter="handleStart('manual')" />
         <p class="text-xs text-muted-foreground">
-          {{ $t('setup.coverageHint', { guesses: setupGuesses, max: (Math.pow(2, setupGuesses) - 1).toLocaleString() }) }}
+          {{ $t('setup.coverageHint', { guesses: setupGuesses, max: (2 ** setupGuesses - 1).toLocaleString() }) }}
         </p>
       </div>
       <p class="text-xs text-muted-foreground">{{ $t('setup.modeHint') }}</p>
