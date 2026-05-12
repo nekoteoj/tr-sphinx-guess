@@ -30,6 +30,9 @@ defineProps<{
               <span class="font-mono text-xs">
                 {{ $t('common.rangeFormat', { low: entry.rangeLow.toLocaleString(), high: entry.rangeHigh.toLocaleString() }) }}
               </span>
+              <span class="text-xs text-muted-foreground">
+                {{ $t('history.modeLabel') }} {{ entry.mode === 'auto_pick' ? $t('history.modeAutoPick') : $t('history.modeManual') }}
+              </span>
               <span v-if="entry.safeLow !== null && entry.safeHigh !== null" class="text-xs text-muted-foreground">
                 {{ $t('history.safe') }} {{ $t('common.rangeFormat', { low: entry.safeLow.toLocaleString(), high: entry.safeHigh.toLocaleString() }) }}
               </span>

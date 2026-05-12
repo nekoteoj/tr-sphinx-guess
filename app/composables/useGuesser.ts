@@ -1,10 +1,14 @@
 import { ref, computed } from 'vue'
 
+export type GameMode = 'manual' | 'auto_pick'
+
 export interface HistoryEntry {
   step: number
   rangeLow: number
   rangeHigh: number
   guessesLeft: number
+  mode: GameMode
+  suggestedGuess: number
   safeLow: number | null
   safeHigh: number | null
   isPossible: boolean
@@ -21,6 +25,80 @@ const guessesLeft = ref(DEFAULT_GUESSES)
 const initialGuesses = ref(DEFAULT_GUESSES)
 const history = ref<HistoryEntry[]>([])
 const isStarted = ref(false)
+const mode = ref<GameMode>('manual')
+const currentSuggestedGuess = ref(DEFAULT_RANGE_LOW)
+
+function clamp(value: number, low: number, high: number) {
+  return Math.min(high, Math.max(low, value))
+}
+
+function erf(x: number) {
+  const sign = x < 0 ? -1 : 1
+  const absX = Math.abs(x)
+  const t = 1 / (1 + 0.3275911 * absX)
+  const y = 1 - (((((1.061405429 * t - 1.453152027) * t + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t) * Math.exp(-absX * absX)
+  return sign * y
+}
+
+function normalCdf(x: number) {
+  return 0.5 * (1 + erf(x / Math.SQRT2))
+}
+
+function inverseNormalCdf(p: number) {
+  const a = [-3.969683028665376e+01, 2.209460984245205e+02, -2.759285104469687e+02, 1.38357751867269e+02, -3.066479806614716e+01, 2.506628277459239e+00]
+  const b = [-5.447609879822406e+01, 1.615858368580409e+02, -1.556989798598866e+02, 6.680131188771972e+01, -1.328068155288572e+01]
+  const c = [-7.784894002430293e-03, -3.223964580411365e-01, -2.400758277161838e+00, -2.549732539343734e+00, 4.374664141464968e+00, 2.938163982698783e+00]
+  const d = [7.784695709041462e-03, 3.224671290700398e-01, 2.445134137142996e+00, 3.754408661907416e+00]
+
+  const pLow = 0.02425
+  const pHigh = 1 - pLow
+
+  if (p <= 0) return Number.NEGATIVE_INFINITY
+  if (p >= 1) return Number.POSITIVE_INFINITY
+
+  if (p < pLow) {
+    const q = Math.sqrt(-2 * Math.log(p))
+    return (((((c[0] * q + c[1]) * q + c[2]) * q + c[3]) * q + c[4]) * q + c[5]) /
+      ((((d[0] * q + d[1]) * q + d[2]) * q + d[3]) * q + 1)
+  }
+
+  if (p <= pHigh) {
+    const q = p - 0.5
+    const r = q * q
+    return (((((a[0] * r + a[1]) * r + a[2]) * r + a[3]) * r + a[4]) * r + a[5]) * q /
+      (((((b[0] * r + b[1]) * r + b[2]) * r + b[3]) * r + b[4]) * r + 1)
+  }
+
+  const q = Math.sqrt(-2 * Math.log(1 - p))
+  return -(((((c[0] * q + c[1]) * q + c[2]) * q + c[3]) * q + c[4]) * q + c[5]) /
+    ((((d[0] * q + d[1]) * q + d[2]) * q + d[3]) * q + 1)
+}
+
+function sampleTruncatedNormalInt(low: number, high: number) {
+  if (low >= high) return low
+
+  const mu = (low + high) / 2
+  const sigma = mu - low
+
+  if (!Number.isFinite(sigma) || sigma <= 0) {
+    return clamp(Math.round(mu), low, high)
+  }
+
+  const a = (low - mu) / sigma
+  const b = (high - mu) / sigma
+  const cdfA = normalCdf(a)
+  const cdfB = normalCdf(b)
+
+  if (!Number.isFinite(cdfA) || !Number.isFinite(cdfB) || cdfA >= cdfB) {
+    return clamp(Math.round(mu), low, high)
+  }
+
+  const u = cdfA + Math.random() * (cdfB - cdfA)
+  const z = inverseNormalCdf(u)
+  const sample = mu + sigma * z
+
+  return clamp(Math.round(sample), low, high)
+}
 
 export function useGuesser() {
 
@@ -78,8 +156,13 @@ export function useGuesser() {
     return guessesLeft.value <= 0 && rangeSize.value > 1
   })
 
-  const suggestedGuess = computed(() => {
+  const midpointGuess = computed(() => {
     return Math.floor((rangeLow.value + rangeHigh.value) / 2)
+  })
+
+  const suggestedGuess = computed(() => {
+    if (mode.value === 'auto_pick') return currentSuggestedGuess.value
+    return midpointGuess.value
   })
 
   const comfortLevel = computed(() => {
@@ -92,14 +175,33 @@ export function useGuesser() {
     return 'tight'
   })
 
+  function refreshSuggestedGuess() {
+    if (rangeLow.value >= rangeHigh.value) {
+      currentSuggestedGuess.value = rangeLow.value
+      return
+    }
+
+    if (mode.value === 'auto_pick') {
+      const sourceLow = safeRange.value ? safeRange.value.low : rangeLow.value
+      const sourceHigh = safeRange.value ? safeRange.value.high : rangeHigh.value
+      currentSuggestedGuess.value = sampleTruncatedNormalInt(sourceLow, sourceHigh)
+      return
+    }
+
+    currentSuggestedGuess.value = midpointGuess.value
+  }
+
   // Actions
-  function startGame(low: number, high: number, guesses: number) {
+  function startGame(low: number, high: number, guesses: number, gameMode: GameMode) {
     rangeLow.value = low
     rangeHigh.value = high
     guessesLeft.value = guesses
     initialGuesses.value = guesses
+    mode.value = gameMode
     isStarted.value = true
     history.value = []
+
+    refreshSuggestedGuess()
 
     // Record initial state
     addHistoryEntry()
@@ -114,7 +216,43 @@ export function useGuesser() {
     rangeHigh.value = newHigh
     guessesLeft.value--
 
+    refreshSuggestedGuess()
     addHistoryEntry()
+  }
+
+  function submitAutoFeedback(direction: 'lower' | 'higher') {
+    if (guessesLeft.value <= 0) return
+
+    const guess = currentSuggestedGuess.value
+
+    if (direction === 'lower') {
+      const newHigh = guess - 1
+      if (newHigh < rangeLow.value) return
+      rangeHigh.value = newHigh
+    }
+    else {
+      const newLow = guess + 1
+      if (newLow > rangeHigh.value) return
+      rangeLow.value = newLow
+    }
+
+    guessesLeft.value--
+
+    refreshSuggestedGuess()
+    addHistoryEntry()
+  }
+
+  function setMode(nextMode: GameMode) {
+    if (mode.value === nextMode) return
+    mode.value = nextMode
+    refreshSuggestedGuess()
+  }
+
+  function rerollSuggestedGuess() {
+    if (!isStarted.value) return
+    if (mode.value !== 'auto_pick') return
+    if (isWon.value || isGameOver.value) return
+    refreshSuggestedGuess()
   }
 
   function addHistoryEntry() {
@@ -124,6 +262,8 @@ export function useGuesser() {
       rangeLow: rangeLow.value,
       rangeHigh: rangeHigh.value,
       guessesLeft: guessesLeft.value,
+      mode: mode.value,
+      suggestedGuess: currentSuggestedGuess.value,
       safeLow: sr ? sr.low : null,
       safeHigh: sr ? sr.high : null,
       isPossible: isPossible.value,
@@ -138,6 +278,8 @@ export function useGuesser() {
     rangeLow.value = prev.rangeLow
     rangeHigh.value = prev.rangeHigh
     guessesLeft.value = prev.guessesLeft
+    mode.value = prev.mode
+    currentSuggestedGuess.value = prev.suggestedGuess
   }
 
   function reset() {
@@ -146,6 +288,8 @@ export function useGuesser() {
     guessesLeft.value = DEFAULT_GUESSES
     initialGuesses.value = DEFAULT_GUESSES
     isStarted.value = false
+    mode.value = 'manual'
+    currentSuggestedGuess.value = DEFAULT_RANGE_LOW
     history.value = []
   }
 
@@ -157,6 +301,7 @@ export function useGuesser() {
     initialGuesses,
     history,
     isStarted,
+    mode,
 
     // Computed
     rangeSize,
@@ -172,7 +317,10 @@ export function useGuesser() {
 
     // Actions
     startGame,
+    setMode,
+    rerollSuggestedGuess,
     submitOracleResponse,
+    submitAutoFeedback,
     undo,
     reset,
   }

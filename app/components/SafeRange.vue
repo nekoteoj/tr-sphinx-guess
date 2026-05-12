@@ -1,5 +1,8 @@
 <script setup lang="ts">
-defineProps<{
+import { Dices } from 'lucide-vue-next'
+import type { GameMode } from '~/composables/useGuesser'
+
+const props = defineProps<{
   rangeLow: number
   rangeHigh: number
   guessesLeft: number
@@ -7,12 +10,24 @@ defineProps<{
   isPossible: boolean
   isWon: boolean
   isGameOver: boolean
+  mode: GameMode
   suggestedGuess: number
   safeRange: { low: number; high: number } | null
   safeRangeSize: number
   comfortLevel: string
   maxCoverable: number
 }>()
+
+const emit = defineEmits<{
+  setMode: [mode: GameMode]
+  reroll: []
+}>()
+
+const isAutoPick = computed(() => props.mode === 'auto_pick')
+
+function toggleMode() {
+  emit('setMode', isAutoPick.value ? 'manual' : 'auto_pick')
+}
 </script>
 
 <template>
@@ -78,6 +93,27 @@ defineProps<{
         </p>
       </div>
 
+      <div v-else-if="mode === 'auto_pick'" class="space-y-3">
+        <div class="rounded-lg border border-muted p-4 text-center">
+          <p class="text-xs text-muted-foreground mb-1">{{ $t('status.suggestedGuessAuto') }}</p>
+          <p class="text-2xl font-mono font-bold text-foreground">
+            {{ suggestedGuess.toLocaleString() }}
+          </p>
+          <p class="text-xs text-muted-foreground mt-1">
+            {{ $t('status.suggestedGuessAutoHint') }}
+          </p>
+        </div>
+
+        <div v-if="!isPossible" class="rounded-lg border border-amber-300/40 bg-amber-100/50 dark:bg-amber-400/10 dark:border-amber-400/30 p-4 text-center">
+          <p class="text-sm font-semibold text-amber-700 dark:text-amber-300">
+            {{ $t('status.notGuaranteed') }}
+          </p>
+          <p class="text-xs text-muted-foreground mt-1">
+            {{ $t('status.impossibleDesc', { rangeSize: rangeSize.toLocaleString(), maxCoverable: maxCoverable.toLocaleString(), guessesLeft }) }}
+          </p>
+        </div>
+      </div>
+
       <!-- Not Guaranteed State (impossible but can still try) -->
       <div v-else-if="!isPossible" class="space-y-3">
         <div class="rounded-lg border border-amber-300/40 bg-amber-100/50 dark:bg-amber-400/10 dark:border-amber-400/30 p-4 text-center">
@@ -133,6 +169,45 @@ defineProps<{
         <p class="text-xs text-muted-foreground text-center">
           {{ $t('status.helpText', { remaining: guessesLeft - 1 }) }}
         </p>
+      </div>
+
+      <div class="flex items-center justify-between gap-2 pt-1">
+        <Button
+          v-if="mode === 'auto_pick'"
+          variant="default"
+          size="sm"
+          class="gap-2 border-teal-300/60 bg-teal-500 text-white hover:bg-teal-600 dark:border-teal-500/50 dark:bg-teal-600 dark:hover:bg-teal-500"
+          :aria-label="$t('mode.reroll')"
+          :title="$t('mode.reroll')"
+          @click="emit('reroll')"
+        >
+          <Dices class="h-4 w-4" />
+          <span class="hidden md:inline">{{ $t('mode.reroll') }}</span>
+        </Button>
+        <div v-else />
+
+        <div class="flex items-center gap-2">
+          <span class="text-xs" :class="mode === 'manual' ? 'font-medium text-foreground' : 'text-muted-foreground'">
+            {{ $t('mode.manual') }}
+          </span>
+          <button
+            type="button"
+            role="switch"
+            :aria-checked="isAutoPick"
+            :aria-label="$t('mode.label')"
+            class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            :class="isAutoPick ? 'bg-primary' : 'bg-border'"
+            @click="toggleMode"
+          >
+            <span
+              class="inline-block h-5 w-5 transform rounded-full bg-background shadow transition-transform"
+              :class="isAutoPick ? 'translate-x-5' : 'translate-x-0.5'"
+            />
+          </button>
+          <span class="text-xs" :class="mode === 'auto_pick' ? 'font-medium text-foreground' : 'text-muted-foreground'">
+            {{ $t('mode.autoPick') }}
+          </span>
+        </div>
       </div>
     </CardContent>
   </Card>

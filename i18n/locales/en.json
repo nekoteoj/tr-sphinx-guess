@@ -12,12 +12,15 @@
   },
   "setup": {
     "title": "Game Setup",
-    "description": "Configure the number range and total guesses",
+    "description": "Configure the number range, total guesses, and play mode",
     "rangeLow": "Range Low",
     "rangeHigh": "Range High",
     "totalGuesses": "Total Guesses",
     "coverageHint": "With {guesses} guesses, you can cover up to {max} numbers",
     "startButton": "Start Guessing",
+    "modeHint": "Choose how you want to play",
+    "manualButton": "Manual Range",
+    "autoPickButton": "Auto Pick",
     "errors": {
       "lowGeHigh": "Low must be less than High",
       "minGuess": "Must have at least 1 guess",
@@ -30,11 +33,22 @@
   "oracle": {
     "title": "Oracle Response",
     "description": "Enter the new range after the oracle's response",
+    "manualDescription": "Enter the new range after the oracle's response",
+    "autoDescription": "The app picks a guess for you. Tap whether the answer is higher or lower.",
     "newLow": "New Low",
     "newHigh": "New High",
+    "lowerButton": "Lower",
+    "higherButton": "Higher",
     "submitButton": "Submit Response",
     "undoButton": "Undo",
     "resetButton": "Reset"
+  },
+  "mode": {
+    "label": "Mode",
+    "manual": "Manual Range",
+    "autoPick": "Auto Pick",
+    "switchHint": "You can switch mode anytime",
+    "reroll": "Reroll"
   },
   "status": {
     "title": "Status",
@@ -53,6 +67,8 @@
     "canStillTry": "You can still continue playing — with some luck, you may still find the answer!",
     "suggestedGuess": "Suggested Guess (Midpoint)",
     "suggestedGuessHint": "The midpoint is the best strategy when no safe range exists",
+    "suggestedGuessAuto": "Suggested Guess (Auto Pick)",
+    "suggestedGuessAutoHint": "Tap Higher or Lower to continue",
     "gameoverTitle": "Out of Guesses",
     "gameoverDesc": "You've used all your guesses. The answer is somewhere in {low} to {high}.",
     "safeRangeLabel": "Safe Range to Guess",
@@ -61,6 +77,9 @@
   },
   "history": {
     "title": "History",
+    "modeLabel": "Mode:",
+    "modeManual": "Manual Range",
+    "modeAutoPick": "Auto Pick",
     "safe": "Safe:",
     "impossible": "Impossible",
     "left": "{count} left"

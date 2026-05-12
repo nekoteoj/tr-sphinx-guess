@@ -12,12 +12,15 @@
   },
   "setup": {
     "title": "ตั้งค่าเกม",
-    "description": "กำหนดช่วงตัวเลขและจำนวนครั้งที่ทายได้",
+    "description": "กำหนดช่วงตัวเลข จำนวนครั้งที่ทาย และโหมดการเล่น",
     "rangeLow": "ค่าต่ำสุด",
     "rangeHigh": "ค่าสูงสุด",
     "totalGuesses": "จำนวนครั้งที่ทาย",
     "coverageHint": "ด้วย {guesses} ครั้ง สามารถครอบคลุมได้ถึง {max} ตัวเลข",
     "startButton": "เริ่มเล่น",
+    "modeHint": "เลือกวิธีการเล่น",
+    "manualButton": "เลือกเอง",
+    "autoPickButton": "แอปเลือกให้",
     "errors": {
       "lowGeHigh": "ค่าต่ำสุดต้องน้อยกว่าค่าสูงสุด",
       "minGuess": "ต้องมีอย่างน้อย 1 ครั้ง",
@@ -30,11 +33,22 @@
   "oracle": {
     "title": "คำตอบจากนักพยากรณ์",
     "description": "ใส่ช่วงใหม่หลังจากได้รับคำตอบจากนักพยากรณ์",
+    "manualDescription": "ใส่ช่วงใหม่หลังจากได้รับคำตอบจากนักพยากรณ์",
+    "autoDescription": "แอปจะเลือกตัวเลขให้ แล้วกดว่าคำตอบสูงกว่าหรือต่ำกว่า",
     "newLow": "ค่าต่ำสุดใหม่",
     "newHigh": "ค่าสูงสุดใหม่",
+    "lowerButton": "ต่ำกว่า",
+    "higherButton": "สูงกว่า",
     "submitButton": "ส่งคำตอบ",
     "undoButton": "ย้อนกลับ",
     "resetButton": "รีเซ็ต"
+  },
+  "mode": {
+    "label": "โหมด",
+    "manual": "เลือกเอง",
+    "autoPick": "แอปเลือกให้",
+    "switchHint": "สลับโหมดได้ตลอดเวลา",
+    "reroll": "สุ่มใหม่"
   },
   "status": {
     "title": "สถานะ",
@@ -53,6 +67,8 @@
     "canStillTry": "คุณยังเล่นต่อได้ — ถ้าโชคดี อาจยังหาคำตอบเจอ!",
     "suggestedGuess": "แนะนำให้ทาย (จุดกึ่งกลาง)",
     "suggestedGuessHint": "จุดกึ่งกลางเป็น strategy ที่ดีที่สุดเมื่อไม่มีช่วงปลอดภัย",
+    "suggestedGuessAuto": "ตัวเลขที่แนะนำ (แอปเลือกให้)",
+    "suggestedGuessAutoHint": "กด \"สูงกว่า\" หรือ \"ต่ำกว่า\" เพื่อเล่นต่อ",
     "gameoverTitle": "หมดสิทธิ์ทายแล้ว",
     "gameoverDesc": "คุณใช้ครั้งทายหมดแล้ว คำตอบอยู่ในช่วง {low} ถึง {high}",
     "safeRangeLabel": "ช่วงปลอดภัยที่ทายได้",
@@ -61,6 +77,9 @@
   },
   "history": {
     "title": "ประวัติ",
+    "modeLabel": "โหมด:",
+    "modeManual": "เลือกเอง",
+    "modeAutoPick": "แอปเลือกให้",
     "safe": "ปลอดภัย:",
     "impossible": "เป็นไปไม่ได้",
     "left": "เหลือ {count}"
