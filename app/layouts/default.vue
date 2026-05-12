@@ -1,11 +1,13 @@
 <script setup lang="ts">
+import { Github } from 'lucide-vue-next'
+
 const { reset } = useGuesser()
 </script>
 
 <template>
   <div class="min-h-screen bg-background">
     <!-- Header -->
-    <header class="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header class="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div class="container mx-auto flex h-14 items-center justify-between px-4">
         <NuxtLink to="/" class="flex items-center gap-2 hover:opacity-80 transition-opacity" @click="reset">
           <svg
@@ -21,9 +23,10 @@ const { reset } = useGuesser()
             stroke-linejoin="round"
             class="text-primary"
           >
-            <path d="m21 21-6.05-6.05M10 4a6 6 0 1 0 0 12 6 6 0 0 0 0-12Z" />
-            <path d="M10 7v6" />
-            <path d="M7 10h6" />
+            <line x1="4" y1="9" x2="20" y2="9" />
+            <line x1="4" y1="15" x2="20" y2="15" />
+            <line x1="10" y1="3" x2="8" y2="21" />
+            <line x1="16" y1="3" x2="14" y2="21" />
           </svg>
           <h1 class="text-lg font-semibold">{{ $t('layout.title') }}</h1>
         </NuxtLink>
@@ -41,9 +44,13 @@ const { reset } = useGuesser()
     </main>
 
     <!-- Footer -->
-    <footer class="border-t py-4 text-center text-xs text-muted-foreground">
+    <footer class="py-4 text-center text-xs text-muted-foreground">
       <div class="container mx-auto px-4">
-        {{ $t('layout.footer') }}
+        {{ $t('layout.footer') }} · {{ $t('layout.credit') }}
+        <a href="https://github.com/nekoteoj" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 hover:text-foreground transition-colors">
+          <Github class="h-3 w-3" />
+          nekoteoj
+        </a>
       </div>
     </footer>
   </div>

@@ -4,7 +4,8 @@
   },
   "layout": {
     "title": "Number Guesser",
-    "footer": "Binary search helper — pick any number in the safe range"
+    "footer": "We'll help you find the number",
+    "credit": "Brought to you by"
   },
   "index": {
     "heading": "Binary Search Helper",
