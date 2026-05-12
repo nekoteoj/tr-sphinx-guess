@@ -28,6 +28,15 @@ export default defineNuxtConfig({
 
   vite: {
     plugins: [tailwindcss()],
+    optimizeDeps: {
+      include: [
+        'class-variance-authority',
+        'clsx',
+        'lucide-vue-next',
+        'reka-ui',
+        'tailwind-merge',
+      ],
+    },
   },
 
   modules: ['@nuxtjs/i18n', 'shadcn-nuxt', '@vueuse/nuxt', '@nuxtjs/color-mode'],
