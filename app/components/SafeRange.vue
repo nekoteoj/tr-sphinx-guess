@@ -94,14 +94,19 @@ function toggleMode() {
       </div>
 
       <div v-else-if="mode === 'auto_pick'" class="space-y-3">
-        <div class="rounded-lg border border-muted p-4 text-center">
-          <p class="text-xs text-muted-foreground mb-1">{{ $t('status.suggestedGuessAuto') }}</p>
-          <p class="text-2xl font-mono font-bold text-foreground">
-            {{ suggestedGuess.toLocaleString() }}
-          </p>
-          <p class="text-xs text-muted-foreground mt-1">
-            {{ $t('status.suggestedGuessAutoHint') }}
-          </p>
+        <div class="glow-border-card relative">
+          <div class="outer-glow" />
+          <div class="relative z-10 rounded-lg border border-border/80 bg-background p-4 text-center">
+            <p class="text-xs text-muted-foreground mb-2">{{ $t('status.suggestedGuessAuto') }}</p>
+            <div class="mx-auto w-fit px-1 py-1">
+              <p class="text-3xl font-mono font-bold text-slate-950 dark:text-white">
+                {{ suggestedGuess.toLocaleString() }}
+              </p>
+            </div>
+            <p class="text-xs text-muted-foreground mt-2">
+              {{ $t('status.suggestedGuessAutoHint') }}
+            </p>
+          </div>
         </div>
 
         <div v-if="!isPossible" class="rounded-lg border border-amber-300/40 bg-amber-100/50 dark:bg-amber-400/10 dark:border-amber-400/30 p-4 text-center">
@@ -212,3 +217,49 @@ function toggleMode() {
     </CardContent>
   </Card>
 </template>
+
+<style scoped>
+.glow-border-card {
+  position: relative;
+}
+
+.outer-glow {
+  position: absolute;
+  inset: -4px;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 0.95rem;
+  background: linear-gradient(
+    135deg,
+    rgb(153 246 228 / 0.52),
+    rgb(165 243 252 / 0.48),
+    rgb(196 181 253 / 0.42),
+    rgb(251 207 232 / 0.42),
+    rgb(153 246 228 / 0.52)
+  );
+  background-size: 220% 220%;
+  filter: blur(8px) saturate(1.2);
+  opacity: 0.88;
+  animation: outer-glow-shift 12s ease-in-out infinite;
+}
+
+:global(.dark) .outer-glow {
+  opacity: 0.78;
+}
+
+@keyframes outer-glow-shift {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .outer-glow {
+    animation: none;
+    background-position: 70% 30%;
+  }
+}
+</style>
