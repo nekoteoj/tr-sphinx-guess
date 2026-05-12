@@ -22,12 +22,12 @@ const emit = defineEmits<{
   reset: []
 }>()
 
-const setupLow = ref(1)
-const setupHigh = ref(9999)
-const setupGuesses = ref(14)
+const setupLow = ref<number>(1)
+const setupHigh = ref<number>(9999)
+const setupGuesses = ref<number>(14)
 
-const oracleLow = ref(1)
-const oracleHigh = ref(9999)
+const oracleLow = ref<number>(1)
+const oracleHigh = ref<number>(9999)
 
 const setupError = computed(() => {
   if (setupLow.value >= setupHigh.value) return t('setup.errors.lowGeHigh')
@@ -70,7 +70,7 @@ function handleReset() {
 }
 
 watch(
-  () => [props.rangeLow, props.rangeHigh],
+  [() => props.rangeLow, () => props.rangeHigh],
   ([low, high]) => {
     oracleLow.value = low
     oracleHigh.value = high
