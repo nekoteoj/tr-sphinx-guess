@@ -1,6 +1,7 @@
 import { computed, ref } from "vue"
 
 export type GameMode = "manual" | "auto_pick"
+export type Distribution = "standard" | "risky_edge"
 
 export interface HistoryEntry {
   step: number
@@ -26,6 +27,7 @@ const initialGuesses = ref(DEFAULT_GUESSES)
 const history = ref<HistoryEntry[]>([])
 const isStarted = ref(false)
 const mode = ref<GameMode>("manual")
+const distribution = ref<Distribution>("risky_edge")
 const currentSuggestedGuess = ref(DEFAULT_RANGE_LOW)
 
 function clamp(value: number, low: number, high: number) {
@@ -116,6 +118,19 @@ function sampleTruncatedNormalInt(low: number, high: number) {
   return clamp(Math.round(sample), low, high)
 }
 
+function sampleArcsineInt(low: number, high: number) {
+  if (low >= high) return low
+
+  // Inverse CDF of Arcsine distribution on [0,1]:
+  // F(x) = (2/π) * arcsin(√x)
+  // F⁻¹(u) = sin²(πu / 2)
+  const u = Math.random()
+  const x = Math.sin((Math.PI * u) / 2) ** 2
+  const sample = low + (high - low) * x
+
+  return clamp(Math.round(sample), low, high)
+}
+
 export function useGuesser() {
   // Computed values
   const rangeSize = computed(() => rangeHigh.value - rangeLow.value + 1)
@@ -199,7 +214,11 @@ export function useGuesser() {
     if (mode.value === "auto_pick") {
       const sourceLow = safeRange.value ? safeRange.value.low : rangeLow.value
       const sourceHigh = safeRange.value ? safeRange.value.high : rangeHigh.value
-      currentSuggestedGuess.value = sampleTruncatedNormalInt(sourceLow, sourceHigh)
+      if (distribution.value === "risky_edge") {
+        currentSuggestedGuess.value = sampleArcsineInt(sourceLow, sourceHigh)
+      } else {
+        currentSuggestedGuess.value = sampleTruncatedNormalInt(sourceLow, sourceHigh)
+      }
       return
     }
 
@@ -262,6 +281,14 @@ export function useGuesser() {
     refreshSuggestedGuess()
   }
 
+  function setDistribution(nextDistribution: Distribution) {
+    if (distribution.value === nextDistribution) return
+    distribution.value = nextDistribution
+    if (mode.value === "auto_pick" && isStarted.value && !isWon.value && !isGameOver.value) {
+      refreshSuggestedGuess()
+    }
+  }
+
   function rerollSuggestedGuess() {
     if (!isStarted.value) return
     if (mode.value !== "auto_pick") return
@@ -303,6 +330,7 @@ export function useGuesser() {
     initialGuesses.value = DEFAULT_GUESSES
     isStarted.value = false
     mode.value = "manual"
+    distribution.value = "risky_edge"
     currentSuggestedGuess.value = DEFAULT_RANGE_LOW
     history.value = []
   }
@@ -316,6 +344,7 @@ export function useGuesser() {
     history,
     isStarted,
     mode,
+    distribution,
 
     // Computed
     rangeSize,
@@ -332,6 +361,7 @@ export function useGuesser() {
     // Actions
     startGame,
     setMode,
+    setDistribution,
     rerollSuggestedGuess,
     submitOracleResponse,
     submitAutoFeedback,

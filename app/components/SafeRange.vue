@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Dices } from 'lucide-vue-next'
-import type { GameMode } from '~/composables/useGuesser'
+import { Dices } from "lucide-vue-next"
+import type { Distribution, GameMode } from "~/composables/useGuesser"
 
 const props = defineProps<{
   rangeLow: number
@@ -11,6 +11,7 @@ const props = defineProps<{
   isWon: boolean
   isGameOver: boolean
   mode: GameMode
+  distribution: Distribution
   suggestedGuess: number
   safeRange: { low: number; high: number } | null
   safeRangeSize: number
@@ -20,6 +21,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   setMode: [mode: GameMode]
+  setDistribution: [distribution: Distribution]
   reroll: []
 }>()
 
@@ -177,18 +179,23 @@ function toggleMode() {
       </div>
 
       <div class="flex items-center justify-between gap-2 pt-1">
-        <Button
-          v-if="mode === 'auto_pick'"
-          variant="default"
-          size="sm"
-          class="gap-2 border-teal-300/60 bg-teal-500 text-white hover:bg-teal-600 dark:border-teal-500/50 dark:bg-teal-600 dark:hover:bg-teal-500"
-          :aria-label="$t('mode.reroll')"
-          :title="$t('mode.reroll')"
-          @click="emit('reroll')"
-        >
-          <Dices class="h-4 w-4" />
-          <span class="hidden md:inline">{{ $t('mode.reroll') }}</span>
-        </Button>
+        <div v-if="mode === 'auto_pick'" class="flex items-center gap-2">
+          <Button
+            variant="default"
+            size="sm"
+            class="gap-2 border-teal-300/60 bg-teal-500 text-white hover:bg-teal-600 dark:border-teal-500/50 dark:bg-teal-600 dark:hover:bg-teal-500"
+            :aria-label="$t('mode.reroll')"
+            :title="$t('mode.reroll')"
+            @click="emit('reroll')"
+          >
+            <Dices class="h-4 w-4" />
+            <span class="hidden md:inline">{{ $t('mode.reroll') }}</span>
+          </Button>
+          <DistributionDialog
+            :distribution="distribution"
+            @select-distribution="emit('setDistribution', $event)"
+          />
+        </div>
         <div v-else />
 
         <div class="flex items-center gap-2">

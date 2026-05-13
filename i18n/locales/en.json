@@ -51,6 +51,15 @@
     "switchHint": "You can switch mode anytime",
     "reroll": "Reroll"
   },
+  "distribution": {
+    "dialogTitle": "Pick Distribution",
+    "dialogDescription": "Choose how the app randomly selects a number.",
+    "buttonLabel": "Change distribution",
+    "standard": "Standard",
+    "standardDesc": "Higher chance near the middle of the range.",
+    "riskyEdge": "Risky Edge",
+    "riskyEdgeDesc": "Higher chance near the edges of the range."
+  },
   "status": {
     "title": "Status",
     "comfortable": "Comfortable",

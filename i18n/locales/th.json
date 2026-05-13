@@ -51,6 +51,15 @@
     "switchHint": "สลับโหมดได้ตลอดเวลา",
     "reroll": "สุ่มใหม่"
   },
+  "distribution": {
+    "dialogTitle": "เลือกรูปแบบการสุ่ม",
+    "dialogDescription": "เลือกวิธีที่แอปจะสุ่มตัวเลข",
+    "buttonLabel": "เปลี่ยนรูปแบบการสุ่ม",
+    "standard": "ปกติ",
+    "standardDesc": "มีโอกาสสูงที่จะสุ่มได้ตัวเลขใกล้กลางช่วง",
+    "riskyEdge": "เสี่ยงขอบ",
+    "riskyEdgeDesc": "มีโอกาสสูงที่จะสุ่มได้ตัวเลขใกล้ขอบช่วง"
+  },
   "status": {
     "title": "สถานะ",
     "comfortable": "สบาย",

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { GameMode } from '~/composables/useGuesser'
+import type { Distribution, GameMode } from "~/composables/useGuesser"
 
 const {
   rangeLow,
@@ -8,6 +8,7 @@ const {
   history,
   isStarted,
   mode,
+  distribution,
   rangeSize,
   maxCoverable,
   isPossible,
@@ -20,11 +21,12 @@ const {
   comfortLevel,
   startGame,
   setMode,
+  setDistribution,
   rerollSuggestedGuess,
   submitOracleResponse,
   submitAutoFeedback,
   undo,
-  reset
+  reset,
 } = useGuesser()
 
 function handleStart(low: number, high: number, guesses: number, gameMode: GameMode) {
@@ -41,6 +43,10 @@ function handleAutoFeedback(direction: 'lower' | 'higher') {
 
 function handleModeChange(nextMode: GameMode) {
   setMode(nextMode)
+}
+
+function handleSetDistribution(nextDistribution: Distribution) {
+  setDistribution(nextDistribution)
 }
 
 function handleReroll() {
@@ -77,12 +83,14 @@ function handleUndo() {
       :is-won="isWon"
       :is-game-over="isGameOver"
       :mode="mode"
+      :distribution="distribution"
       :suggested-guess="suggestedGuess"
       :safe-range="safeRange"
       :safe-range-size="safeRangeSize"
       :comfort-level="comfortLevel"
       :max-coverable="maxCoverable"
       @set-mode="handleModeChange"
+      @set-distribution="handleSetDistribution"
       @reroll="handleReroll"
     />
 
