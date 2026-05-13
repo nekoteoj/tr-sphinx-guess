@@ -118,6 +118,12 @@ function sampleTruncatedNormalInt(low: number, high: number) {
   return clamp(Math.round(sample), low, high)
 }
 
+function sharpen(x: number, power: number) {
+  const z = 2 * x - 1
+  const sign = z < 0 ? -1 : 1
+  return (1 + sign * Math.abs(z) ** power) / 2
+}
+
 function sampleArcsineInt(low: number, high: number) {
   if (low >= high) return low
 
@@ -125,7 +131,8 @@ function sampleArcsineInt(low: number, high: number) {
   // F(x) = (2/π) * arcsin(√x)
   // F⁻¹(u) = sin²(πu / 2)
   const u = Math.random()
-  const x = Math.sin((Math.PI * u) / 2) ** 2
+  let x = Math.sin((Math.PI * u) / 2) ** 2
+  x = sharpen(x, 0.5)
   const sample = low + (high - low) * x
 
   return clamp(Math.round(sample), low, high)
