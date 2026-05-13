@@ -102,7 +102,6 @@ watch(
           {{ $t('setup.coverageHint', { guesses: setupGuesses, max: (2 ** setupGuesses - 1).toLocaleString() }) }}
         </p>
       </div>
-      <p class="text-xs text-muted-foreground">{{ $t('setup.modeHint') }}</p>
       <p v-if="setupError" class="text-sm text-destructive">{{ setupError }}</p>
     </CardContent>
     <CardFooter class="grid grid-cols-2 gap-2">
@@ -122,9 +121,9 @@ watch(
   </Card>
 
   <Card v-else>
-    <CardHeader>
+    <CardHeader v-if="mode === 'manual'">
       <CardTitle class="text-lg">{{ $t('oracle.title') }}</CardTitle>
-      <CardDescription>{{ mode === 'auto_pick' ? $t('oracle.autoDescription') : $t('oracle.manualDescription') }}</CardDescription>
+      <CardDescription>{{ $t('oracle.manualDescription') }}</CardDescription>
     </CardHeader>
     <CardContent class="space-y-4">
       <div v-if="mode === 'manual'" class="grid grid-cols-2 gap-4">
