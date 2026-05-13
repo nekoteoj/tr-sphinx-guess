@@ -1,43 +1,61 @@
-# tr-sphinx-guess
+<p align="center">
+  ✿ ✿ ✿
+</p>
 
-A binary search helper for number-guessing games. Given a number range and a limited number of guesses, it calculates the **safe range** — the set of numbers you can guess while guaranteeing you can still find the answer within your remaining tries, no matter how the oracle responds.
+<h1 align="center">✿ tr-sphinx-guess ✿</h1>
 
-Inspired by Thailand's TV game show *Sphinx*, where contestants must find a number within a fixed number of guesses.
+<p align="center">
+  🎀 A binary search helper for number-guessing games~ 🎀
+</p>
 
-**Live demo:** https://nekoteoj.github.io/tr-sphinx-guess/
+<p align="center">
+  Given a number range and a limited number of guesses, it calculates the <b>safe range</b> — the set of numbers you can guess while guaranteeing you can still find the answer within your remaining tries, no matter how the oracle responds ♡
+</p>
+
+<p align="center">
+  🌸 Inspired by the TalesRunner 19th anniversary event~ 🌸
+</p>
+
+<p align="center">
+  🌐 <b>Live demo:</b> <a href="https://nekoteoj.github.io/tr-sphinx-guess/">nekoteoj.github.io/tr-sphinx-guess</a>
+</p>
+
+<p align="center">
+  ✿ ✿ ✿
+</p>
 
 ---
 
-## How It Works
+## 💭 How It Works 💭
 
 Given a range `[lo, hi]` (size `N`) and `G` guesses remaining:
 
-- A guess at position `x` is **safe** if both sides of the split are solvable in `G-1` guesses
-- Maximum numbers coverable with `G` guesses = `2^G - 1`
-- Safe range formula:
+- 🔮 A guess at position `x` is **safe** if both sides of the split are solvable in `G-1` guesses
+- ✨ Maximum numbers coverable with `G` guesses = `2^G - 1`
+- 📐 Safe range formula:
   ```
   offset   = max(0, N - 2^(G-1))
   safeLow  = lo + offset
   safeHigh = hi - offset
   ```
-- If `N > 2^G - 1`, it is impossible to guarantee finding the number
+- 🚫 If `N > 2^G - 1`, it is impossible to guarantee finding the number
 
-The app guides you through each iteration: enter the narrowed range the oracle gives you after each guess, and it recalculates the safe range for the next step.
-
----
-
-## Features
-
-- Safe range calculation with comfort level indicators (comfortable / moderate / tight / impossible)
-- Step-by-step iteration with a full guess history log
-- "How it works" modal with algorithm explanation and SVG visualizations
-- Thai / English language support
-- Light / dark theme toggle
-- Mobile-responsive layout
+🔄 The app guides you through each iteration: enter the narrowed range the oracle gives you after each guess, and it recalculates the safe range for the next step~
 
 ---
 
-## Tech Stack
+## 🌸 Features 🌸
+
+- 🎯 Safe range calculation with comfort level indicators (comfortable / moderate / tight / impossible)
+- 📝 Step-by-step iteration with a full guess history log
+- 💡 "How it works" modal with algorithm explanation and SVG visualizations
+- 🇹🇭🇬🇧 Thai / English language support
+- 🌙☀️ Light / dark theme toggle
+- 📱 Mobile-responsive layout
+
+---
+
+## 🛠️ Tech Stack 🛠️
 
 | Layer | Technology |
 |---|---|
@@ -52,34 +70,34 @@ The app guides you through each iteration: enter the narrowed range the oracle g
 
 ---
 
-## Getting Started
+## 🚀 Getting Started 🚀
 
 **Prerequisites:** Node.js 20+, pnpm 9+
 
 ```bash
-# Install dependencies
+# 📦 Install dependencies
 pnpm install
 
-# Start development server at http://localhost:3000
+# 💻 Start development server at http://localhost:3000
 pnpm dev
 ```
 
 ### Other commands
 
 ```bash
-# Type-check and build for production
+# 🏗️ Type-check and build for production
 pnpm build
 
-# Preview the production build locally
+# 👀 Preview the production build locally
 pnpm preview
 
-# Generate static output
+# 📤 Generate static output
 pnpm generate
 ```
 
 ---
 
-## Deployment
+## 📦 Deployment 📦
 
 The project deploys automatically to GitHub Pages on every push to `main` via `.github/workflows/deploy.yml`.
 
@@ -87,30 +105,34 @@ It uses the Nuxt `github_pages` preset, which generates a `404.html` fallback fo
 
 ---
 
-## Project Structure
+## 📁 Project Structure 📁
 
 ```
 tr-sphinx-guess/
 ├── app/
 │   ├── components/
-│   │   ├── AlgorithmDialog.vue   # "How it works" modal with math + SVG diagrams
-│   │   ├── GuesserForm.vue       # Setup form (range + guesses) and oracle response form
-│   │   ├── GuessHistory.vue      # Scrollable log of past iterations
-│   │   ├── LanguageToggle.vue    # TH/EN language switcher
-│   │   ├── SafeRange.vue         # Safe range status card
-│   │   ├── ThemeToggle.vue       # Light/dark mode toggle
-│   │   └── ui/                   # shadcn-vue UI primitives
+│   │   ├── AlgorithmDialog.vue   # 💡 "How it works" modal with math + SVG diagrams
+│   │   ├── GuesserForm.vue       # 🎮 Setup form (range + guesses) and oracle response form
+│   │   ├── GuessHistory.vue      # 📜 Scrollable log of past iterations
+│   │   ├── LanguageToggle.vue    # 🌐 TH/EN language switcher
+│   │   ├── SafeRange.vue         # 🎯 Safe range status card
+│   │   ├── ThemeToggle.vue       # 🌙 Light/dark mode toggle
+│   │   └── ui/                   # 🧩 shadcn-vue UI primitives
 │   ├── composables/
-│   │   └── useGuesser.ts         # Core algorithm, game state, and actions
+│   │   └── useGuesser.ts         # ⚙️ Core algorithm, game state, and actions
 │   ├── layouts/
-│   │   └── default.vue           # App shell (header, footer)
+│   │   └── default.vue           # 🖼️ App shell (header, footer)
 │   └── pages/
-│       └── index.vue             # Main page
+│       └── index.vue             # 🏠 Main page
 ├── i18n/
 │   └── locales/
-│       ├── en.json               # English translations
-│       └── th.json               # Thai translations
+│       ├── en.json               # 🇬🇧 English translations
+│       └── th.json               # 🇹🇭 Thai translations
 ├── public/
 │   └── .nojekyll
 └── nuxt.config.ts
 ```
+
+<p align="center">
+  💕 Made with love and lots of sparkles ✨💕
+</p>
