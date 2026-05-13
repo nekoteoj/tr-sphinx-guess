@@ -146,12 +146,12 @@ watch(
       </Button>
 
       <div v-else class="flex gap-2 w-full">
-        <Button class="flex-1" :disabled="!canGoLower" @click="emit('submitAutoFeedback', 'lower')">
-          <ArrowDown class="mr-2 h-4 w-4" />
+        <Button class="flex-1 h-[70px] border-red-300/60 bg-red-400 text-white hover:bg-red-500 dark:border-red-500/50 dark:bg-red-500 dark:hover:bg-red-400" :disabled="!canGoLower" @click="emit('submitAutoFeedback', 'lower')">
+          <ArrowDown class="mr-2 h-5 w-5" />
           {{ $t('oracle.lowerButton') }}
         </Button>
-        <Button class="flex-1" :disabled="!canGoHigher" @click="emit('submitAutoFeedback', 'higher')">
-          <ArrowUp class="mr-2 h-4 w-4" />
+        <Button class="flex-1 h-[70px] border-emerald-300/60 bg-emerald-400 text-white hover:bg-emerald-500 dark:border-emerald-500/50 dark:bg-emerald-500 dark:hover:bg-emerald-400" :disabled="!canGoHigher" @click="emit('submitAutoFeedback', 'higher')">
+          <ArrowUp class="mr-2 h-5 w-5" />
           {{ $t('oracle.higherButton') }}
         </Button>
       </div>
