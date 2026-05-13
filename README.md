@@ -1,5 +1,5 @@
 <p align="center">
-  ✿ ✿ ✿
+  <img src="https://img.shields.io/badge/💖-Made%20with%20Love-ffb6c1?style=for-the-badge" alt="Made with Love">
 </p>
 
 <h1 align="center">✿ tr-sphinx-guess ✿</h1>
@@ -18,6 +18,13 @@
 
 <p align="center">
   🌐 <b>Live demo:</b> <a href="https://nekoteoj.github.io/tr-sphinx-guess/">nekoteoj.github.io/tr-sphinx-guess</a>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/🌙-Dark%20Mode-ffb6c1?style=for-the-badge" alt="Dark Mode">
+  <img src="https://img.shields.io/badge/🇹🇭🇬🇧-i18n-ffb6c1?style=for-the-badge" alt="i18n">
+  <img src="https://img.shields.io/badge/📱-Mobile%20Ready-ffb6c1?style=for-the-badge" alt="Mobile Ready">
+  <img src="https://img.shields.io/badge/✨-SPA%20Mode-ffb6c1?style=for-the-badge" alt="SPA Mode">
 </p>
 
 <p align="center">
@@ -57,16 +64,17 @@ Given a range `[lo, hi]` (size `N`) and `G` guesses remaining:
 
 ## 🛠️ Tech Stack 🛠️
 
-| Layer | Technology |
-|---|---|
-| Framework | Nuxt 4 (SPA mode, `ssr: false`) |
-| UI Components | shadcn-vue + reka-ui |
-| Styling | Tailwind CSS v4 |
-| Internationalization | `@nuxtjs/i18n` (Thai, English) |
-| Dark Mode | `@nuxtjs/color-mode` (class-based) |
-| Icons | lucide-vue-next |
-| Package Manager | pnpm |
-| Deployment | GitHub Pages via GitHub Actions |
+<p align="center">
+  <img src="https://img.shields.io/badge/Nuxt%204-00DC82?style=for-the-badge&logo=nuxt.js&logoColor=white&labelColor=ffb6c1" alt="Nuxt 4">
+  <img src="https://img.shields.io/badge/Vue%203-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white&labelColor=ffb6c1" alt="Vue 3">
+  <img src="https://img.shields.io/badge/Tailwind%20CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white&labelColor=ffb6c1" alt="Tailwind CSS">
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white&labelColor=ffb6c1" alt="TypeScript">
+  <img src="https://img.shields.io/badge/pnpm-F69220?style=for-the-badge&logo=pnpm&logoColor=white&labelColor=ffb6c1" alt="pnpm">
+  <img src="https://img.shields.io/badge/shadcn--vue-000000?style=for-the-badge&labelColor=ffb6c1" alt="shadcn-vue">
+  <img src="https://img.shields.io/badge/reka--ui-7C3AED?style=for-the-badge&logoColor=white&labelColor=ffb6c1" alt="reka-ui">
+  <img src="https://img.shields.io/badge/lucide--vue-FF6B6B?style=for-the-badge&labelColor=ffb6c1" alt="lucide-vue">
+  <img src="https://img.shields.io/badge/GitHub%20Pages-181717?style=for-the-badge&logo=github&logoColor=white&labelColor=ffb6c1" alt="GitHub Pages">
+</p>
 
 ---
 
