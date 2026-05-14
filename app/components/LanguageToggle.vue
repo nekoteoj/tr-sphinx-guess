@@ -13,8 +13,7 @@ const currentCode = computed(() => (locale.value === 'th' ? 'TH' : 'EN'))
 <template>
   <Button
     variant="outline"
-    size="sm"
-    class="gap-1.5 px-2.5 text-xs font-medium"
+    class="gap-1.5 px-2.5 text-xs font-medium h-10"
     @click="toggleLocale"
     aria-label="Switch language"
   >

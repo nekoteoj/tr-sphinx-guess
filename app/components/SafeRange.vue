@@ -171,7 +171,7 @@ function toggleMode() {
       <div class="flex items-center justify-between gap-2 pt-1">
         <div v-if="mode === 'auto_pick'" class="flex items-center gap-2">
           <Button
-            variant="default"
+            variant="secondary"
             size="sm"
             class="gap-2"
             :aria-label="$t('mode.reroll')"
@@ -197,12 +197,12 @@ function toggleMode() {
             role="switch"
             :aria-checked="isAutoPick"
             :aria-label="$t('mode.label')"
-            class="relative inline-flex h-7 w-12 items-center rounded-md border-2 border-border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            class="relative inline-flex h-7 w-12 items-center rounded-md border-2 border-border shadow-[var(--shadow-brutal-sm)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             :class="isAutoPick ? 'bg-primary' : 'bg-muted'"
             @click="toggleMode"
           >
             <span
-              class="inline-block h-5 w-5 transform rounded-md border-2 border-border bg-card shadow-[var(--shadow-brutal-sm)] transition-transform"
+              class="inline-block h-5 w-5 transform rounded-md border-2 border-border bg-card transition-transform"
               :class="isAutoPick ? 'translate-x-5' : 'translate-x-0.5'"
             />
           </button>
