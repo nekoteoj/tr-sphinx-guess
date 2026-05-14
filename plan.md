@@ -75,8 +75,10 @@ Transform the current soft pastel UI into a "cute brutalism" aesthetic — thick
 | `Alert` (primitive)        | pending     | Thick border, hard shadow                      |
 | `Dialog` (primitive)       | pending     | Thick border, hard shadow                      |
 | `SafeRange.vue`            | done        | Hard-edged animation, neon glow dark mode      |
-| `GuesserForm.vue`          | in progress | Flat pastels, thick borders on all elements    |
-| `GuessHistory.vue`         | pending     | Sticker-style entries, flat colors             |
+| `GuesserForm.vue`          | done        | Flat pastels, thick borders on all elements    |
+| `GuessHistory.vue`         | done        | Sticker-style entries, flat colors             |
+| `Alert` (primitive)        | in progress | Thick border, hard shadow                      |
+| `Dialog` (primitive)       | in progress | Thick border, hard shadow                      |
 | `AlgorithmDialog.vue`      | pending     | Dialog styling, SVG recoloring                 |
 | `DistributionDialog.vue`   | pending     | Dialog styling                                 |
 | `ThemeToggle.vue`          | pending     | Brutalist icon button                          |
@@ -91,7 +93,7 @@ Transform the current soft pastel UI into a "cute brutalism" aesthetic — thick
 | 2   | Update core UI primitives (Button, Card, etc) | done (bb3c825) |
 | 3   | Update layout and global components           | done (dc598ea) |
 | 4   | Update SafeRange.vue + custom animations      | done (7b7d5bd) |
-| 5   | Update GuesserForm.vue + GuessHistory.vue     | pending     |
+| 5   | Update GuesserForm.vue + GuessHistory.vue     | done (6a1da78) |
 | 6   | Update Dialogs + remaining components         | pending     |
 | 7   | Final polish, QA, and plan.md completion      | pending     |
 

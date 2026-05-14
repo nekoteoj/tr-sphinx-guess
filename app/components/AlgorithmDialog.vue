@@ -125,14 +125,14 @@ const lineProps = computed(() => {
             <p class="text-sm leading-relaxed">
               {{ $t('algorithm.formula.intro') }}
             </p>
-            <div class="rounded-lg border bg-muted/50 p-4 font-mono text-xs leading-loose space-y-1">
+            <div class="rounded-md border-2 border-border bg-muted p-4 font-mono text-xs leading-loose space-y-1 shadow-[var(--shadow-brutal-sm)]">
               <div>{{ $t('algorithm.formula.leftSide') }}</div>
               <div>{{ $t('algorithm.formula.rightSide') }}</div>
             </div>
             <p class="text-sm leading-relaxed">
               {{ $t('algorithm.formula.solving') }}
             </p>
-            <div class="rounded-lg border bg-primary/5 p-4 font-mono text-xs leading-loose space-y-1">
+            <div class="rounded-md border-2 border-border bg-primary/10 p-4 font-mono text-xs leading-loose space-y-1 shadow-[var(--shadow-brutal-sm)]">
               <div><strong>{{ $t('algorithm.formula.safeLow') }}</strong></div>
               <div><strong>{{ $t('algorithm.formula.safeHigh') }}</strong></div>
             </div>
@@ -167,7 +167,7 @@ const lineProps = computed(() => {
               {{ $t('algorithm.vizNumberLine.subtitle', { lo: vizLo.toLocaleString(), hi: vizHi.toLocaleString(), guesses: vizG }) }}
             </p>
 
-            <div class="rounded-lg border p-4 bg-muted/30">
+            <div class="rounded-md border-2 border-border p-4 bg-muted shadow-[var(--shadow-brutal-sm)]">
               <svg
                 aria-hidden="true"
                 viewBox="0 0 400 100"
@@ -175,7 +175,7 @@ const lineProps = computed(() => {
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <!-- Full range bar background -->
-                <rect x="20" y="30" width="360" height="24" rx="4" class="fill-muted stroke-border" stroke-width="1" />
+                <rect x="20" y="30" width="360" height="24" rx="4" class="fill-muted stroke-border" stroke-width="2" />
 
                 <!-- Unsafe left zone -->
                 <rect
@@ -185,7 +185,7 @@ const lineProps = computed(() => {
                   :width="(lineProps.leftWidth / 100) * 360"
                   height="24"
                   rx="4"
-                  class="fill-destructive/20"
+                  class="fill-destructive/30"
                 />
 
                 <!-- Safe range zone -->
@@ -195,7 +195,7 @@ const lineProps = computed(() => {
                   y="30"
                   :width="(lineProps.safeWidth / 100) * 360"
                   height="24"
-                  class="fill-blue-200/50 dark:fill-blue-400/20"
+                  class="fill-primary/30"
                 />
 
                 <!-- Unsafe right zone -->
@@ -206,14 +206,14 @@ const lineProps = computed(() => {
                   :width="(lineProps.rightWidth / 100) * 360"
                   height="24"
                   rx="4"
-                  class="fill-destructive/20"
+                  class="fill-destructive/30"
                 />
 
                 <!-- Boundary markers -->
-                <line x1="20" y1="26" x2="20" y2="58" class="stroke-foreground" stroke-width="1.5" />
-                <line :x1="20 + (lineProps.safeStart / 100) * 360" y1="26" :x2="20 + (lineProps.safeStart / 100) * 360" y2="58" class="stroke-blue-400 dark:stroke-blue-300" stroke-width="1.5" stroke-dasharray="3,2" />
-                <line :x1="20 + (lineProps.safeEnd / 100) * 360" y1="26" :x2="20 + (lineProps.safeEnd / 100) * 360" y2="58" class="stroke-blue-400 dark:stroke-blue-300" stroke-width="1.5" stroke-dasharray="3,2" />
-                <line x1="380" y1="26" x2="380" y2="58" class="stroke-foreground" stroke-width="1.5" />
+                <line x1="20" y1="26" x2="20" y2="58" class="stroke-foreground" stroke-width="2" />
+                <line :x1="20 + (lineProps.safeStart / 100) * 360" y1="26" :x2="20 + (lineProps.safeStart / 100) * 360" y2="58" class="stroke-primary" stroke-width="2" stroke-dasharray="3,2" />
+                <line :x1="20 + (lineProps.safeEnd / 100) * 360" y1="26" :x2="20 + (lineProps.safeEnd / 100) * 360" y2="58" class="stroke-primary" stroke-width="2" stroke-dasharray="3,2" />
+                <line x1="380" y1="26" x2="380" y2="58" class="stroke-foreground" stroke-width="2" />
 
                 <!-- Labels -->
                 <text x="20" y="75" class="fill-foreground text-[9px]" text-anchor="start" font-family="monospace">
@@ -223,7 +223,7 @@ const lineProps = computed(() => {
                   v-if="vizSafe"
                   :x="20 + (lineProps.safeStart / 100) * 360"
                   y="75"
-                  class="fill-blue-600 dark:fill-blue-300 text-[9px]"
+                  class="fill-primary text-[9px]"
                   text-anchor="middle"
                   font-family="monospace"
                 >
@@ -233,7 +233,7 @@ const lineProps = computed(() => {
                   v-if="vizSafe"
                   :x="20 + (lineProps.safeEnd / 100) * 360"
                   y="75"
-                  class="fill-blue-600 dark:fill-blue-300 text-[9px]"
+                  class="fill-primary text-[9px]"
                   text-anchor="middle"
                   font-family="monospace"
                 >
@@ -258,7 +258,7 @@ const lineProps = computed(() => {
                   v-if="vizSafe && lineProps.safeWidth > 10"
                   :x="20 + ((lineProps.safeStart + lineProps.safeEnd) / 200) * 360"
                   y="46"
-                  class="fill-blue-600 dark:fill-blue-300 text-[8px] font-semibold"
+                  class="fill-primary text-[8px] font-semibold"
                   text-anchor="middle"
                   font-family="sans-serif"
                 >
@@ -303,7 +303,7 @@ const lineProps = computed(() => {
               {{ $t('algorithm.vizTree.subtitle') }}
             </p>
 
-            <div class="rounded-lg border p-4 bg-muted/30">
+            <div class="rounded-md border-2 border-border p-4 bg-muted shadow-[var(--shadow-brutal-sm)]">
               <svg
                 aria-hidden="true"
                 viewBox="0 0 400 200"
@@ -311,9 +311,9 @@ const lineProps = computed(() => {
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <!-- Level 0: Root -->
-                <line x1="200" y1="30" x2="110" y2="75" class="stroke-muted-foreground" stroke-width="1" />
-                <line x1="200" y1="30" x2="290" y2="75" class="stroke-muted-foreground" stroke-width="1" />
-                <circle cx="200" cy="25" r="16" class="fill-primary/10 stroke-primary" stroke-width="1.5" />
+                <line x1="200" y1="30" x2="110" y2="75" class="stroke-muted-foreground" stroke-width="2" />
+                <line x1="200" y1="30" x2="290" y2="75" class="stroke-muted-foreground" stroke-width="2" />
+                <circle cx="200" cy="25" r="16" class="fill-primary/20 stroke-primary" stroke-width="2" />
                 <text x="200" y="29" class="fill-primary text-[9px] font-semibold" text-anchor="middle" font-family="sans-serif">
                   {{ $t('algorithm.vizTree.guess') }}
                 </text>
@@ -327,39 +327,39 @@ const lineProps = computed(() => {
                 </text>
 
                 <!-- Level 1: Left -->
-                <line x1="110" y1="85" x2="65" y2="130" class="stroke-muted-foreground" stroke-width="1" />
-                <line x1="110" y1="85" x2="155" y2="130" class="stroke-muted-foreground" stroke-width="1" />
-                <circle cx="110" cy="80" r="14" class="fill-secondary stroke-border" stroke-width="1" />
+                <line x1="110" y1="85" x2="65" y2="130" class="stroke-muted-foreground" stroke-width="2" />
+                <line x1="110" y1="85" x2="155" y2="130" class="stroke-muted-foreground" stroke-width="2" />
+                <circle cx="110" cy="80" r="14" class="fill-secondary stroke-border" stroke-width="2" />
                 <text x="110" y="84" class="fill-foreground text-[8px]" text-anchor="middle" font-family="sans-serif">
                   G-1
                 </text>
 
                 <!-- Level 1: Right -->
-                <line x1="290" y1="85" x2="245" y2="130" class="stroke-muted-foreground" stroke-width="1" />
-                <line x1="290" y1="85" x2="335" y2="130" class="stroke-muted-foreground" stroke-width="1" />
-                <circle cx="290" cy="80" r="14" class="fill-secondary stroke-border" stroke-width="1" />
+                <line x1="290" y1="85" x2="245" y2="130" class="stroke-muted-foreground" stroke-width="2" />
+                <line x1="290" y1="85" x2="335" y2="130" class="stroke-muted-foreground" stroke-width="2" />
+                <circle cx="290" cy="80" r="14" class="fill-secondary stroke-border" stroke-width="2" />
                 <text x="290" y="84" class="fill-foreground text-[8px]" text-anchor="middle" font-family="sans-serif">
                   G-1
                 </text>
 
                 <!-- Level 2: Leaves -->
-                <circle cx="65" cy="135" r="12" class="fill-violet-200/30 stroke-violet-400/50 dark:fill-violet-400/15 dark:stroke-violet-400/40" stroke-width="1" />
-                <text x="65" y="139" class="fill-violet-600 dark:fill-violet-300 text-[7px]" text-anchor="middle" font-family="sans-serif">
+                <circle cx="65" cy="135" r="12" class="fill-info/30 stroke-info" stroke-width="2" />
+                <text x="65" y="139" class="fill-info text-[7px]" text-anchor="middle" font-family="sans-serif">
                   G-2
                 </text>
 
-                <circle cx="155" cy="135" r="12" class="fill-violet-200/30 stroke-violet-400/50 dark:fill-violet-400/15 dark:stroke-violet-400/40" stroke-width="1" />
-                <text x="155" y="139" class="fill-violet-600 dark:fill-violet-300 text-[7px]" text-anchor="middle" font-family="sans-serif">
+                <circle cx="155" cy="135" r="12" class="fill-info/30 stroke-info" stroke-width="2" />
+                <text x="155" y="139" class="fill-info text-[7px]" text-anchor="middle" font-family="sans-serif">
                   G-2
                 </text>
 
-                <circle cx="245" cy="135" r="12" class="fill-violet-200/30 stroke-violet-400/50 dark:fill-violet-400/15 dark:stroke-violet-400/40" stroke-width="1" />
-                <text x="245" y="139" class="fill-violet-600 dark:fill-violet-300 text-[7px]" text-anchor="middle" font-family="sans-serif">
+                <circle cx="245" cy="135" r="12" class="fill-info/30 stroke-info" stroke-width="2" />
+                <text x="245" y="139" class="fill-info text-[7px]" text-anchor="middle" font-family="sans-serif">
                   G-2
                 </text>
 
-                <circle cx="335" cy="135" r="12" class="fill-violet-200/30 stroke-violet-400/50 dark:fill-violet-400/15 dark:stroke-violet-400/40" stroke-width="1" />
-                <text x="335" y="139" class="fill-violet-600 dark:fill-violet-300 text-[7px]" text-anchor="middle" font-family="sans-serif">
+                <circle cx="335" cy="135" r="12" class="fill-info/30 stroke-info" stroke-width="2" />
+                <text x="335" y="139" class="fill-info text-[7px]" text-anchor="middle" font-family="sans-serif">
                   G-2
                 </text>
 
@@ -370,20 +370,20 @@ const lineProps = computed(() => {
                 <text x="335" y="162" class="fill-muted-foreground text-[8px]" text-anchor="middle">...</text>
 
                 <!-- Bottom leaf nodes -->
-                <rect x="40" y="170" width="50" height="16" rx="3" class="fill-blue-200/40 stroke-blue-400/40 dark:fill-blue-400/15 dark:stroke-blue-400/30" stroke-width="0.75" />
-                <text x="65" y="181" class="fill-blue-700 dark:fill-blue-300 text-[7px]" text-anchor="middle" font-family="sans-serif">{{ $t('algorithm.vizTree.found') }}</text>
+                <rect x="40" y="170" width="50" height="16" rx="3" class="fill-primary/30 stroke-primary" stroke-width="2" />
+                <text x="65" y="181" class="fill-primary text-[7px]" text-anchor="middle" font-family="sans-serif">{{ $t('algorithm.vizTree.found') }}</text>
 
-                <rect x="130" y="170" width="50" height="16" rx="3" class="fill-blue-200/40 stroke-blue-400/40 dark:fill-blue-400/15 dark:stroke-blue-400/30" stroke-width="0.75" />
-                <text x="155" y="181" class="fill-blue-700 dark:fill-blue-300 text-[7px]" text-anchor="middle" font-family="sans-serif">{{ $t('algorithm.vizTree.found') }}</text>
+                <rect x="130" y="170" width="50" height="16" rx="3" class="fill-primary/30 stroke-primary" stroke-width="2" />
+                <text x="155" y="181" class="fill-primary text-[7px]" text-anchor="middle" font-family="sans-serif">{{ $t('algorithm.vizTree.found') }}</text>
 
-                <rect x="220" y="170" width="50" height="16" rx="3" class="fill-blue-200/40 stroke-blue-400/40 dark:fill-blue-400/15 dark:stroke-blue-400/30" stroke-width="0.75" />
-                <text x="245" y="181" class="fill-blue-700 dark:fill-blue-300 text-[7px]" text-anchor="middle" font-family="sans-serif">{{ $t('algorithm.vizTree.found') }}</text>
+                <rect x="220" y="170" width="50" height="16" rx="3" class="fill-primary/30 stroke-primary" stroke-width="2" />
+                <text x="245" y="181" class="fill-primary text-[7px]" text-anchor="middle" font-family="sans-serif">{{ $t('algorithm.vizTree.found') }}</text>
 
-                <rect x="310" y="170" width="50" height="16" rx="3" class="fill-blue-200/40 stroke-blue-400/40 dark:fill-blue-400/15 dark:stroke-blue-400/30" stroke-width="0.75" />
-                <text x="335" y="181" class="fill-blue-700 dark:fill-blue-300 text-[7px]" text-anchor="middle" font-family="sans-serif">{{ $t('algorithm.vizTree.found') }}</text>
+                <rect x="310" y="170" width="50" height="16" rx="3" class="fill-primary/30 stroke-primary" stroke-width="2" />
+                <text x="335" y="181" class="fill-primary text-[7px]" text-anchor="middle" font-family="sans-serif">{{ $t('algorithm.vizTree.found') }}</text>
 
                 <!-- Annotation: depth -->
-                <line x1="390" y1="20" x2="390" y2="185" class="stroke-muted-foreground" stroke-width="0.75" stroke-dasharray="2,2" />
+                <line x1="390" y1="20" x2="390" y2="185" class="stroke-muted-foreground" stroke-width="2" stroke-dasharray="2,2" />
                 <text x="395" y="25" class="fill-muted-foreground text-[7px]" text-anchor="start" font-family="sans-serif">{{ $t('algorithm.vizTree.depth') }} 0</text>
                 <text x="395" y="82" class="fill-muted-foreground text-[7px]" text-anchor="start" font-family="sans-serif">{{ $t('algorithm.vizTree.depth') }} 1</text>
                 <text x="395" y="137" class="fill-muted-foreground text-[7px]" text-anchor="start" font-family="sans-serif">{{ $t('algorithm.vizTree.depth') }} 2</text>
@@ -402,7 +402,7 @@ const lineProps = computed(() => {
             <h3 class="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
               {{ $t('algorithm.example.title') }}
             </h3>
-            <div class="rounded-lg border bg-muted/50 p-4 text-xs leading-relaxed space-y-2 font-mono">
+            <div class="rounded-md border-2 border-border bg-muted p-4 text-xs leading-relaxed space-y-2 font-mono shadow-[var(--shadow-brutal-sm)]">
               <div>{{ $t('algorithm.example.range') }}</div>
               <div>{{ $t('algorithm.example.maxPerSide') }}</div>
               <div>{{ $t('algorithm.example.offset') }}</div>
