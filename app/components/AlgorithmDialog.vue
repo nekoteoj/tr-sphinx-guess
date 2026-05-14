@@ -55,7 +55,7 @@ const lineProps = computed(() => {
 <template>
   <Dialog>
     <DialogTrigger as-child>
-      <Button variant="ghost" size="icon" :aria-label="$t('algorithm.triggerLabel')">
+      <Button variant="outline" size="icon" :aria-label="$t('algorithm.triggerLabel')">
         <svg
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"

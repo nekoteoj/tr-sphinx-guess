@@ -66,11 +66,12 @@ Transform the current soft pastel UI into a "cute brutalism" aesthetic — thick
 
 | Component                  | Status      | Notes                                        |
 |----------------------------|-------------|----------------------------------------------|
-| `tailwind.css`             | pending     | Full token rewrite                           |
-| `Button` (primitive)       | pending     | Thick border, hard shadow, translate hover     |
-| `Card` (primitive)         | pending     | Thick border, hard shadow                      |
-| `Input` (primitive)        | pending     | Thick border, hard shadow                      |
-| `Badge` (primitive)        | pending     | Thick border, hard shadow, rounded-md          |
+| `tailwind.css`             | done        | Full token rewrite                           |
+| `Button` (primitive)       | done        | Thick border, hard shadow, translate hover     |
+| `Card` (primitive)         | done        | Thick border, hard shadow                      |
+| `Input` (primitive)        | done        | Thick border, hard shadow                      |
+| `Badge` (primitive)        | done        | Thick border, hard shadow, rounded-md          |
+| `default.vue` (layout)    | in progress | Remove blur, brutalist header bar              |
 | `Alert` (primitive)        | pending     | Thick border, hard shadow                      |
 | `Dialog` (primitive)       | pending     | Thick border, hard shadow                      |
 | `default.vue` (layout)    | pending     | Remove blur, brutalist header bar              |
@@ -87,8 +88,8 @@ Transform the current soft pastel UI into a "cute brutalism" aesthetic — thick
 
 | #   | Commit Message                              | Status      |
 |-----|---------------------------------------------|-------------|
-| 1   | Update design tokens (tailwind.css)         | pending     |
-| 2   | Update core UI primitives (Button, Card, etc) | pending     |
+| 1   | Update design tokens (tailwind.css)         | done (990f2c6) |
+| 2   | Update core UI primitives (Button, Card, etc) | done (bb3c825) |
 | 3   | Update layout and global components           | pending     |
 | 4   | Update SafeRange.vue + custom animations      | pending     |
 | 5   | Update GuesserForm.vue + GuessHistory.vue     | pending     |
