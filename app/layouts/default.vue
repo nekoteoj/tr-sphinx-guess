@@ -3,9 +3,9 @@ const { reset } = useGuesser()
 </script>
 
 <template>
-  <div class="min-h-screen bg-background">
+  <div class="min-h-screen bg-background flex flex-col">
     <!-- Header -->
-    <header class="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header class="sticky top-0 z-50 bg-card border-b-2 border-border shadow-[var(--shadow-brutal)]">
       <div class="container mx-auto flex h-14 items-center justify-between px-4">
         <NuxtLink to="/" class="flex items-center gap-2 hover:opacity-80 transition-opacity" @click="reset">
           <svg
@@ -38,12 +38,12 @@ const { reset } = useGuesser()
     </header>
 
     <!-- Main Content -->
-    <main class="container mx-auto px-4 py-6 max-w-2xl">
+    <main class="container mx-auto px-4 py-6 max-w-2xl flex-1">
       <slot />
     </main>
 
     <!-- Footer -->
-    <footer class="py-4 text-center text-xs text-muted-foreground">
+    <footer class="py-4 text-center text-xs text-muted-foreground border-t-2 border-border">
       <div class="container mx-auto px-4">
         {{ $t('layout.footer') }} · {{ $t('layout.credit') }}
         <a href="https://github.com/nekoteoj" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 hover:text-foreground transition-colors">

@@ -8,7 +8,7 @@ function toggleTheme() {
 
 <template>
   <Button
-    variant="ghost"
+    variant="outline"
     size="icon"
     @click="toggleTheme"
     :aria-label="$t('theme.toggle')"

@@ -1,7 +1,7 @@
 <template>
   <Button
     as="a"
-    variant="ghost"
+    variant="outline"
     size="icon"
     href="https://github.com/nekoteoj/tr-sphinx-guess"
     rel="noopener noreferrer"
