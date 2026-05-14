@@ -16,13 +16,13 @@ defineProps<{
         <div
           v-for="entry in [...history].reverse()"
           :key="entry.step"
-          class="flex items-center gap-3 rounded-lg border p-3 text-sm"
+          class="flex items-center gap-3 rounded-md border-2 border-border bg-card p-3 text-sm shadow-[var(--shadow-brutal-sm)]"
           :class="{
-            'border-blue-200/40 bg-blue-50/40 dark:bg-blue-400/5 dark:border-blue-400/20': entry.isPossible && entry.safeLow !== null,
-            'border-pink-200/40 bg-pink-50/40 dark:bg-pink-400/5 dark:border-pink-400/20': !entry.isPossible,
+            'border-l-4 border-l-primary': entry.isPossible && entry.safeLow !== null,
+            'border-l-4 border-l-destructive': !entry.isPossible,
           }"
         >
-          <div class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-muted text-xs font-medium">
+          <div class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-muted text-xs font-medium border border-border">
             {{ entry.step }}
           </div>
           <div class="flex-1 min-w-0">
@@ -41,7 +41,7 @@ defineProps<{
               </span>
             </div>
           </div>
-          <Badge variant="outline" class="shrink-0 text-xs">
+          <Badge variant="outline" class="shrink-0 text-xs bg-card">
             {{ $t('history.left', { count: entry.guessesLeft }) }}
           </Badge>
         </div>

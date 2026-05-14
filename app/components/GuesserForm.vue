@@ -110,7 +110,7 @@ watch(
         {{ $t('setup.manualButton') }}
       </Button>
       <Button
-        class="w-full border-teal-300/60 bg-teal-500 text-white hover:bg-teal-600 dark:border-teal-500/50 dark:bg-teal-600 dark:hover:bg-teal-500"
+        class="w-full bg-secondary text-secondary-foreground hover:bg-secondary"
         :disabled="!!setupError"
         @click="handleStart('auto_pick')"
       >
@@ -146,11 +146,11 @@ watch(
       </Button>
 
       <div v-else class="flex gap-2 w-full">
-        <Button class="flex-1 h-[70px] border-red-300/60 bg-red-400 text-white hover:bg-red-500 dark:border-red-500/50 dark:bg-red-500 dark:hover:bg-red-400" :disabled="!canGoLower" @click="emit('submitAutoFeedback', 'lower')">
+        <Button class="flex-1 h-[70px] bg-destructive text-destructive-foreground hover:bg-destructive" :disabled="!canGoLower" @click="emit('submitAutoFeedback', 'lower')">
           <ArrowDown class="mr-2 h-5 w-5" />
           {{ $t('oracle.lowerButton') }}
         </Button>
-        <Button class="flex-1 h-[70px] border-emerald-300/60 bg-emerald-400 text-white hover:bg-emerald-500 dark:border-emerald-500/50 dark:bg-emerald-500 dark:hover:bg-emerald-400" :disabled="!canGoHigher" @click="emit('submitAutoFeedback', 'higher')">
+        <Button class="flex-1 h-[70px] bg-accent text-accent-foreground hover:bg-accent" :disabled="!canGoHigher" @click="emit('submitAutoFeedback', 'higher')">
           <ArrowUp class="mr-2 h-5 w-5" />
           {{ $t('oracle.higherButton') }}
         </Button>
