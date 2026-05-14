@@ -97,7 +97,7 @@ function toggleMode() {
 
       <div v-else-if="mode === 'auto_pick'" class="space-y-3">
         <div class="rainbow-wrapper rounded-md shadow-[var(--shadow-brutal)]">
-          <div class="inner-card rounded-sm bg-card p-4 text-center">
+          <div class="inner-card rounded-md bg-card p-4 text-center">
             <p class="text-xs text-muted-foreground mb-2">{{ $t('status.suggestedGuessAuto') }}</p>
             <div class="mx-auto w-fit px-1 py-1">
               <p class="text-3xl font-mono font-bold text-foreground">
@@ -222,18 +222,18 @@ function toggleMode() {
   padding: 6px;
   background: repeating-linear-gradient(
     135deg,
-    #a7d8f0 0px,
-    #a7d8f0 24px,
-    #f8c8dc 24px,
-    #f8c8dc 48px,
-    #c5e99e 48px,
-    #c5e99e 72px,
-    #d4bbff 72px,
-    #d4bbff 96px,
-    #ffe082 96px,
-    #ffe082 120px,
-    #a7d8f0 120px,
-    #a7d8f0 144px
+    var(--primary) 0px,
+    var(--primary) 24px,
+    var(--secondary) 24px,
+    var(--secondary) 48px,
+    var(--accent) 48px,
+    var(--accent) 72px,
+    var(--info) 72px,
+    var(--info) 96px,
+    var(--warning) 96px,
+    var(--warning) 120px,
+    var(--primary) 120px,
+    var(--primary) 144px
   );
 }
 
@@ -244,18 +244,18 @@ function toggleMode() {
 :global(.dark) .rainbow-wrapper {
   background: repeating-linear-gradient(
     135deg,
-    #7ecbf0 0px,
-    #7ecbf0 24px,
-    #ff9ebe 24px,
-    #ff9ebe 48px,
-    #b8e986 48px,
-    #b8e986 72px,
-    #bb86fc 72px,
-    #bb86fc 96px,
-    #ffd54f 96px,
-    #ffd54f 120px,
-    #7ecbf0 120px,
-    #7ecbf0 144px
+    var(--primary) 0px,
+    var(--primary) 24px,
+    var(--secondary) 24px,
+    var(--secondary) 48px,
+    var(--accent) 48px,
+    var(--accent) 72px,
+    var(--info) 72px,
+    var(--info) 96px,
+    var(--warning) 96px,
+    var(--warning) 120px,
+    var(--primary) 120px,
+    var(--primary) 144px
   );
   box-shadow: 0 0 12px rgba(126, 203, 240, 0.5), var(--shadow-brutal);
 }
