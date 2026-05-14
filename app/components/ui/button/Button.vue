@@ -22,6 +22,7 @@ const props = withDefaults(defineProps<Props>(), {
     :as="as"
     :as-child="asChild"
     :class="cn(buttonVariants({ variant, size }), props.class)"
+    @touchend="(e: TouchEvent) => ((e.currentTarget as HTMLElement)?.blur())"
   >
     <slot />
   </Primitive>
