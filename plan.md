@@ -71,11 +71,10 @@ Transform the current soft pastel UI into a "cute brutalism" aesthetic — thick
 | `Card` (primitive)         | done        | Thick border, hard shadow                      |
 | `Input` (primitive)        | done        | Thick border, hard shadow                      |
 | `Badge` (primitive)        | done        | Thick border, hard shadow, rounded-md          |
-| `default.vue` (layout)    | in progress | Remove blur, brutalist header bar              |
+| `default.vue` (layout)    | done        | Remove blur, brutalist header bar              |
 | `Alert` (primitive)        | pending     | Thick border, hard shadow                      |
 | `Dialog` (primitive)       | pending     | Thick border, hard shadow                      |
-| `default.vue` (layout)    | pending     | Remove blur, brutalist header bar              |
-| `SafeRange.vue`            | pending     | Hard-edged animation, neon glow dark mode      |
+| `SafeRange.vue`            | in progress | Hard-edged animation, neon glow dark mode      |
 | `GuesserForm.vue`          | pending     | Flat pastels, thick borders on all elements    |
 | `GuessHistory.vue`         | pending     | Sticker-style entries, flat colors             |
 | `AlgorithmDialog.vue`      | pending     | Dialog styling, SVG recoloring                 |
@@ -90,7 +89,7 @@ Transform the current soft pastel UI into a "cute brutalism" aesthetic — thick
 |-----|---------------------------------------------|-------------|
 | 1   | Update design tokens (tailwind.css)         | done (990f2c6) |
 | 2   | Update core UI primitives (Button, Card, etc) | done (bb3c825) |
-| 3   | Update layout and global components           | pending     |
+| 3   | Update layout and global components           | done (dc598ea) |
 | 4   | Update SafeRange.vue + custom animations      | pending     |
 | 5   | Update GuesserForm.vue + GuessHistory.vue     | pending     |
 | 6   | Update Dialogs + remaining components         | pending     |
