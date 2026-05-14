@@ -22,9 +22,9 @@ function select(dist: Distribution) {
   <Dialog v-model:open="dialogOpen">
     <DialogTrigger as-child>
       <Button
-        variant="default"
+        variant="outline"
         size="sm"
-        class="gap-2 border-indigo-300/60 bg-indigo-500 text-white hover:bg-indigo-600 dark:border-indigo-500/50 dark:bg-indigo-600 dark:hover:bg-indigo-500"
+        class="gap-2"
         :aria-label="$t('distribution.buttonLabel')"
         :title="$t('distribution.buttonLabel')"
       >
@@ -71,10 +71,10 @@ function select(dist: Distribution) {
       <div class="grid grid-cols-2 gap-3 pt-2">
         <button
           type="button"
-          class="relative flex flex-col items-center gap-2 rounded-lg border p-4 text-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+          class="relative flex flex-col items-center gap-2 rounded-md border-2 p-4 text-center shadow-[var(--shadow-brutal-sm)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           :class="{
-            'border-primary bg-primary/5': distribution === 'standard',
-            'border-border hover:bg-muted/50': distribution !== 'standard',
+            'border-primary bg-primary text-primary-foreground': distribution === 'standard',
+            'border-border bg-card hover:bg-muted': distribution !== 'standard',
           }"
           @click="select('standard')"
         >
@@ -85,7 +85,7 @@ function select(dist: Distribution) {
             height="40"
             viewBox="0 0 24 24"
             fill="none"
-            class="text-foreground"
+            class="text-current"
           >
             <rect x="2" y="14" width="3" height="6" rx="1" fill="currentColor" />
             <rect x="6.5" y="10" width="3" height="10" rx="1" fill="currentColor" />
@@ -95,16 +95,16 @@ function select(dist: Distribution) {
           </svg>
           <div class="space-y-0.5">
             <p class="text-sm font-semibold">{{ $t("distribution.standard") }}</p>
-            <p class="text-xs text-muted-foreground">{{ $t("distribution.standardDesc") }}</p>
+            <p class="text-xs opacity-80">{{ $t("distribution.standardDesc") }}</p>
           </div>
         </button>
 
         <button
           type="button"
-          class="relative flex flex-col items-center gap-2 rounded-lg border p-4 text-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+          class="relative flex flex-col items-center gap-2 rounded-md border-2 p-4 text-center shadow-[var(--shadow-brutal-sm)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           :class="{
-            'border-primary bg-primary/5': distribution === 'risky_edge',
-            'border-border hover:bg-muted/50': distribution !== 'risky_edge',
+            'border-primary bg-primary text-primary-foreground': distribution === 'risky_edge',
+            'border-border bg-card hover:bg-muted': distribution !== 'risky_edge',
           }"
           @click="select('risky_edge')"
         >
@@ -115,7 +115,7 @@ function select(dist: Distribution) {
             height="40"
             viewBox="0 0 24 24"
             fill="none"
-            class="text-foreground"
+            class="text-current"
           >
             <rect x="2" y="6" width="3" height="14" rx="1" fill="currentColor" />
             <rect x="6.5" y="10" width="3" height="10" rx="1" fill="currentColor" />
@@ -125,7 +125,7 @@ function select(dist: Distribution) {
           </svg>
           <div class="space-y-0.5">
             <p class="text-sm font-semibold">{{ $t("distribution.riskyEdge") }}</p>
-            <p class="text-xs text-muted-foreground">{{ $t("distribution.riskyEdgeDesc") }}</p>
+            <p class="text-xs opacity-80">{{ $t("distribution.riskyEdgeDesc") }}</p>
           </div>
         </button>
       </div>
