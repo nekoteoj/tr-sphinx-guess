@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { Github } from 'lucide-vue-next'
-
 const { reset } = useGuesser()
 </script>
 
@@ -31,6 +29,7 @@ const { reset } = useGuesser()
           <h1 class="text-lg font-semibold">{{ $t('layout.title') }}</h1>
         </NuxtLink>
         <div class="flex items-center gap-1">
+          <GithubButton />
           <AlgorithmDialog />
           <LanguageToggle />
           <ThemeToggle />
@@ -48,7 +47,7 @@ const { reset } = useGuesser()
       <div class="container mx-auto px-4">
         {{ $t('layout.footer') }} · {{ $t('layout.credit') }}
         <a href="https://github.com/nekoteoj" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 hover:text-foreground transition-colors">
-          <Github class="h-3 w-3" />
+          <GithubIcon class="h-3 w-3" />
           nekoteoj
         </a>
       </div>

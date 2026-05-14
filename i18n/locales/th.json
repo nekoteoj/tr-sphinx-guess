@@ -5,7 +5,8 @@
   "layout": {
     "title": "ทายตัวเลข",
     "footer": "ให้เราช่วยคุณหาตัวเลข",
-    "credit": "สร้างโดย"
+    "credit": "สร้างโดย",
+    "githubRepo": "GitHub Repository"
   },
   "index": {
     "heading": "ตัวช่วยทายตัวเลข",

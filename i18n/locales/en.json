@@ -5,7 +5,8 @@
   "layout": {
     "title": "Number Guesser",
     "footer": "We'll help you find the number",
-    "credit": "Brought to you by"
+    "credit": "Brought to you by",
+    "githubRepo": "GitHub Repository"
   },
   "index": {
     "heading": "Binary Search Helper",
