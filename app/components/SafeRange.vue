@@ -96,16 +96,18 @@ function toggleMode() {
       </div>
 
       <div v-else-if="mode === 'auto_pick'" class="space-y-3">
-        <div class="auto-pick-glow relative rounded-md border-3 bg-card p-4 text-center shadow-[var(--shadow-brutal)]">
-          <p class="text-xs text-muted-foreground mb-2">{{ $t('status.suggestedGuessAuto') }}</p>
-          <div class="mx-auto w-fit px-1 py-1">
-            <p class="text-3xl font-mono font-bold text-foreground">
-              {{ suggestedGuess.toLocaleString() }}
+        <div class="rainbow-wrapper rounded-md shadow-[var(--shadow-brutal)]">
+          <div class="inner-card rounded-sm bg-card p-4 text-center">
+            <p class="text-xs text-muted-foreground mb-2">{{ $t('status.suggestedGuessAuto') }}</p>
+            <div class="mx-auto w-fit px-1 py-1">
+              <p class="text-3xl font-mono font-bold text-foreground">
+                {{ suggestedGuess.toLocaleString() }}
+              </p>
+            </div>
+            <p class="text-xs text-muted-foreground mt-2">
+              {{ $t('status.suggestedGuessAutoHint') }}
             </p>
           </div>
-          <p class="text-xs text-muted-foreground mt-2">
-            {{ $t('status.suggestedGuessAutoHint') }}
-          </p>
         </div>
 
         <div v-if="!isPossible" class="rounded-md border-2 border-border bg-warning p-4 text-center shadow-[var(--shadow-brutal-sm)]">
@@ -216,71 +218,68 @@ function toggleMode() {
 </template>
 
 <style scoped>
-.auto-pick-glow {
-  border-width: 3px;
-  animation: border-color-cycle 4s steps(4) infinite;
+.rainbow-wrapper {
+  padding: 3px;
+  background: repeating-linear-gradient(
+    135deg,
+    #a7d8f0 0px,
+    #a7d8f0 3px,
+    #f8c8dc 3px,
+    #f8c8dc 6px,
+    #c5e99e 6px,
+    #c5e99e 9px,
+    #d4bbff 9px,
+    #d4bbff 12px,
+    #ffe082 12px,
+    #ffe082 15px,
+    #a7d8f0 15px,
+    #a7d8f0 18px
+  );
+  background-size: 18px 18px;
+  animation: stripe-march 1s linear infinite;
 }
 
-@keyframes border-color-cycle {
+.inner-card {
+  background: var(--card);
+}
+
+@keyframes stripe-march {
   0% {
-    border-color: #A7D8F0;
-    box-shadow: 0 0 0 3px #A7D8F0, var(--shadow-brutal);
-  }
-  25% {
-    border-color: #F8C8DC;
-    box-shadow: 0 0 0 3px #F8C8DC, var(--shadow-brutal);
-  }
-  50% {
-    border-color: #C5E99E;
-    box-shadow: 0 0 0 3px #C5E99E, var(--shadow-brutal);
-  }
-  75% {
-    border-color: #D4BBFF;
-    box-shadow: 0 0 0 3px #D4BBFF, var(--shadow-brutal);
+    background-position: 0 0;
   }
   100% {
-    border-color: #A7D8F0;
-    box-shadow: 0 0 0 3px #A7D8F0, var(--shadow-brutal);
+    background-position: 18px 18px;
   }
 }
 
-:global(.dark) .auto-pick-glow {
-  animation: neon-color-cycle 4s steps(4) infinite;
-}
-
-@keyframes neon-color-cycle {
-  0% {
-    border-color: #7ECBF0;
-    box-shadow: 0 0 0 2px #7ECBF0, 0 0 12px #7ECBF0, var(--shadow-brutal);
-  }
-  25% {
-    border-color: #FF9EBE;
-    box-shadow: 0 0 0 2px #FF9EBE, 0 0 12px #FF9EBE, var(--shadow-brutal);
-  }
-  50% {
-    border-color: #B8E986;
-    box-shadow: 0 0 0 2px #B8E986, 0 0 12px #B8E986, var(--shadow-brutal);
-  }
-  75% {
-    border-color: #BB86FC;
-    box-shadow: 0 0 0 2px #BB86FC, 0 0 12px #BB86FC, var(--shadow-brutal);
-  }
-  100% {
-    border-color: #7ECBF0;
-    box-shadow: 0 0 0 2px #7ECBF0, 0 0 12px #7ECBF0, var(--shadow-brutal);
-  }
+:global(.dark) .rainbow-wrapper {
+  background: repeating-linear-gradient(
+    135deg,
+    #7ecbf0 0px,
+    #7ecbf0 3px,
+    #ff9ebe 3px,
+    #ff9ebe 6px,
+    #b8e986 6px,
+    #b8e986 9px,
+    #bb86fc 9px,
+    #bb86fc 12px,
+    #ffd54f 12px,
+    #ffd54f 15px,
+    #7ecbf0 15px,
+    #7ecbf0 18px
+  );
+  box-shadow: 0 0 12px rgba(126, 203, 240, 0.5), var(--shadow-brutal);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .auto-pick-glow {
+  .rainbow-wrapper {
     animation: none;
-    border-color: #A7D8F0;
-    box-shadow: 0 0 0 3px #A7D8F0, var(--shadow-brutal);
+    background-position: 0 0;
   }
-  :global(.dark) .auto-pick-glow {
+  :global(.dark) .rainbow-wrapper {
     animation: none;
-    border-color: #7ECBF0;
-    box-shadow: 0 0 0 2px #7ECBF0, 0 0 12px #7ECBF0, var(--shadow-brutal);
+    background-position: 0 0;
+    box-shadow: 0 0 12px rgba(126, 203, 240, 0.5), var(--shadow-brutal);
   }
 }
 </style>
