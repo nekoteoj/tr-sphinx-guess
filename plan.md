@@ -93,7 +93,8 @@ Transform the current soft pastel UI into a "cute brutalism" aesthetic — thick
 | 4   | Update SafeRange.vue + custom animations      | done (7b7d5bd) |
 | 5   | Update GuesserForm.vue + GuessHistory.vue     | done (6a1da78) |
 | 6   | Update Dialogs + remaining components         | done (e4822d0) |
-| 7   | Final polish, QA, and plan.md completion    | done (this commit) |
+| 7   | Final polish, QA, and plan.md completion    | done (684f755) |
+| 8   | Fix UI polish issues from review            | done (6261a4a) |
 
 ## QA Checklist
 
