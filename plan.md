@@ -1,215 +1,123 @@
-# Number Guesser (Binary Search Helper) - Development Plan
+# Cute Brutalism Redesign Plan
 
-## Project Overview
+## Context and Goals
 
-A Nuxt 3 SPA that helps users find the "safe range" of numbers to guess in a binary-search-style guessing game. Given a range `[lo, hi]` and `G` guesses remaining, it calculates which numbers are safe to pick (i.e., regardless of the oracle's response, you can still finish within the remaining guesses).
+Transform the current soft pastel UI into a "cute brutalism" aesthetic — thick borders, hard offset shadows, flat colors, with a mixed pastel palette on warm cream surfaces. Dark mode becomes deep charcoal with neon pastel glow accents.
 
----
+## Branch
 
-## Tech Stack
+`feat/cute-brutalism`
 
-| Layer | Choice |
-|-------|--------|
-| Framework | Nuxt 3 (SPA mode, `ssr: false`) |
-| UI Components | shadcn-vue (with Tailwind CSS v4) |
-| Styling | Tailwind CSS v4 via `@tailwindcss/vite` |
-| Dark Mode | `@vueuse/core` `useColorMode` + class-based toggle |
-| Deployment | GitHub Pages via GitHub Actions (`github_pages` preset) |
-| Package Manager | pnpm |
+## Design Tokens and Foundations
 
----
+### Light Mode Surface
 
-## Core Algorithm
+| Token         | Hex       | Usage                          |
+|---------------|-----------|--------------------------------|
+| background    | `#FBFBF9` | Warm cream page background     |
+| foreground    | `#1C293C` | Near-black text                |
+| card          | `#FFFFFF` | Pure white cards               |
+| muted         | `#F5F3EF` | Slightly warm gray stat boxes  |
+| border        | `#1C293C` | All borders (light mode)       |
 
-The "safe range" logic:
+### Pastel Accent Palette
 
-```
-Given range [lo, hi] (size N = hi - lo + 1) and G guesses remaining:
+| Token         | Hex       | Pastel Vibe | Usage                          |
+|---------------|-----------|-------------|--------------------------------|
+| primary       | `#A7D8F0` | Baby blue   | Main buttons, active states    |
+| secondary     | `#F8C8DC` | Soft pink   | Secondary actions, tags        |
+| accent        | `#C5E99E` | Mint green  | Highlights, success            |
+| destructive   | `#FF8B94` | Salmon red  | Errors, game over              |
+| warning       | `#FFE082` | Custard     | Warnings, impossible           |
+| info          | `#D4BBFF` | Lavender    | Info cards, hints              |
 
-- Maximum numbers coverable with G guesses = 2^G - 1 (binary search worst case)
-- A guess at position x splits [lo, hi] into:
-  - Left part: [lo, x-1] of size (x - lo)
-  - Right part: [x+1, hi] of size (hi - x)
-- x is "safe" if BOTH:
-  - (x - lo) <= 2^(G-1) - 1  (left part solvable in G-1 guesses)
-  - (hi - x) <= 2^(G-1) - 1  (right part solvable in G-1 guesses)
+### Dark Mode Surface
 
-Safe range: [lo + max(0, N - 2^(G-1)), hi - max(0, N - 2^(G-1))]
+| Token         | Hex       | Usage                          |
+|---------------|-----------|--------------------------------|
+| background    | `#1A1A2E` | Deep charcoal-navy             |
+| foreground    | `#FFF5F7` | Warm white text                |
+| card          | `#16213E` | Slightly lighter navy card     |
+| border        | `#FFFFFF` | White borders (dark mode)      |
 
-If N > 2^G - 1, it's impossible to guarantee finding the number.
-If N <= 1, the game is already won (no guess needed).
-```
+### Dark Mode Neon Accents
 
-### Derivation
+| Token         | Hex       | Effect                         |
+|---------------|-----------|--------------------------------|
+| primary       | `#7ECBF0` | Glowing baby blue              |
+| secondary     | `#FF9EBE` | Neon pink                      |
+| accent        | `#B8E986` | Neon mint                      |
+| destructive   | `#FF6B75` | Bright salmon                  |
+| warning       | `#FFD54F` | Neon custard                   |
+| info          | `#BB86FC` | Neon lavender                  |
 
-- For a guess at position `x` to be safe, both sides must be solvable in `G-1` guesses
-- Left side size: `x - lo` (must be <= `2^(G-1) - 1`)
-- Right side size: `hi - x` (must be <= `2^(G-1) - 1`)
-- Therefore: `x >= lo + (N - 2^(G-1))` and `x <= hi - (N - 2^(G-1))`
-- Safe low = `lo + max(0, N - 2^(G-1))`
-- Safe high = `hi - max(0, N - 2^(G-1))`
-- If safe low > safe high, no safe guess exists (impossible)
+### Shadows (Brutalist)
 
----
+- All cards: `4px 4px 0 0 #1C293C` (light) / `4px 4px 0 0 #000` (dark)
+- Buttons: `3px 3px 0 0 #1C293C` (light) / `3px 3px 0 0 #000` (dark)
+- Inputs: `2px 2px 0 0 #1C293C` (light) / `2px 2px 0 0 #000` (dark)
+- No blur, no gradients — pure hard offset.
 
-## Project Structure
+### Border Radius
 
-```
-tr-sphinx-guess/
-├── .github/
-│   └── workflows/
-│       └── deploy.yml          # GitHub Actions for Pages deployment
-├── app/
-│   ├── assets/
-│   │   └── css/
-│   │       └── tailwind.css    # Tailwind imports
-│   ├── components/
-│   │   ├── ui/                 # shadcn-vue components (auto-generated)
-│   │   ├── GuesserForm.vue     # Input form (range + guesses)
-│   │   ├── SafeRange.vue       # Display safe range result
-│   │   ├── GuessHistory.vue    # History of iterations
-│   │   └── ThemeToggle.vue     # Dark/light mode toggle
-│   ├── composables/
-│   │   └── useGuesser.ts       # Core game logic & state
-│   ├── layouts/
-│   │   └── default.vue         # Main layout with header
-│   ├── pages/
-│   │   └── index.vue           # Main page
-│   └── app.vue                 # Root app component
-├── public/
-│   └── .nojekyll               # Required for GitHub Pages
-├── nuxt.config.ts
-├── package.json
-├── tsconfig.json
-└── components.json             # shadcn-vue config
-```
+- Changed from `0.75rem` (12px) to `0.375rem` (6px) — "cute brutalism" sticker corners.
 
----
+## Component Migration Tracker
 
-## Implementation Steps
+| Component                  | Status      | Notes                                        |
+|----------------------------|-------------|----------------------------------------------|
+| `tailwind.css`             | pending     | Full token rewrite                           |
+| `Button` (primitive)       | pending     | Thick border, hard shadow, translate hover     |
+| `Card` (primitive)         | pending     | Thick border, hard shadow                      |
+| `Input` (primitive)        | pending     | Thick border, hard shadow                      |
+| `Badge` (primitive)        | pending     | Thick border, hard shadow, rounded-md          |
+| `Alert` (primitive)        | pending     | Thick border, hard shadow                      |
+| `Dialog` (primitive)       | pending     | Thick border, hard shadow                      |
+| `default.vue` (layout)    | pending     | Remove blur, brutalist header bar              |
+| `SafeRange.vue`            | pending     | Hard-edged animation, neon glow dark mode      |
+| `GuesserForm.vue`          | pending     | Flat pastels, thick borders on all elements    |
+| `GuessHistory.vue`         | pending     | Sticker-style entries, flat colors             |
+| `AlgorithmDialog.vue`      | pending     | Dialog styling, SVG recoloring                 |
+| `DistributionDialog.vue`   | pending     | Dialog styling                                 |
+| `ThemeToggle.vue`          | pending     | Brutalist icon button                          |
+| `LanguageToggle.vue`       | pending     | Brutalist icon button                          |
+| `GithubButton.vue`         | pending     | Brutalist icon button                          |
 
-### Phase 1: Project Setup
+## Commit Log
 
-- [ ] 1. Initialize Nuxt 3 project with `pnpm create nuxt@latest`
-- [ ] 2. Install Tailwind CSS v4 (`tailwindcss`, `@tailwindcss/vite`)
-- [ ] 3. Install and configure `shadcn-nuxt` module
-- [ ] 4. Run `shadcn-vue init` and add needed components (Button, Input, Card, Badge, Alert, Separator, Label)
-- [ ] 5. Configure `nuxt.config.ts` for SPA mode (`ssr: false`)
-- [ ] 6. Add `.nojekyll` to `public/`
-- [ ] 7. Verify dev server starts correctly
+| #   | Commit Message                              | Status      |
+|-----|---------------------------------------------|-------------|
+| 1   | Update design tokens (tailwind.css)         | pending     |
+| 2   | Update core UI primitives (Button, Card, etc) | pending     |
+| 3   | Update layout and global components           | pending     |
+| 4   | Update SafeRange.vue + custom animations      | pending     |
+| 5   | Update GuesserForm.vue + GuessHistory.vue     | pending     |
+| 6   | Update Dialogs + remaining components         | pending     |
+| 7   | Final polish, QA, and plan.md completion      | pending     |
 
-### Phase 2: Core Logic (`composables/useGuesser.ts`)
+## QA Checklist
 
-- [ ] 8. Implement the safe range calculation function
-- [ ] 9. Implement state management:
-  - `rangeLow`, `rangeHigh` (current range)
-  - `totalGuesses` (initial guess count)
-  - `guessesLeft` (remaining guesses)
-  - `history` (array of past iterations)
-  - Computed: `safeRange`, `isPossible`, `isWon`
-- [ ] 10. Implement `submitOracleResponse(newLow, newHigh)` — updates range and decrements guesses
-- [ ] 11. Implement `reset()` — restores defaults
+### Visual
+- [ ] Every card has `border-2` + black offset shadow.
+- [ ] Every button has `border-2` + black offset shadow + hover/active translate.
+- [ ] Every input has `border-2` + black offset shadow.
+- [ ] No soft `shadow-sm` or `shadow-md` remains.
+- [ ] No transparent pastel backgrounds (`bg-*-100/50`) remain.
+- [ ] No `backdrop-blur` remains in the layout.
+- [ ] Border radius consistently ~6px.
+- [ ] Dark mode uses deep navy + neon pastels + black shadows.
+- [ ] Light mode uses warm cream + soft pastels + near-black shadows.
 
-### Phase 3: UI Components
+### Functional
+- [ ] All buttons work (hover, active, disabled).
+- [ ] Dialogs open/close correctly.
+- [ ] Theme toggle works.
+- [ ] Language toggle works.
+- [ ] Form validation displays correctly.
+- [ ] `pnpm build` passes.
+- [ ] `pnpm lint:check` passes.
 
-- [ ] 12. **ThemeToggle.vue** — Dark/light mode toggle button
-- [ ] 13. **GuesserForm.vue** — Inputs for range [lo, hi] and guesses remaining, with validation
-- [ ] 14. **SafeRange.vue** — Displays the safe range (or "impossible" warning, or "won" state)
-- [ ] 15. **GuessHistory.vue** — Shows past iterations in a timeline/list
-- [ ] 16. **default.vue layout** — Header with title + theme toggle, responsive container
-
-### Phase 4: Main Page (`pages/index.vue`)
-
-- [ ] 17. Compose all components into the main page
-- [ ] 18. Handle the "iteration" flow:
-  - Show current range + guesses left + safe range
-  - User inputs oracle response (new range)
-  - State updates, history appends
-- [ ] 19. Reset button functionality
-- [ ] 20. Mobile-responsive layout (Tailwind responsive utilities)
-
-### Phase 5: Deployment
-
-- [ ] 21. Create GitHub Actions workflow (`.github/workflows/deploy.yml`)
-- [ ] 22. Configure `NUXT_APP_BASE_URL` / `app.baseURL` for the repo slug
-- [ ] 23. Initialize git repo, add `.gitignore`, and make initial commit
-
----
-
-## UI/UX Design Notes
-
-- **Mobile-first**: Single column layout on mobile, centered card on desktop
-- **Modern aesthetic**: Clean cards with subtle shadows, rounded corners, smooth transitions
-- **Color scheme**: Neutral base with accent color (blue/indigo) for safe range highlight
-- **States clearly communicated**:
-  - Green highlight = safe range available (comfortable margin)
-  - Yellow/amber = range is tight (safe range is small)
-  - Red alert = impossible to guarantee finishing
-  - Celebration state when range narrows to 1 number (won!)
-- **Dark mode**: Class-based toggling via `dark:` Tailwind variants
-- **Typography**: Clean, modern sans-serif; monospace for numbers
-
----
-
-## GitHub Pages Deployment
-
-The GitHub Actions workflow will:
-1. Checkout code
-2. Setup Node 20 + pnpm
-3. Install dependencies
-4. Build with `npx nuxt build --preset github_pages` (with `NUXT_APP_BASE_URL` set)
-5. Upload artifact and deploy to Pages
-
-For SPA mode with client-side routing on GitHub Pages:
-- The `github_pages` preset handles creating `404.html` fallback
-- Must set `app.baseURL` to `'/tr-sphinx-guess/'` in `nuxt.config.ts`
-
----
-
-## Key Considerations
-
-1. **SPA + GitHub Pages routing**: The `github_pages` preset with `ssr: false` generates `404.html` fallback for client-side routing
-2. **Base URL**: Must set `app.baseURL` to `'/tr-sphinx-guess/'` for assets to load correctly on `username.github.io/tr-sphinx-guess/`
-3. **No server-side logic needed**: All computation is pure client-side math
-4. **Input validation**: Prevent invalid ranges (lo > hi), non-positive guesses, new range must be subset of current range
-5. **Edge cases**:
-   - Range of size 1 = already found the number
-   - 0 guesses left but range > 1 = failed
-   - Very large ranges with few guesses = impossible from the start
-
----
-
-## shadcn-vue Components Needed
-
-- `Button` — Actions (submit, reset)
-- `Card` — Main content containers
-- `Input` — Number inputs
-- `Label` — Form labels
-- `Badge` — Status indicators
-- `Alert` — Warning/error messages
-- `Separator` — Visual dividers
-
----
-
-## Nuxt Config Summary
-
-```ts
-import tailwindcss from '@tailwindcss/vite'
-
-export default defineNuxtConfig({
-  ssr: false,
-  compatibilityDate: '2024-11-01',
-  app: {
-    baseURL: '/tr-sphinx-guess/',
-  },
-  css: ['~/assets/css/tailwind.css'],
-  vite: {
-    plugins: [tailwindcss()],
-  },
-  modules: ['shadcn-nuxt', '@vueuse/nuxt'],
-  shadcn: {
-    prefix: '',
-    componentDir: './components/ui',
-  },
-})
-```
+### Accessibility
+- [ ] Focus rings visible on all interactive elements.
+- [ ] Color contrast passes WCAG 2.2 AA.
+- [ ] Reduced motion preference respected.
