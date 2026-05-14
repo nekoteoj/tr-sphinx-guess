@@ -20,6 +20,10 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -35,61 +39,81 @@
 }
 
 :root {
-  /* Cute pastel: Blue / Pink / Purple — Light Mode */
-  --background: oklch(0.975 0.01 280); /* very light lavender-white */
-  --foreground: oklch(0.28 0.03 280); /* soft dark slate-purple */
-  --card: oklch(0.99 0.008 280); /* near-white with faint purple */
-  --card-foreground: oklch(0.28 0.03 280);
-  --popover: oklch(0.99 0.008 280);
-  --popover-foreground: oklch(0.28 0.03 280);
-  --primary: oklch(0.75 0.1 250); /* pastel blue (periwinkle) */
-  --primary-foreground: oklch(0.98 0.005 250); /* white text on blue */
-  --secondary: oklch(0.88 0.08 350); /* pastel pink (sakura) */
-  --secondary-foreground: oklch(0.35 0.05 350); /* dark pink text */
-  --muted: oklch(0.95 0.012 270); /* very light blue-lavender */
-  --muted-foreground: oklch(0.5 0.03 270); /* muted purple-gray */
-  --accent: oklch(0.85 0.08 300); /* pastel purple/lavender */
-  --accent-foreground: oklch(0.3 0.06 300); /* dark purple */
-  --destructive: oklch(0.7 0.13 15); /* pastel red/coral */
-  --destructive-foreground: oklch(0.98 0.01 15); /* white text on red */
-  --border: oklch(0.91 0.02 290); /* light lavender/pink border */
-  --input: oklch(0.93 0.015 280); /* light lavender input bg */
-  --ring: oklch(0.75 0.1 250); /* blue ring (matches primary) */
-  --chart-1: oklch(0.75 0.1 250); /* pastel blue */
-  --chart-2: oklch(0.82 0.09 350); /* pastel pink */
-  --chart-3: oklch(0.78 0.09 300); /* pastel purple */
-  --chart-4: oklch(0.8 0.1 150); /* pastel green */
-  --chart-5: oklch(0.7 0.12 15); /* pastel red */
-  --radius: 0.75rem;
+  /* Cute Brutalism — Light Mode */
+  --background: #FBFBF9;
+  --foreground: #1C293C;
+  --card: #FFFFFF;
+  --card-foreground: #1C293C;
+  --popover: #FFFFFF;
+  --popover-foreground: #1C293C;
+  --primary: #A7D8F0;
+  --primary-foreground: #1C293C;
+  --secondary: #F8C8DC;
+  --secondary-foreground: #1C293C;
+  --muted: #F5F3EF;
+  --muted-foreground: #5A6575;
+  --accent: #C5E99E;
+  --accent-foreground: #1C293C;
+  --destructive: #FF8B94;
+  --destructive-foreground: #1C293C;
+  --warning: #FFE082;
+  --warning-foreground: #1C293C;
+  --info: #D4BBFF;
+  --info-foreground: #1C293C;
+  --border: #1C293C;
+  --input: #1C293C;
+  --ring: #A7D8F0;
+  --chart-1: #A7D8F0;
+  --chart-2: #F8C8DC;
+  --chart-3: #D4BBFF;
+  --chart-4: #C5E99E;
+  --chart-5: #FF8B94;
+  --radius: 0.375rem;
+
+  /* Brutalist shadows (light mode) */
+  --shadow-brutal: 4px 4px 0 0 #1C293C;
+  --shadow-brutal-sm: 2px 2px 0 0 #1C293C;
+  --shadow-brutal-lg: 6px 6px 0 0 #1C293C;
+  --shadow-brutal-xl: 8px 8px 0 0 #1C293C;
 }
 
 .dark {
-  /* Cute pastel: Blue / Pink / Purple — Dark Pastel Mode */
-  --background: oklch(0.2 0.03 280); /* deep muted purple-navy */
-  --foreground: oklch(0.92 0.015 280); /* light lavender-cream text */
-  --card: oklch(0.24 0.03 280); /* slightly lighter card */
-  --card-foreground: oklch(0.92 0.015 280);
-  --popover: oklch(0.24 0.03 280);
-  --popover-foreground: oklch(0.92 0.015 280);
-  --primary: oklch(0.75 0.11 250); /* brighter pastel blue */
-  --primary-foreground: oklch(0.15 0.04 250); /* very dark blue */
-  --secondary: oklch(0.38 0.05 350); /* muted dark pink */
-  --secondary-foreground: oklch(0.88 0.07 350); /* light pink text */
-  --muted: oklch(0.28 0.025 280); /* deep purple-slate */
-  --muted-foreground: oklch(0.65 0.04 270); /* muted lavender-gray */
-  --accent: oklch(0.38 0.05 300); /* muted purple surface */
-  --accent-foreground: oklch(0.85 0.08 300); /* bright lavender text */
-  --destructive: oklch(0.62 0.12 15); /* muted rose-red */
-  --destructive-foreground: oklch(0.92 0.02 15); /* light text on red */
-  --border: oklch(0.33 0.03 280); /* dark purple/indigo border */
-  --input: oklch(0.3 0.025 280); /* dark purple input bg */
-  --ring: oklch(0.75 0.11 250); /* blue ring */
-  --chart-1: oklch(0.72 0.1 250); /* pastel blue */
-  --chart-2: oklch(0.7 0.09 350); /* muted pink */
-  --chart-3: oklch(0.68 0.09 300); /* muted purple */
-  --chart-4: oklch(0.7 0.09 150); /* muted green */
-  --chart-5: oklch(0.65 0.11 15); /* muted red */
-  --radius: 0.75rem;
+  /* Cute Brutalism — Dark Mode */
+  --background: #1A1A2E;
+  --foreground: #FFF5F7;
+  --card: #16213E;
+  --card-foreground: #FFF5F7;
+  --popover: #16213E;
+  --popover-foreground: #FFF5F7;
+  --primary: #7ECBF0;
+  --primary-foreground: #1A1A2E;
+  --secondary: #FF9EBE;
+  --secondary-foreground: #1A1A2E;
+  --muted: #252540;
+  --muted-foreground: #A0A8C0;
+  --accent: #B8E986;
+  --accent-foreground: #1A1A2E;
+  --destructive: #FF6B75;
+  --destructive-foreground: #1A1A2E;
+  --warning: #FFD54F;
+  --warning-foreground: #1A1A2E;
+  --info: #BB86FC;
+  --info-foreground: #1A1A2E;
+  --border: #FFFFFF;
+  --input: #FFFFFF;
+  --ring: #7ECBF0;
+  --chart-1: #7ECBF0;
+  --chart-2: #FF9EBE;
+  --chart-3: #BB86FC;
+  --chart-4: #B8E986;
+  --chart-5: #FF6B75;
+  --radius: 0.375rem;
+
+  /* Brutalist shadows (dark mode) */
+  --shadow-brutal: 4px 4px 0 0 #000000;
+  --shadow-brutal-sm: 2px 2px 0 0 #000000;
+  --shadow-brutal-lg: 6px 6px 0 0 #000000;
+  --shadow-brutal-xl: 8px 8px 0 0 #000000;
 }
 
 @layer base {
@@ -98,5 +122,6 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
