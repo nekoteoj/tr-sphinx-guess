@@ -219,24 +219,24 @@ function toggleMode() {
 
 <style scoped>
 .rainbow-wrapper {
-  padding: 3px;
+  padding: 8px;
   background: repeating-linear-gradient(
     135deg,
     #a7d8f0 0px,
-    #a7d8f0 3px,
-    #f8c8dc 3px,
-    #f8c8dc 6px,
-    #c5e99e 6px,
-    #c5e99e 9px,
-    #d4bbff 9px,
-    #d4bbff 12px,
-    #ffe082 12px,
-    #ffe082 15px,
-    #a7d8f0 15px,
-    #a7d8f0 18px
+    #a7d8f0 20px,
+    #f8c8dc 20px,
+    #f8c8dc 40px,
+    #c5e99e 40px,
+    #c5e99e 60px,
+    #d4bbff 60px,
+    #d4bbff 80px,
+    #ffe082 80px,
+    #ffe082 100px,
+    #a7d8f0 100px,
+    #a7d8f0 120px
   );
-  background-size: 18px 18px;
-  animation: stripe-march 1s linear infinite;
+  background-size: 100px 100px;
+  animation: stripe-march 2s linear infinite;
 }
 
 .inner-card {
@@ -248,7 +248,7 @@ function toggleMode() {
     background-position: 0 0;
   }
   100% {
-    background-position: 18px 18px;
+    background-position: 100px 100px;
   }
 }
 
@@ -256,17 +256,17 @@ function toggleMode() {
   background: repeating-linear-gradient(
     135deg,
     #7ecbf0 0px,
-    #7ecbf0 3px,
-    #ff9ebe 3px,
-    #ff9ebe 6px,
-    #b8e986 6px,
-    #b8e986 9px,
-    #bb86fc 9px,
-    #bb86fc 12px,
-    #ffd54f 12px,
-    #ffd54f 15px,
-    #7ecbf0 15px,
-    #7ecbf0 18px
+    #7ecbf0 20px,
+    #ff9ebe 20px,
+    #ff9ebe 40px,
+    #b8e986 40px,
+    #b8e986 60px,
+    #bb86fc 60px,
+    #bb86fc 80px,
+    #ffd54f 80px,
+    #ffd54f 100px,
+    #7ecbf0 100px,
+    #7ecbf0 120px
   );
   box-shadow: 0 0 12px rgba(126, 203, 240, 0.5), var(--shadow-brutal);
 }
