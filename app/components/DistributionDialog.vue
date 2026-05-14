@@ -24,7 +24,7 @@ function select(dist: Distribution) {
       <Button
         variant="outline"
         size="sm"
-        class="gap-2"
+        class="gap-2 bg-info text-info-foreground hover:bg-info border-info"
         :aria-label="$t('distribution.buttonLabel')"
         :title="$t('distribution.buttonLabel')"
       >
