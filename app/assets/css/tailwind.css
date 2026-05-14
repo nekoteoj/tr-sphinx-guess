@@ -126,4 +126,11 @@
       "rlig" 1,
       "calt" 1;
   }
+
+  button,
+  [role="button"],
+  a {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
 }
