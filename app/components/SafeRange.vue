@@ -40,11 +40,11 @@ function toggleMode() {
         <Badge
           :variant="comfortLevel === 'gameover' ? 'destructive' : 'secondary'"
           :class="{
-            'bg-emerald-200/50 text-emerald-700 dark:bg-emerald-400/15 dark:text-emerald-300 border-emerald-300/50': comfortLevel === 'comfortable',
-            'bg-violet-200/50 text-violet-700 dark:bg-violet-400/15 dark:text-violet-300 border-violet-300/50': comfortLevel === 'moderate',
-            'bg-pink-200/50 text-pink-700 dark:bg-pink-400/15 dark:text-pink-300 border-pink-300/50': comfortLevel === 'tight',
-            'bg-blue-200/50 text-blue-700 dark:bg-blue-400/15 dark:text-blue-300 border-blue-300/50': comfortLevel === 'won',
-            'bg-amber-200/50 text-amber-700 dark:bg-amber-400/15 dark:text-amber-300 border-amber-300/50': comfortLevel === 'impossible',
+            'bg-accent text-accent-foreground': comfortLevel === 'comfortable',
+            'bg-info text-info-foreground': comfortLevel === 'moderate',
+            'bg-secondary text-secondary-foreground': comfortLevel === 'tight',
+            'bg-primary text-primary-foreground': comfortLevel === 'won',
+            'bg-warning text-warning-foreground': comfortLevel === 'impossible',
           }"
         >
           {{ comfortLevel === 'comfortable' ? $t('status.comfortable') :
@@ -59,63 +59,60 @@ function toggleMode() {
     <CardContent class="space-y-4">
       <!-- Current Range Info -->
       <div class="grid grid-cols-3 gap-2 text-center">
-        <div class="rounded-lg bg-muted p-3">
+        <div class="rounded-md border-2 border-border bg-muted shadow-[var(--shadow-brutal-sm)] p-3">
           <p class="text-xs text-muted-foreground">{{ $t('status.range') }}</p>
           <p class="text-sm font-mono font-semibold">
             {{ $t('common.rangeFormat', { low: rangeLow.toLocaleString(), high: rangeHigh.toLocaleString() }) }}
           </p>
         </div>
-        <div class="rounded-lg bg-muted p-3">
+        <div class="rounded-md border-2 border-border bg-muted shadow-[var(--shadow-brutal-sm)] p-3">
           <p class="text-xs text-muted-foreground">{{ $t('status.size') }}</p>
           <p class="text-sm font-mono font-semibold">{{ rangeSize.toLocaleString() }}</p>
         </div>
-        <div class="rounded-lg bg-muted p-3">
+        <div class="rounded-md border-2 border-border bg-muted shadow-[var(--shadow-brutal-sm)] p-3">
           <p class="text-xs text-muted-foreground">{{ $t('status.guessesLeft') }}</p>
           <p class="text-sm font-mono font-semibold">{{ guessesLeft }}</p>
         </div>
       </div>
 
       <!-- Won State -->
-      <div v-if="isWon" class="rounded-lg border border-blue-300/40 bg-blue-100/50 dark:bg-blue-400/10 dark:border-blue-400/30 p-4 text-center">
-        <p class="text-lg font-semibold text-blue-700 dark:text-blue-300">
+      <div v-if="isWon" class="rounded-md border-2 border-border bg-primary p-4 text-center shadow-[var(--shadow-brutal)]">
+        <p class="text-lg font-semibold text-primary-foreground">
           {{ $t('status.numberFound') }}
         </p>
-        <p class="text-2xl font-mono font-bold text-blue-800 dark:text-blue-200 mt-1">
+        <p class="text-2xl font-mono font-bold text-primary-foreground mt-1">
           {{ rangeLow.toLocaleString() }}
         </p>
       </div>
 
       <!-- Game Over State (out of guesses, didn't find it) -->
-      <div v-else-if="isGameOver" class="rounded-lg border border-pink-300/40 bg-pink-100/50 dark:bg-pink-400/10 dark:border-pink-400/30 p-4 text-center">
-        <p class="text-lg font-semibold text-pink-700 dark:text-pink-300">
+      <div v-else-if="isGameOver" class="rounded-md border-2 border-border bg-destructive p-4 text-center shadow-[var(--shadow-brutal)]">
+        <p class="text-lg font-semibold text-destructive-foreground">
           {{ $t('status.gameoverTitle') }}
         </p>
-        <p class="text-sm text-muted-foreground mt-1">
+        <p class="text-sm text-destructive-foreground mt-1">
           {{ $t('status.gameoverDesc', { low: rangeLow.toLocaleString(), high: rangeHigh.toLocaleString() }) }}
         </p>
       </div>
 
       <div v-else-if="mode === 'auto_pick'" class="space-y-3">
-        <div class="glow-border-card relative">
-          <div class="outer-glow" />
-          <div class="relative z-10 rounded-lg border border-border/80 bg-background p-4 text-center">
-            <p class="text-xs text-muted-foreground mb-2">{{ $t('status.suggestedGuessAuto') }}</p>
-            <div class="mx-auto w-fit px-1 py-1">
-              <p class="text-3xl font-mono font-bold text-slate-950 dark:text-white">
-                {{ suggestedGuess.toLocaleString() }}
-              </p>
-            </div>
-            <p class="text-xs text-muted-foreground mt-2">
-              {{ $t('status.suggestedGuessAutoHint') }}
+        <div class="auto-pick-glow relative rounded-md border-3 bg-card p-4 text-center shadow-[var(--shadow-brutal)]">
+          <p class="text-xs text-muted-foreground mb-2">{{ $t('status.suggestedGuessAuto') }}</p>
+          <div class="mx-auto w-fit px-1 py-1">
+            <p class="text-3xl font-mono font-bold text-foreground">
+              {{ suggestedGuess.toLocaleString() }}
             </p>
           </div>
+          <p class="text-xs text-muted-foreground mt-2">
+            {{ $t('status.suggestedGuessAutoHint') }}
+          </p>
         </div>
 
-        <div v-if="!isPossible" class="rounded-lg border border-amber-300/40 bg-amber-100/50 dark:bg-amber-400/10 dark:border-amber-400/30 p-4 text-center">
-          <p class="text-sm font-semibold text-amber-700 dark:text-amber-300">
+        <div v-if="!isPossible" class="rounded-md border-2 border-border bg-warning p-4 text-center shadow-[var(--shadow-brutal-sm)]">
+          <p class="text-sm font-semibold text-warning-foreground">
             {{ $t('status.notGuaranteed') }}
           </p>
-          <p class="text-xs text-muted-foreground mt-1">
+          <p class="text-xs text-warning-foreground mt-1">
             {{ $t('status.impossibleDesc', { rangeSize: rangeSize.toLocaleString(), maxCoverable: maxCoverable.toLocaleString(), guessesLeft }) }}
           </p>
         </div>
@@ -123,20 +120,20 @@ function toggleMode() {
 
       <!-- Not Guaranteed State (impossible but can still try) -->
       <div v-else-if="!isPossible" class="space-y-3">
-        <div class="rounded-lg border border-amber-300/40 bg-amber-100/50 dark:bg-amber-400/10 dark:border-amber-400/30 p-4 text-center">
-          <p class="text-sm font-semibold text-amber-700 dark:text-amber-300">
+        <div class="rounded-md border-2 border-border bg-warning p-4 text-center shadow-[var(--shadow-brutal-sm)]">
+          <p class="text-sm font-semibold text-warning-foreground">
             {{ $t('status.notGuaranteed') }}
           </p>
-          <p class="text-xs text-muted-foreground mt-1">
+          <p class="text-xs text-warning-foreground mt-1">
             {{ $t('status.impossibleDesc', { rangeSize: rangeSize.toLocaleString(), maxCoverable: maxCoverable.toLocaleString(), guessesLeft }) }}
           </p>
-          <p class="text-xs text-amber-600 dark:text-amber-400 mt-2 font-medium">
+          <p class="text-xs text-warning-foreground mt-2 font-medium">
             {{ $t('status.canStillTry') }}
           </p>
         </div>
 
         <!-- Suggested midpoint guess -->
-        <div class="rounded-lg border border-muted p-4 text-center">
+        <div class="rounded-md border-2 border-border bg-card p-4 text-center shadow-[var(--shadow-brutal-sm)]">
           <p class="text-xs text-muted-foreground mb-1">{{ $t('status.suggestedGuess') }}</p>
           <p class="text-2xl font-mono font-bold text-foreground">
             {{ suggestedGuess.toLocaleString() }}
@@ -150,25 +147,18 @@ function toggleMode() {
       <!-- Safe Range Display -->
       <div v-else-if="safeRange" class="space-y-3">
         <div
-          class="rounded-lg border p-4 text-center transition-colors"
+          class="rounded-md border-2 border-border p-4 text-center transition-colors shadow-[var(--shadow-brutal-sm)]"
           :class="{
-            'border-emerald-300/40 bg-emerald-100/50 dark:bg-emerald-400/10 dark:border-emerald-400/25': comfortLevel === 'comfortable',
-            'border-violet-300/40 bg-violet-100/50 dark:bg-violet-400/10 dark:border-violet-400/25': comfortLevel === 'moderate',
-            'border-pink-300/40 bg-pink-100/50 dark:bg-pink-400/10 dark:border-pink-400/25': comfortLevel === 'tight',
+            'bg-accent text-accent-foreground': comfortLevel === 'comfortable',
+            'bg-info text-info-foreground': comfortLevel === 'moderate',
+            'bg-secondary text-secondary-foreground': comfortLevel === 'tight',
           }"
         >
-          <p class="text-xs text-muted-foreground mb-1">{{ $t('status.safeRangeLabel') }}</p>
-          <p
-            class="text-2xl font-mono font-bold"
-            :class="{
-              'text-emerald-700 dark:text-emerald-300': comfortLevel === 'comfortable',
-              'text-violet-700 dark:text-violet-300': comfortLevel === 'moderate',
-              'text-pink-700 dark:text-pink-300': comfortLevel === 'tight',
-            }"
-          >
+          <p class="text-xs mb-1 opacity-80">{{ $t('status.safeRangeLabel') }}</p>
+          <p class="text-2xl font-mono font-bold">
             {{ $t('common.rangeFormat', { low: safeRange.low.toLocaleString(), high: safeRange.high.toLocaleString() }) }}
           </p>
-          <p class="text-xs text-muted-foreground mt-1">
+          <p class="text-xs mt-1 opacity-80">
             {{ $t('status.safeNumbers', { count: safeRangeSize.toLocaleString(), percent: Math.round((safeRangeSize / rangeSize) * 100) }) }}
           </p>
         </div>
@@ -183,7 +173,7 @@ function toggleMode() {
           <Button
             variant="default"
             size="sm"
-            class="gap-2 border-teal-300/60 bg-teal-500 text-white hover:bg-teal-600 dark:border-teal-500/50 dark:bg-teal-600 dark:hover:bg-teal-500"
+            class="gap-2"
             :aria-label="$t('mode.reroll')"
             :title="$t('mode.reroll')"
             @click="emit('reroll')"
@@ -207,12 +197,12 @@ function toggleMode() {
             role="switch"
             :aria-checked="isAutoPick"
             :aria-label="$t('mode.label')"
-            class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-            :class="isAutoPick ? 'bg-primary' : 'bg-border'"
+            class="relative inline-flex h-7 w-12 items-center rounded-md border-2 border-border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            :class="isAutoPick ? 'bg-primary' : 'bg-muted'"
             @click="toggleMode"
           >
             <span
-              class="inline-block h-5 w-5 transform rounded-full bg-background shadow transition-transform"
+              class="inline-block h-5 w-5 transform rounded-md border-2 border-border bg-card shadow-[var(--shadow-brutal-sm)] transition-transform"
               :class="isAutoPick ? 'translate-x-5' : 'translate-x-0.5'"
             />
           </button>
@@ -226,47 +216,71 @@ function toggleMode() {
 </template>
 
 <style scoped>
-.glow-border-card {
-  position: relative;
+.auto-pick-glow {
+  border-width: 3px;
+  animation: border-color-cycle 4s steps(4) infinite;
 }
 
-.outer-glow {
-  position: absolute;
-  inset: -4px;
-  pointer-events: none;
-  z-index: 0;
-  border-radius: 0.95rem;
-  background: linear-gradient(
-    135deg,
-    rgb(153 246 228 / 0.52),
-    rgb(165 243 252 / 0.48),
-    rgb(196 181 253 / 0.42),
-    rgb(251 207 232 / 0.42),
-    rgb(153 246 228 / 0.52)
-  );
-  background-size: 220% 220%;
-  filter: blur(8px) saturate(1.2);
-  opacity: 0.88;
-  animation: outer-glow-shift 12s ease-in-out infinite;
-}
-
-:global(.dark) .outer-glow {
-  opacity: 0.78;
-}
-
-@keyframes outer-glow-shift {
+@keyframes border-color-cycle {
   0% {
-    background-position: 0% 0%;
+    border-color: #A7D8F0;
+    box-shadow: 0 0 0 3px #A7D8F0, var(--shadow-brutal);
+  }
+  25% {
+    border-color: #F8C8DC;
+    box-shadow: 0 0 0 3px #F8C8DC, var(--shadow-brutal);
+  }
+  50% {
+    border-color: #C5E99E;
+    box-shadow: 0 0 0 3px #C5E99E, var(--shadow-brutal);
+  }
+  75% {
+    border-color: #D4BBFF;
+    box-shadow: 0 0 0 3px #D4BBFF, var(--shadow-brutal);
   }
   100% {
-    background-position: 100% 100%;
+    border-color: #A7D8F0;
+    box-shadow: 0 0 0 3px #A7D8F0, var(--shadow-brutal);
+  }
+}
+
+:global(.dark) .auto-pick-glow {
+  animation: neon-color-cycle 4s steps(4) infinite;
+}
+
+@keyframes neon-color-cycle {
+  0% {
+    border-color: #7ECBF0;
+    box-shadow: 0 0 0 2px #7ECBF0, 0 0 12px #7ECBF0, var(--shadow-brutal);
+  }
+  25% {
+    border-color: #FF9EBE;
+    box-shadow: 0 0 0 2px #FF9EBE, 0 0 12px #FF9EBE, var(--shadow-brutal);
+  }
+  50% {
+    border-color: #B8E986;
+    box-shadow: 0 0 0 2px #B8E986, 0 0 12px #B8E986, var(--shadow-brutal);
+  }
+  75% {
+    border-color: #BB86FC;
+    box-shadow: 0 0 0 2px #BB86FC, 0 0 12px #BB86FC, var(--shadow-brutal);
+  }
+  100% {
+    border-color: #7ECBF0;
+    box-shadow: 0 0 0 2px #7ECBF0, 0 0 12px #7ECBF0, var(--shadow-brutal);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .outer-glow {
+  .auto-pick-glow {
     animation: none;
-    background-position: 70% 30%;
+    border-color: #A7D8F0;
+    box-shadow: 0 0 0 3px #A7D8F0, var(--shadow-brutal);
+  }
+  :global(.dark) .auto-pick-glow {
+    animation: none;
+    border-color: #7ECBF0;
+    box-shadow: 0 0 0 2px #7ECBF0, 0 0 12px #7ECBF0, var(--shadow-brutal);
   }
 }
 </style>
