@@ -219,71 +219,44 @@ function toggleMode() {
 
 <style scoped>
 .rainbow-wrapper {
-  border: 6px solid #a7d8f0;
-  animation: color-blink 1s steps(5) infinite;
+  padding: 6px;
+  background: repeating-linear-gradient(
+    135deg,
+    #a7d8f0 0px,
+    #a7d8f0 24px,
+    #f8c8dc 24px,
+    #f8c8dc 48px,
+    #c5e99e 48px,
+    #c5e99e 72px,
+    #d4bbff 72px,
+    #d4bbff 96px,
+    #ffe082 96px,
+    #ffe082 120px,
+    #a7d8f0 120px,
+    #a7d8f0 144px
+  );
 }
 
 .inner-card {
   background: var(--card);
 }
 
-@keyframes color-blink {
-  0% {
-    border-color: #a7d8f0;
-  }
-  20% {
-    border-color: #f8c8dc;
-  }
-  40% {
-    border-color: #c5e99e;
-  }
-  60% {
-    border-color: #d4bbff;
-  }
-  80% {
-    border-color: #ffe082;
-  }
-  100% {
-    border-color: #a7d8f0;
-  }
-}
-
 :global(.dark) .rainbow-wrapper {
-  border-color: #7ecbf0;
+  background: repeating-linear-gradient(
+    135deg,
+    #7ecbf0 0px,
+    #7ecbf0 24px,
+    #ff9ebe 24px,
+    #ff9ebe 48px,
+    #b8e986 48px,
+    #b8e986 72px,
+    #bb86fc 72px,
+    #bb86fc 96px,
+    #ffd54f 96px,
+    #ffd54f 120px,
+    #7ecbf0 120px,
+    #7ecbf0 144px
+  );
   box-shadow: 0 0 12px rgba(126, 203, 240, 0.5), var(--shadow-brutal);
-  animation: color-blink-dark 1s steps(5) infinite;
-}
-
-@keyframes color-blink-dark {
-  0% {
-    border-color: #7ecbf0;
-  }
-  20% {
-    border-color: #ff9ebe;
-  }
-  40% {
-    border-color: #b8e986;
-  }
-  60% {
-    border-color: #bb86fc;
-  }
-  80% {
-    border-color: #ffd54f;
-  }
-  100% {
-    border-color: #7ecbf0;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .rainbow-wrapper {
-    animation: none;
-    border-color: #a7d8f0;
-  }
-  :global(.dark) .rainbow-wrapper {
-    animation: none;
-    border-color: #7ecbf0;
-    box-shadow: 0 0 12px rgba(126, 203, 240, 0.5), var(--shadow-brutal);
-  }
 }
 </style>
