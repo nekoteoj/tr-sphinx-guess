@@ -71,19 +71,17 @@ Transform the current soft pastel UI into a "cute brutalism" aesthetic — thick
 | `Card` (primitive)         | done        | Thick border, hard shadow                      |
 | `Input` (primitive)        | done        | Thick border, hard shadow                      |
 | `Badge` (primitive)        | done        | Thick border, hard shadow, rounded-md          |
+| `Alert` (primitive)        | done        | Thick border, hard shadow                      |
+| `Dialog` (primitive)       | done        | Thick border, hard shadow                      |
 | `default.vue` (layout)    | done        | Remove blur, brutalist header bar              |
-| `Alert` (primitive)        | pending     | Thick border, hard shadow                      |
-| `Dialog` (primitive)       | pending     | Thick border, hard shadow                      |
 | `SafeRange.vue`            | done        | Hard-edged animation, neon glow dark mode      |
 | `GuesserForm.vue`          | done        | Flat pastels, thick borders on all elements    |
 | `GuessHistory.vue`         | done        | Sticker-style entries, flat colors             |
-| `Alert` (primitive)        | in progress | Thick border, hard shadow                      |
-| `Dialog` (primitive)       | in progress | Thick border, hard shadow                      |
-| `AlgorithmDialog.vue`      | pending     | Dialog styling, SVG recoloring                 |
-| `DistributionDialog.vue`   | pending     | Dialog styling                                 |
-| `ThemeToggle.vue`          | pending     | Brutalist icon button                          |
-| `LanguageToggle.vue`       | pending     | Brutalist icon button                          |
-| `GithubButton.vue`         | pending     | Brutalist icon button                          |
+| `AlgorithmDialog.vue`      | done        | Dialog styling, SVG recoloring                 |
+| `DistributionDialog.vue`   | done        | Dialog styling                                 |
+| `ThemeToggle.vue`          | done        | Brutalist icon button                          |
+| `LanguageToggle.vue`       | done        | Brutalist icon button                          |
+| `GithubButton.vue`         | done        | Brutalist icon button                          |
 
 ## Commit Log
 
@@ -94,32 +92,33 @@ Transform the current soft pastel UI into a "cute brutalism" aesthetic — thick
 | 3   | Update layout and global components           | done (dc598ea) |
 | 4   | Update SafeRange.vue + custom animations      | done (7b7d5bd) |
 | 5   | Update GuesserForm.vue + GuessHistory.vue     | done (6a1da78) |
-| 6   | Update Dialogs + remaining components         | pending     |
-| 7   | Final polish, QA, and plan.md completion      | pending     |
+| 6   | Update Dialogs + remaining components         | done (e4822d0) |
+| 7   | Final polish, QA, and plan.md completion    | done (this commit) |
 
 ## QA Checklist
 
 ### Visual
-- [ ] Every card has `border-2` + black offset shadow.
-- [ ] Every button has `border-2` + black offset shadow + hover/active translate.
-- [ ] Every input has `border-2` + black offset shadow.
-- [ ] No soft `shadow-sm` or `shadow-md` remains.
-- [ ] No transparent pastel backgrounds (`bg-*-100/50`) remain.
-- [ ] No `backdrop-blur` remains in the layout.
-- [ ] Border radius consistently ~6px.
-- [ ] Dark mode uses deep navy + neon pastels + black shadows.
-- [ ] Light mode uses warm cream + soft pastels + near-black shadows.
+- [x] Every card has `border-2` + black offset shadow.
+- [x] Every button has `border-2` + black offset shadow + hover/active translate.
+- [x] Every input has `border-2` + black offset shadow.
+- [x] No soft `shadow-sm` or `shadow-md` remains.
+- [x] No transparent pastel backgrounds (`bg-*-100/50`) remain.
+- [x] No `backdrop-blur` remains in the layout.
+- [x] Border radius consistently ~6px.
+- [x] Dark mode uses deep navy + neon pastels + black shadows.
+- [x] Light mode uses warm cream + soft pastels + near-black shadows.
+- [x] The auto-pick glow card has a brutalist interpretation (hard-edged color cycle).
 
 ### Functional
-- [ ] All buttons work (hover, active, disabled).
-- [ ] Dialogs open/close correctly.
-- [ ] Theme toggle works.
-- [ ] Language toggle works.
-- [ ] Form validation displays correctly.
-- [ ] `pnpm build` passes.
-- [ ] `pnpm lint:check` passes.
+- [x] All buttons work (hover, active, disabled).
+- [x] Dialogs open/close correctly.
+- [x] Theme toggle works.
+- [x] Language toggle works.
+- [x] Form validation displays correctly.
+- [x] `pnpm build` passes.
+- [x] `pnpm lint:check` passes.
 
 ### Accessibility
-- [ ] Focus rings visible on all interactive elements.
-- [ ] Color contrast passes WCAG 2.2 AA.
-- [ ] Reduced motion preference respected.
+- [x] Focus rings visible on all interactive elements.
+- [x] Color contrast passes WCAG 2.2 AA.
+- [x] Reduced motion preference respected.
