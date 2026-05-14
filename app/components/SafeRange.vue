@@ -219,66 +219,70 @@ function toggleMode() {
 
 <style scoped>
 .rainbow-wrapper {
-  padding: 8px;
-  background: repeating-linear-gradient(
-    135deg,
-    #a7d8f0 0px,
-    #a7d8f0 20px,
-    #f8c8dc 20px,
-    #f8c8dc 40px,
-    #c5e99e 40px,
-    #c5e99e 60px,
-    #d4bbff 60px,
-    #d4bbff 80px,
-    #ffe082 80px,
-    #ffe082 100px,
-    #a7d8f0 100px,
-    #a7d8f0 120px
-  );
-  background-size: 100px 100px;
-  animation: stripe-march 2s linear infinite;
+  border: 6px solid #a7d8f0;
+  animation: color-blink 1s steps(5) infinite;
 }
 
 .inner-card {
   background: var(--card);
 }
 
-@keyframes stripe-march {
+@keyframes color-blink {
   0% {
-    background-position: 0 0;
+    border-color: #a7d8f0;
+  }
+  20% {
+    border-color: #f8c8dc;
+  }
+  40% {
+    border-color: #c5e99e;
+  }
+  60% {
+    border-color: #d4bbff;
+  }
+  80% {
+    border-color: #ffe082;
   }
   100% {
-    background-position: 100px 100px;
+    border-color: #a7d8f0;
   }
 }
 
 :global(.dark) .rainbow-wrapper {
-  background: repeating-linear-gradient(
-    135deg,
-    #7ecbf0 0px,
-    #7ecbf0 20px,
-    #ff9ebe 20px,
-    #ff9ebe 40px,
-    #b8e986 40px,
-    #b8e986 60px,
-    #bb86fc 60px,
-    #bb86fc 80px,
-    #ffd54f 80px,
-    #ffd54f 100px,
-    #7ecbf0 100px,
-    #7ecbf0 120px
-  );
+  border-color: #7ecbf0;
   box-shadow: 0 0 12px rgba(126, 203, 240, 0.5), var(--shadow-brutal);
+  animation: color-blink-dark 1s steps(5) infinite;
+}
+
+@keyframes color-blink-dark {
+  0% {
+    border-color: #7ecbf0;
+  }
+  20% {
+    border-color: #ff9ebe;
+  }
+  40% {
+    border-color: #b8e986;
+  }
+  60% {
+    border-color: #bb86fc;
+  }
+  80% {
+    border-color: #ffd54f;
+  }
+  100% {
+    border-color: #7ecbf0;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .rainbow-wrapper {
     animation: none;
-    background-position: 0 0;
+    border-color: #a7d8f0;
   }
   :global(.dark) .rainbow-wrapper {
     animation: none;
-    background-position: 0 0;
+    border-color: #7ecbf0;
     box-shadow: 0 0 12px rgba(126, 203, 240, 0.5), var(--shadow-brutal);
   }
 }
