@@ -197,7 +197,7 @@ function toggleMode() {
             role="switch"
             :aria-checked="isAutoPick"
             :aria-label="$t('mode.label')"
-            class="relative inline-flex h-7 w-12 items-center rounded-md border-2 border-border shadow-[var(--shadow-brutal-sm)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            class="relative inline-flex h-7 w-12 items-center rounded-md border-2 border-border shadow-[var(--shadow-brutal-sm)] transition-all hover:-translate-x-px hover:-translate-y-px hover:shadow-[var(--shadow-brutal)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             :class="isAutoPick ? 'bg-primary' : 'bg-muted'"
             @click="toggleMode"
           >
