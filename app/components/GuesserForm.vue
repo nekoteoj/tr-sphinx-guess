@@ -121,24 +121,29 @@ watch(
   </Card>
 
   <Card v-else>
-    <CardHeader v-if="mode === 'manual'">
-      <CardTitle class="text-lg">{{ $t('oracle.title') }}</CardTitle>
-      <CardDescription>{{ $t('oracle.manualDescription') }}</CardDescription>
-    </CardHeader>
-    <CardContent class="space-y-4">
-      <div v-if="mode === 'manual'" class="grid grid-cols-2 gap-4">
-        <div class="space-y-2">
-          <Label for="oracle-low">{{ $t('oracle.newLow') }}</Label>
-          <Input id="oracle-low" v-model.number="oracleLow" type="number" :min="rangeLow" :max="rangeHigh" @keyup.enter="handleOracleSubmit" />
+    <template v-if="mode === 'manual'">
+      <CardHeader>
+        <CardTitle class="text-lg">{{ $t('oracle.title') }}</CardTitle>
+        <CardDescription>{{ $t('oracle.manualDescription') }}</CardDescription>
+      </CardHeader>
+      <CardContent class="space-y-4">
+        <div class="grid grid-cols-2 gap-4">
+          <div class="space-y-2">
+            <Label for="oracle-low">{{ $t('oracle.newLow') }}</Label>
+            <Input id="oracle-low" v-model.number="oracleLow" type="number" :min="rangeLow" :max="rangeHigh" @keyup.enter="handleOracleSubmit" />
+          </div>
+          <div class="space-y-2">
+            <Label for="oracle-high">{{ $t('oracle.newHigh') }}</Label>
+            <Input id="oracle-high" v-model.number="oracleHigh" type="number" :min="rangeLow" :max="rangeHigh" @keyup.enter="handleOracleSubmit" />
+          </div>
         </div>
-        <div class="space-y-2">
-          <Label for="oracle-high">{{ $t('oracle.newHigh') }}</Label>
-          <Input id="oracle-high" v-model.number="oracleHigh" type="number" :min="rangeLow" :max="rangeHigh" @keyup.enter="handleOracleSubmit" />
-        </div>
-      </div>
 
-      <p v-if="mode === 'manual' && oracleError" class="text-sm text-destructive">{{ oracleError }}</p>
-    </CardContent>
+        <p v-if="oracleError" class="text-sm text-destructive">{{ oracleError }}</p>
+      </CardContent>
+    </template>
+
+    <CardContent v-else />
+
     <CardFooter class="flex flex-col gap-2">
       <Button v-if="mode === 'manual'" class="w-full" :disabled="!!oracleError" @click="handleOracleSubmit">
         <ArrowRight class="mr-2 h-4 w-4" />

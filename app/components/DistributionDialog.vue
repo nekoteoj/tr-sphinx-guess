@@ -28,36 +28,7 @@ function select(dist: Distribution) {
         :aria-label="$t('distribution.buttonLabel')"
         :title="$t('distribution.buttonLabel')"
       >
-        <svg
-          v-if="distribution === 'standard'"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-        >
-          <rect x="2" y="14" width="3" height="6" rx="1" fill="currentColor" />
-          <rect x="6.5" y="10" width="3" height="10" rx="1" fill="currentColor" />
-          <rect x="11" y="6" width="3" height="14" rx="1" fill="currentColor" />
-          <rect x="15.5" y="10" width="3" height="10" rx="1" fill="currentColor" />
-          <rect x="20" y="14" width="3" height="6" rx="1" fill="currentColor" />
-        </svg>
-        <svg
-          v-else
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-        >
-          <rect x="2" y="6" width="3" height="14" rx="1" fill="currentColor" />
-          <rect x="6.5" y="10" width="3" height="10" rx="1" fill="currentColor" />
-          <rect x="11" y="14" width="3" height="6" rx="1" fill="currentColor" />
-          <rect x="15.5" y="10" width="3" height="10" rx="1" fill="currentColor" />
-          <rect x="20" y="6" width="3" height="14" rx="1" fill="currentColor" />
-        </svg>
+        <DistributionIcon :type="distribution" :size="16" />
         <span class="hidden md:inline">{{ distribution === 'standard' ? $t('distribution.standard') : $t('distribution.riskyEdge') }}</span>
       </Button>
     </DialogTrigger>
@@ -78,21 +49,7 @@ function select(dist: Distribution) {
           }"
           @click="select('standard')"
         >
-          <svg
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            width="40"
-            height="40"
-            viewBox="0 0 24 24"
-            fill="none"
-            class="text-current"
-          >
-            <rect x="2" y="14" width="3" height="6" rx="1" fill="currentColor" />
-            <rect x="6.5" y="10" width="3" height="10" rx="1" fill="currentColor" />
-            <rect x="11" y="6" width="3" height="14" rx="1" fill="currentColor" />
-            <rect x="15.5" y="10" width="3" height="10" rx="1" fill="currentColor" />
-            <rect x="20" y="14" width="3" height="6" rx="1" fill="currentColor" />
-          </svg>
+          <DistributionIcon type="standard" :size="40" />
           <div class="space-y-0.5">
             <p class="text-sm font-semibold">{{ $t("distribution.standard") }}</p>
             <p class="text-xs opacity-80">{{ $t("distribution.standardDesc") }}</p>
@@ -108,21 +65,7 @@ function select(dist: Distribution) {
           }"
           @click="select('risky_edge')"
         >
-          <svg
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            width="40"
-            height="40"
-            viewBox="0 0 24 24"
-            fill="none"
-            class="text-current"
-          >
-            <rect x="2" y="6" width="3" height="14" rx="1" fill="currentColor" />
-            <rect x="6.5" y="10" width="3" height="10" rx="1" fill="currentColor" />
-            <rect x="11" y="14" width="3" height="6" rx="1" fill="currentColor" />
-            <rect x="15.5" y="10" width="3" height="10" rx="1" fill="currentColor" />
-            <rect x="20" y="6" width="3" height="14" rx="1" fill="currentColor" />
-          </svg>
+          <DistributionIcon type="risky_edge" :size="40" />
           <div class="space-y-0.5">
             <p class="text-sm font-semibold">{{ $t("distribution.riskyEdge") }}</p>
             <p class="text-xs opacity-80">{{ $t("distribution.riskyEdgeDesc") }}</p>
